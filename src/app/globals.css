@@ -1,26 +1,69 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f7fb;
+  --foreground: #111827;
+
+  --sidebar-bg: #0f172a;
+  --sidebar-foreground: #e5e7eb;
+
+  --card: #ffffff;
+  --card-foreground: #111827;
+
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+
+  --border: #e5e7eb;
+
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+
+  --chart-blue: #3b82f6;
+  --chart-green: #10b981;
+  --chart-purple: #8b5cf6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+.dark {
+  --background: #0b1120;
+  --foreground: #f9fafb;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --sidebar-bg: #020817;
+  --sidebar-foreground: #cbd5e1;
+
+  --card: #111827;
+  --card-foreground: #f3f4f6;
+
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+
+  --border: #1f2937;
+
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --danger: #f87171;
+
+  --chart-blue: #60a5fa;
+  --chart-green: #34d399;
+  --chart-purple: #a78bfa;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.erp-card {
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.erp-table th {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.erp-table td {
+  font-size: 14px;
 }
