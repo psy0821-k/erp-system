@@ -3,6 +3,8 @@ import { Package, ShoppingCart, Truck, Users } from 'lucide-react';
 import DashboardCard from '@/components/dashboard/dashboard-card';
 import { Fragment } from 'react/jsx-runtime';
 import SalesChart from '@/components/dashboard/sales-chart';
+import AttendanceChart from '@/components/dashboard/attendance-chart';
+import PartChart from '@/components/dashboard/part-chart';
 
 const stats = [
   {
@@ -39,8 +41,20 @@ export default function DashboardPage() {
           <DashboardCard key={stat.title} title={stat.title} value={stat.value} description={stat.description} icon={stat.icon} />
         ))}
       </section>
-      <section>
-        <SalesChart />
+      <section className="grid xl:grid-cols-2 sm:grid-cols-1">
+        <h2 className="sr-only">대시보드 요약 정보</h2>
+        <article>
+          <h3>전년도 대비 실적</h3>
+          <SalesChart />
+        </article>
+        <article>
+          <h3>직원 근태 현황</h3>
+          <AttendanceChart />
+        </article>
+        <article>
+          <h3>전년도 대비 실적</h3>
+          <PartChart />
+        </article>
       </section>
     </Fragment>
   );
