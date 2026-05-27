@@ -5,28 +5,30 @@ import { Fragment } from 'react/jsx-runtime';
 import SalesChart from '@/components/dashboard/sales-chart';
 import AttendanceChart from '@/components/dashboard/attendance-chart';
 import PartChart from '@/components/dashboard/part-chart';
+import ProjectChart from '@/components/dashboard/project-chart';
+import RecentLog from '@/components/dashboard/recent-log';
 
 const stats = [
   {
-    title: '총 주문',
-    value: '1,248',
-    description: '이번 달 주문 수',
+    title: '총 직원 수',
+    value: '124',
+    description: '총 직원수',
     icon: ShoppingCart,
   },
   {
-    title: '출고 완료',
-    value: '892',
-    description: '정상 출고 처리',
+    title: '총 프로젝트',
+    value: '200',
+    description: '현재까지 진행한 프로젝트',
     icon: Truck,
   },
   {
-    title: '재고 부족',
-    value: '24',
-    description: '확인 필요 품목',
+    title: '승인대기',
+    value: '3',
+    description: '현재 승인 대기 중',
     icon: Package,
   },
   {
-    title: '등록 직원',
+    title: '긴급 요청',
     value: '36',
     description: '활성 직원 수',
     icon: Users,
@@ -41,20 +43,13 @@ export default function DashboardPage() {
           <DashboardCard key={stat.title} title={stat.title} value={stat.value} description={stat.description} icon={stat.icon} />
         ))}
       </section>
-      <section className="grid xl:grid-cols-2 sm:grid-cols-1">
+      <section className="grid xl:grid-cols-3 sm:grid-cols-1 mt-8 gap-4">
         <h2 className="sr-only">대시보드 요약 정보</h2>
-        <article>
-          <h3>전년도 대비 실적</h3>
-          <SalesChart />
-        </article>
-        <article>
-          <h3>직원 근태 현황</h3>
-          <AttendanceChart />
-        </article>
-        <article>
-          <h3>전년도 대비 실적</h3>
-          <PartChart />
-        </article>
+        <SalesChart />
+        <AttendanceChart />
+        <PartChart />
+        <ProjectChart />
+        <RecentLog />
       </section>
     </Fragment>
   );

@@ -1,77 +1,56 @@
 'use client';
 
-import { Pie, PieChart, Sector, Tooltip, Label, LabelList, ResponsiveContainer } from 'recharts';
+import { Pie, PieChart, Tooltip, Label, LabelList } from 'recharts';
+import { RechartsDevtools } from '@recharts/devtools';
 
-import type { PieSectorDataItem, PieSectorShapeProps, LabelProps } from 'recharts';
-
-const data = [
-  {
-    name: '프론트엔드',
-    value: 12,
-  },
-  {
-    name: '백엔드',
-    value: 8,
-  },
-  {
-    name: '인사팀',
-    value: 5,
-  },
-  {
-    name: '물류팀',
-    value: 10,
-  },
+const departmentData = [
+  { name: '프론트엔드팀', value: 28, fill: '#3b82f6' },
+  { name: '백엔드팀', value: 36, fill: '#22c55e' },
+  { name: '디자인팀', value: 20, fill: '#f59e0b' },
+  { name: '기획팀', value: 18, fill: '#8b5cf6' },
+  { name: '인사팀', value: 14, fill: '#ef4444' },
+  { name: '기타', value: 12, fill: '#94a3b8' },
 ];
 
-const colors = ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444'];
+export default function DepartmentPieChart() {
+  const total = departmentData.reduce((sum, item) => sum + item.value, 0);
 
-const CustomPieSector = (
-  props: PieSectorShapeProps & {
-    payload?: PieSectorDataItem;
-  }
-) => {
-  return <Sector {...props} fill={colors[(props.index ?? 0) % colors.length]} />;
-};
-
-const CustomLabel = (props: LabelProps) => {
-  return <Label {...props} fill={colors[(props.index ?? 0) % colors.length]} position="outside" offset={12} fontSize={12} />;
-};
-
-export default function PartChart({ isAnimationActive = true }: { isAnimationActive?: boolean }) {
   return (
     <article className="rounded-xl border bg-background p-5">
-      <div>
-        <h2 className="text-lg font-semibold">직군별 인원 비율</h2>
+      <h2 className="text-lg font-semibold">부서별 인원 비율</h2>
+      <PieChart
+        style={{
+          width: '100%',
+          height: '100%',
+          maxWidth: '500px',
+          maxHeight: '80vh',
+          aspectRatio: 1,
+          margin: 'auto',
+        }}
+        responsive
+      >
+        <Pie data={departmentData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius="60%" outerRadius="80%" isAnimationActive={false}>
+          <LabelList dataKey="name" position="outside" className="fill-foreground text-sm" />
 
-        <p className="mt-1 text-sm text-muted-foreground">현재 부서별 인원 구성 현황입니다.</p>
-      </div>
+          <Label
+            position="center"
+            content={() => (
+              <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="fill-foreground">
+                <tspan x="50%" dy="-1em" className="text-sm">
+                  총 인원
+                </tspan>
+                <tspan x="50%" dy="1.6em" className="text-2xl font-bold">
+                  {total}명
+                </tspan>
+              </text>
+            )}
+          />
+        </Pie>
 
-      <div className="mt-6 h-80 w-full" role="img">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie data={data} dataKey="value" nameKey="name" outerRadius={100} isAnimationActive={isAnimationActive} shape={CustomPieSector}>
-              <LabelList content={CustomLabel} />
-            </Pie>
+        <Tooltip />
 
-            <Tooltip />
-          </PieChart>
-        </ResponsiveContainer>
-      </div>
-
-      <ul className="mt-4 grid grid-cols-2 gap-3">
-        {data.map((item, index) => (
-          <li key={item.name} className="flex items-center gap-2">
-            <span
-              className="h-3 w-3 rounded-full"
-              style={{
-                backgroundColor: colors[index % colors.length],
-              }}
-            />
-
-            <span className="text-sm">{item.name}</span>
-          </li>
-        ))}
-      </ul>
+        <RechartsDevtools />
+      </PieChart>
     </article>
   );
 }
