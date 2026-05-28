@@ -4,7 +4,7 @@ import Link from 'next/link';
 const RecentLog = () => {
   return (
     <section className="rounded-xl border p-5">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">최근 활동 로그</h2>
 
         <Link href="#" className="text-sm text-muted-foreground hover:underline">
@@ -17,7 +17,7 @@ const RecentLog = () => {
           const Icon = log.icon;
 
           return (
-            <article key={log.id} className="flex items-center justify-between rounded-lg p-3">
+            <article key={log.id} className="flex items-center justify-between rounded-lg mt-2">
               <div className="flex items-center gap-4">
                 <div className="rounded-full bg-muted p-2">
                   <Icon className="h-4 w-4" />
