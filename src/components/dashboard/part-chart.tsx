@@ -21,9 +21,8 @@ export default function DepartmentPieChart() {
       <PieChart
         style={{
           width: '100%',
-          height: '100%',
+          height: '300px',
           maxWidth: '500px',
-          maxHeight: '80vh',
           aspectRatio: 1,
           margin: 'auto',
         }}
