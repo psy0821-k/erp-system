@@ -1,9 +1,10 @@
 import type { NavigationItem } from './type';
 
 import { employeeNavigation } from './employee-navigation';
-import { inventoryNavigation } from './inventory-navigation';
 import { systemNavigation } from './system-navigation';
-import { paymentNavigation } from './payment-navigation';
+import { approvalNavigation } from './approval-navigation';
+import { assetNavigation } from './asset-navigation';
+import { projectNavigation } from './project-navigation';
 
 export const dashboardNavigation: NavigationItem[] = [
   {
@@ -18,15 +19,20 @@ export const dashboardNavigation: NavigationItem[] = [
   },
 
   {
-    title: '물류관리',
-    value: 'logistics',
-    children: inventoryNavigation,
+    title: '업무승인',
+    value: 'approval',
+    children: approvalNavigation,
+  },
+  {
+    title: '프로젝트',
+    value: 'project',
+    children: projectNavigation,
   },
 
   {
-    title: '전자결재',
-    value: 'payment',
-    children: paymentNavigation,
+    title: 'IT자산관리',
+    value: 'asset',
+    children: assetNavigation,
   },
 
   {

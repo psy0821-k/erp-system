@@ -6,7 +6,7 @@ import { dashboardNavigation } from '@/config/navigation';
 
 const Sidebar = () => {
   return (
-    <div className="flex sticky justify-between items-center flex-col w-64 bg-[#1E293B] text-white h-screen left-0 top-0 transition-all duration-300 border-r border-white/10`">
+    <div className="flex sticky justify-between items-center flex-col w-64 bg-[#1E293B] text-white h-screen left-0 top-0 transition-all duration-300 border-r border-white/10">
       <nav>
         <h2 className="sr-only">싸이 컴패니 대시보드 메뉴</h2>
 

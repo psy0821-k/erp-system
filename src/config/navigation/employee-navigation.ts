@@ -1,7 +1,20 @@
 import type { NavigationItem } from './type';
 
 export const employeeNavigation: NavigationItem[] = [
-  { title: '직원관리', href: '/employee' },
-  { title: '조직도', href: '/organization' },
-  { title: '근태관리', href: '/attendance' },
+  {
+    title: '직원 목록',
+    href: '/employee',
+  },
+  {
+    title: '근태 관리',
+    href: '/employee/attendance',
+  },
+  {
+    title: '휴가 관리',
+    href: '/employee/vacation',
+  },
+  {
+    title: '채용 관리',
+    href: '/employee/recruitment',
+  },
 ];
