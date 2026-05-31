@@ -8,10 +8,9 @@ import PartChart from '@/components/dashboard/part-chart';
 import ProjectChart from '@/components/dashboard/project-chart';
 import RecentLog from '@/components/dashboard/recent-log';
 import ApprovalBoard from '@/components/dashboard/approval-board';
-// import NoticeBoard from '@/components/dashboard/notice-board';
+import NoticeBoard from '@/components/dashboard/notice-board';
 import TodaySchedule from '@/components/dashboard/todaySchedule';
 import AssetBoard from '@/components/dashboard/asset-board';
-import QuickMoveBoard from '@/components/dashboard/quickMove';
 
 const stats = [
   {
@@ -56,10 +55,9 @@ export default function DashboardPage() {
         <ProjectChart />
         <RecentLog />
         <ApprovalBoard />
-        {/* <NoticeBoard /> */}
+        <NoticeBoard />
         <TodaySchedule />
         <AssetBoard />
-        <QuickMoveBoard />
       </section>
     </Fragment>
   );

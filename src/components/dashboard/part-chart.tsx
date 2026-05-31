@@ -1,7 +1,6 @@
 'use client';
 
-import { Pie, PieChart, Tooltip, Label, LabelList } from 'recharts';
-import { RechartsDevtools } from '@recharts/devtools';
+import { Pie, PieChart, ResponsiveContainer, Tooltip, Label, Cell } from 'recharts';
 
 const departmentData = [
   { name: '프론트엔드팀', value: 28, fill: '#3b82f6' },
@@ -17,39 +16,60 @@ export default function DepartmentPieChart() {
 
   return (
     <article className="rounded-xl border bg-background p-5">
-      <h2 className="text-lg font-semibold">부서별 인원 비율</h2>
-      <PieChart
-        style={{
-          width: '100%',
-          height: '300px',
-          maxWidth: '500px',
-          aspectRatio: 1,
-          margin: 'auto',
-        }}
-        responsive
-      >
-        <Pie data={departmentData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius="60%" outerRadius="80%" isAnimationActive={false}>
-          <LabelList dataKey="name" position="outside" className="fill-foreground text-sm" />
+      <header>
+        <h2 className="text-lg font-semibold">부서별 인원 현황</h2>
+        <p className="mt-1 text-sm text-muted-foreground">부서별 인원 구성 비율을 확인합니다.</p>
+      </header>
 
-          <Label
-            position="center"
-            content={() => (
-              <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="fill-foreground">
-                <tspan x="50%" dy="-1em" className="text-sm">
-                  총 인원
-                </tspan>
-                <tspan x="50%" dy="1.6em" className="text-2xl font-bold">
-                  {total}명
-                </tspan>
-              </text>
-            )}
-          />
-        </Pie>
+      <div className="mt-6 grid gap-6 lg:grid-cols-[320px_1fr]">
+        <div className="h-70 w-full lg:h-80">
+          <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 1, height: 1 }}>
+            <PieChart>
+              <Pie data={departmentData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius="58%" outerRadius="78%" paddingAngle={3}>
+                {departmentData.map(item => (
+                  <Cell key={item.name} fill={item.fill} />
+                ))}
 
-        <Tooltip />
+                <Label
+                  position="center"
+                  content={() => (
+                    <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle" className="fill-foreground">
+                      <tspan x="50%" dy="-0.4em" className="text-xs">
+                        총 직원
+                      </tspan>
+                      <tspan x="50%" dy="1.5em" className="text-2xl font-bold">
+                        {total}명
+                      </tspan>
+                    </text>
+                  )}
+                />
+              </Pie>
 
-        <RechartsDevtools />
-      </PieChart>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        <ul className="grid content-center gap-3 sm:grid-cols-2">
+          {departmentData.map(item => {
+            const percent = Math.round((item.value / total) * 100);
+
+            return (
+              <li key={item.name} className="flex items-center justify-between gap-4 rounded-lg border bg-card p-3">
+                <div className="flex min-w-0 items-center gap-3">
+                  <span className="h-3 w-3 shrink-0 rounded-full" style={{ backgroundColor: item.fill }} />
+                  <span className="truncate font-medium">{item.name}</span>
+                </div>
+
+                <div className="shrink-0 text-right">
+                  <p className="font-semibold">{item.value}명</p>
+                  <p className="text-xs text-muted-foreground">{percent}%</p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </article>
   );
 }

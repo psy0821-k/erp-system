@@ -32,8 +32,8 @@ export default function AttendanceCharts() {
         <h2 className="text-lg font-semibold">오늘 근태 현황</h2>
         <span>총 {'n'}명</span>
       </div>
-      <div className="p-8 h-full w-full">
-        <ResponsiveContainer width="100%" height="100%">
+      <div className=" w-full sm:h-65 md:h-80 xl:h-125">
+        <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 1, height: 1 }}>
           <BarChart data={todayAttendanceData}>
             <XAxis dataKey="status" tickLine={false} axisLine={false} />
 
