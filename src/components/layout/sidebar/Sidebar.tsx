@@ -1,42 +1,84 @@
 'use client';
 
 import Link from 'next/link';
+import { ChevronDown, LayoutDashboard, UserCircle } from 'lucide-react';
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { dashboardNavigation } from '@/config/navigation';
+import { cn } from '@/lib/utils';
 
 const Sidebar = () => {
   return (
-    <div className="flex sticky justify-between items-center flex-col w-64 bg-[#1E293B] text-white h-screen left-0 top-0 transition-all duration-300 border-r border-white/10">
-      <nav>
-        <h2 className="sr-only">싸이 컴패니 대시보드 메뉴</h2>
+    <aside className="sticky left-0 top-0 flex h-screen w-64 flex-col justify-between border-r border-white/10 bg-slate-950 text-white">
+      <div>
+        <div className="flex h-18 items-center gap-3 border-b border-white/10 px-6">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 font-bold">E</div>
+          <div>
+            <strong className="text-lg font-bold tracking-tight">ERP SYSTEM</strong>
+            <p className="text-xs text-slate-400">Company Admin</p>
+          </div>
+        </div>
 
-        <ul className="space-y-2">
-          {dashboardNavigation.map(menu => (
-            <li key={menu.title}>
-              {menu.href ? (
-                <Link href={menu.href}>{menu.title}</Link>
-              ) : (
-                <Accordion type="single" collapsible>
-                  <AccordionItem value={menu.value ?? menu.title}>
-                    <AccordionTrigger>{menu.title}</AccordionTrigger>
+        <nav className="px-3 py-5">
+          <h2 className="sr-only">사이드바 메뉴</h2>
 
-                    <AccordionContent>
-                      <ul>
-                        {menu.children?.map(subMenu => (
-                          <li key={subMenu.title}>
-                            <Link href={subMenu.href ?? '/'}>{subMenu.title}</Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              )}
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </div>
+          <ul className="space-y-1">
+            {dashboardNavigation.map(menu => (
+              <li key={menu.title}>
+                {menu.href ? (
+                  <Link
+                    href={menu.href}
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-white"
+                  >
+                    <LayoutDashboard className="h-4 w-4" />
+                    {menu.title}
+                  </Link>
+                ) : (
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value={menu.value ?? menu.title} className="border-none">
+                      <AccordionTrigger
+                        className={cn(
+                          'group flex rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/10 hover:text-white hover:no-underline',
+                          'data-[state=open]:bg-blue-600 data-[state=open]:text-white'
+                        )}
+                      >
+                        <span>{menu.title}</span>
+                      </AccordionTrigger>
+
+                      <AccordionContent className="pb-1 pt-2">
+                        <ul className="ml-4 space-y-1 border-l border-white/10 pl-3">
+                          {menu.children?.map(subMenu => (
+                            <li key={subMenu.title}>
+                              <Link
+                                href={subMenu.href ?? '/'}
+                                className="block rounded-lg px-3 py-2 text-sm text-slate-400 transition hover:bg-white/10 hover:text-white"
+                              >
+                                {subMenu.title}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <div className="border-t border-white/10 p-4">
+        <div className="flex items-center gap-3 rounded-xl bg-white/5 p-3">
+          <UserCircle className="h-9 w-9 text-slate-300" />
+          <div className="min-w-0">
+            <p className="truncate text-sm font-semibold">관리자</p>
+            <p className="truncate text-xs text-slate-400">admin@example.com</p>
+          </div>
+          <ChevronDown className="ml-auto h-4 w-4 text-slate-400" />
+        </div>
+      </div>
+    </aside>
   );
 };
 
