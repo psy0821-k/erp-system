@@ -3,6 +3,7 @@ import { ArrowLeft, Asterisk, Save, Send } from 'lucide-react';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
+import { Textarea } from '../ui/textarea';
 
 const CreateWrite = () => {
   return (
@@ -129,7 +130,7 @@ const CreateWrite = () => {
               사유
             </Label>
           </div>
-          <textarea
+          <Textarea
             id="reason"
             rows={4}
             placeholder="휴가 신청 사유를 입력해주세요."
