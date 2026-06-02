@@ -2,13 +2,22 @@ import { vacationSummary } from '@/app/mock-data/vacation';
 import DashboardCard from '@/components/dashboard/dashboard-card';
 import TableComponent from '@/components/table/tableComponent';
 import UserInfo from '@/components/userCard/userInfo';
+import Link from 'next/link';
 
 const VacationPage = () => {
   return (
     <main className="space-y-6">
-      <section>
-        <h1 className="text-2xl font-bold">휴가관리</h1>
-        <p className="mt-1 text-sm text-muted-foreground">직원 휴가 신청 현황과 승인 상태를 관리합니다.</p>
+      <section className="flex justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">휴가관리</h1>
+          <p className="mt-1 text-sm text-muted-foreground">직원 휴가 신청 현황과 승인 상태를 관리합니다.</p>
+        </div>
+        <Link
+          href={'/employee/vacation/createVacation'}
+          className="pl-2 pr-2 rounded-2xl border bg-(--primary) text-white font-bold flex items-center"
+        >
+          휴가 신청
+        </Link>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
