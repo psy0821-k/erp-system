@@ -15,14 +15,14 @@ export default function DepartmentPieChart() {
   const total = departmentData.reduce((sum, item) => sum + item.value, 0);
 
   return (
-    <article className="rounded-xl border bg-background p-5">
+    <article className="rounded-xl border bg-background p-5 aspect-[1.67]">
       <header>
         <h2 className="text-lg font-semibold">부서별 인원 현황</h2>
         <p className="mt-1 text-sm text-muted-foreground">부서별 인원 구성 비율을 확인합니다.</p>
       </header>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[320px_1fr]">
-        <div className="h-70 w-full lg:h-80">
+        <div className="h-65 w-full md:h-80 xl:h-105">
           <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 1, height: 1 }}>
             <PieChart>
               <Pie data={departmentData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius="58%" outerRadius="78%" paddingAngle={3}>
@@ -50,18 +50,18 @@ export default function DepartmentPieChart() {
           </ResponsiveContainer>
         </div>
 
-        <ul className="grid content-center gap-3 sm:grid-cols-2">
+        <ul className="grid content-center [&>*:first-child]:border-t-2">
           {departmentData.map(item => {
             const percent = Math.round((item.value / total) * 100);
 
             return (
-              <li key={item.name} className="flex items-center justify-between gap-4 rounded-lg border bg-card p-3">
-                <div className="flex min-w-0 items-center gap-3">
+              <li key={item.name} className="border-b-2">
+                <div className="flex min-w-0 items-center gap-3 mt-2">
                   <span className="h-3 w-3 shrink-0 rounded-full" style={{ backgroundColor: item.fill }} />
                   <span className="truncate font-medium">{item.name}</span>
                 </div>
 
-                <div className="shrink-0 text-right">
+                <div className="flex justify-between mb-2">
                   <p className="font-semibold">{item.value}명</p>
                   <p className="text-xs text-muted-foreground">{percent}%</p>
                 </div>
