@@ -25,17 +25,9 @@ export default function PerformanceChart() {
         <p className="text-sm text-muted-foreground">월별 실적 비교 현황</p>
       </header>
 
-      <div className=" w-full sm:h-65 md:h-80 xl:h-125">
-        <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 1, height: 1 }}>
-          <AreaChart
-            data={data}
-            margin={{
-              top: 10,
-              right: 10,
-              left: 0,
-              bottom: 0,
-            }}
-          >
+      <div className="h-65 w-full md:h-80 xl:h-105">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" />
 
             <XAxis dataKey="month" />
