@@ -46,8 +46,7 @@ export function SignInForm() {
   }
 
   function handleToggleView() {
-    const toggleState = setViewPassword(!viewPassword);
-    return toggleState;
+    setViewPassword(prev => !prev);
   }
 
   // const setUser = useAuthStore(state => state.setUser);
@@ -151,6 +150,7 @@ export function SignInForm() {
         <CardFooter className="flex flex-col gap-4">
           <Button
             type="submit"
+            form="sign-in-form"
             className="w-full h-11 bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold py-3.5 px-4 rounded-xl cursor-pointer shadow-md active:translate-y-0.5 shadow-amber-400/20 mt-2"
           >
             로그인
