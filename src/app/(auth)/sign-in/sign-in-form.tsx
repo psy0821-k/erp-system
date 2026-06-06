@@ -1,8 +1,9 @@
 'use client';
 
+import { createClient } from '@/lib/client';
 import { zodResolver } from '@hookform/resolvers/zod';
+
 import { Controller, useForm, useWatch } from 'react-hook-form';
-import { toast } from 'sonner';
 import { useState } from 'react';
 import * as z from 'zod';
 import { CheckCircle2, Eye, EyeClosed, Lock, Mail } from 'lucide-react';
@@ -11,6 +12,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
   email: z.email('이메일 형식에 맞게 작성해 주세요'),
@@ -18,6 +21,7 @@ const formSchema = z.object({
 });
 
 export function SignInForm() {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -25,6 +29,31 @@ export function SignInForm() {
       password: '',
     },
   });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const supabase = createClient();
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: values.email,
+        password: values.password,
+      });
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      if (data) {
+        toast.success('로그인에 성공했습니다');
+        router.push('/');
+      }
+    } catch (error) {
+      console.log(error);
+      throw new Error(`${error}`);
+    }
+  };
+
   const [viewPassword, setViewPassword] = useState(false);
   const password = useWatch({
     control: form.control,
@@ -36,13 +65,6 @@ export function SignInForm() {
     minLength: password.length >= 8,
     hasCombination: /[a-z]/.test(password) && /[A-Z]/.test(password) && /\d/.test(password),
   };
-
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    toast('로그인 시도', {
-      description: JSON.stringify(data, null, 2),
-      position: 'bottom-right',
-    });
-  }
 
   function handleToggleView() {
     setViewPassword(prev => !prev);
