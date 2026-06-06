@@ -1,4 +1,4 @@
-export type AttendanceStatus = 'NORMAL' | 'LATE' | 'ABSENCE' | 'VACATION';
+export type AttendanceStatus = null | 'PRESENT' | 'LATE' | 'ABSENCE' | 'BUSINESS_TRIP' | 'VACATION';
 export type EmployeeRole = 'ADMIN' | 'HR_MANAGER' | 'INVENTORY_MANAGER' | 'EMPLOYEE';
 
 export interface Employee {
@@ -23,7 +23,7 @@ export const employees: Employee[] = [
     department: '프론트엔드팀',
     position: '주니어 개발자',
     role: 'EMPLOYEE',
-    status: 'NORMAL',
+    status: 'PRESENT',
     checkIn: '08:57',
     checkOut: null,
     workHours: 7.5,
@@ -35,7 +35,7 @@ export const employees: Employee[] = [
     department: '백엔드팀',
     position: '시니어 개발자',
     role: 'EMPLOYEE',
-    status: 'NORMAL',
+    status: 'PRESENT',
     checkIn: '08:43',
     checkOut: null,
     workHours: 8.1,
@@ -71,7 +71,7 @@ export const employees: Employee[] = [
     department: '물류관리팀',
     position: '운영 담당자',
     role: 'INVENTORY_MANAGER',
-    status: 'NORMAL',
+    status: 'PRESENT',
     checkIn: '08:51',
     checkOut: null,
     workHours: 7.8,
@@ -95,7 +95,7 @@ export const employees: Employee[] = [
     department: '프론트엔드팀',
     position: '시니어 개발자',
     role: 'ADMIN',
-    status: 'NORMAL',
+    status: 'PRESENT',
     checkIn: '08:39',
     checkOut: null,
     workHours: 8.4,
@@ -119,7 +119,7 @@ export const employees: Employee[] = [
     department: '재무팀',
     position: '재무 담당자',
     role: 'EMPLOYEE',
-    status: 'NORMAL',
+    status: 'PRESENT',
     checkIn: '08:48',
     checkOut: null,
     workHours: 7.9,

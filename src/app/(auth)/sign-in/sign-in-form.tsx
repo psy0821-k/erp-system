@@ -11,7 +11,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { createClient } from '@/lib/client';
 
 const formSchema = z.object({
   email: z.email('이메일 형식에 맞게 작성해 주세요'),
@@ -48,21 +47,6 @@ export function SignInForm() {
   function handleToggleView() {
     setViewPassword(prev => !prev);
   }
-
-  // const setUser = useAuthStore(state => state.setUser);
-
-  // const handleSignIn = async () => {
-  //   const supabase = createClient();
-  //   const { error } = await supabase.auth.signInWithOAuth({
-  //     provider: 'google',
-  //     options: {
-  //       queryParams: { access_type: 'offline', prompt: 'consent' },
-  //       redirectTo: window.location.origin,
-  //     },
-  //   });
-
-  //   if (error) toast.error(error);
-  // };
 
   return (
     <section className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
