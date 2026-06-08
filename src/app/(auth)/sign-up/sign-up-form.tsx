@@ -78,6 +78,29 @@ export function SignUpForm() {
                 )}
               />
               <Controller
+                name="employee_number"
+                control={form.control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="employee_number">사번</FieldLabel>
+
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        {...field}
+                        id="employee_number"
+                        aria-invalid={fieldState.invalid}
+                        placeholder="EMP-year-number"
+                        autoComplete="cc-number"
+                        className="h-11 pl-10"
+                      />
+                    </div>
+
+                    {fieldState.invalid && <FieldError className="text-red-600" errors={[fieldState.error]} />}
+                  </Field>
+                )}
+              />
+              <Controller
                 name="hire_date"
                 control={form.control}
                 render={({ field, fieldState }) => (
