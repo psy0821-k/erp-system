@@ -9,8 +9,4 @@ export const projectNavigation: NavigationItem[] = [
     title: '일정 관리',
     href: '/project/calendar',
   },
-  {
-    title: '칸반 보드',
-    href: '/project/kanban',
-  },
 ];
