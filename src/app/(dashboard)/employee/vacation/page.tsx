@@ -49,12 +49,10 @@ const VacationPage = () => {
           </div>
 
           <div className="rounded-xl border bg-background p-5">
-            <h2 className="text-lg font-semibold">승인 대기</h2>
-            <p className="mt-1 text-sm text-muted-foreground">결재 처리가 필요한 휴가 신청입니다.</p>
+            <h2 className="text-lg font-semibold">나의 휴가</h2>
+            <p className="mt-1 text-sm text-muted-foreground">내가 신청한 휴가에 대해 확인합니다</p>
 
-            <div className="mt-5 space-y-3">
-              <UserInfo />
-            </div>
+            <div className="mt-5 space-y-3"></div>
           </div>
         </aside>
       </section>
