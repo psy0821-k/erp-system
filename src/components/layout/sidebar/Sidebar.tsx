@@ -1,11 +1,10 @@
-'use client';
-
 import Link from 'next/link';
-import { ChevronDown, LayoutDashboard, UserCircle } from 'lucide-react';
+import { LayoutDashboard } from 'lucide-react';
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { dashboardNavigation } from '@/config/navigation';
 import { cn } from '@/lib/utils';
+import { UserInfo } from './userInfo';
 
 const Sidebar = () => {
   return (
@@ -13,6 +12,7 @@ const Sidebar = () => {
       <div>
         <div className="flex h-18 items-center gap-3 border-b border-white/10 px-6">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 font-bold">E</div>
+
           <div>
             <strong className="text-lg font-bold tracking-tight">ERP SYSTEM</strong>
             <p className="text-xs text-slate-400">Company Admin</p>
@@ -68,16 +68,7 @@ const Sidebar = () => {
         </nav>
       </div>
 
-      <div className="border-t border-white/10 p-4">
-        <div className="flex items-center gap-3 rounded-xl bg-white/5 p-3">
-          <UserCircle className="h-9 w-9 text-slate-300" />
-          <div className="min-w-0">
-            <p className="truncate text-sm font-semibold">관리자</p>
-            <p className="truncate text-xs text-slate-400">admin@example.com</p>
-          </div>
-          <ChevronDown className="ml-auto h-4 w-4 text-slate-400" />
-        </div>
-      </div>
+      <UserInfo />
     </aside>
   );
 };
