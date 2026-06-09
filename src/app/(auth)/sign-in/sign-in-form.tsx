@@ -29,6 +29,7 @@ export function SignInForm() {
       password: '',
     },
   });
+  const [isWrong, setIsWrong] = useState(false);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const supabase = createClient();
@@ -41,6 +42,7 @@ export function SignInForm() {
 
       if (error) {
         toast.error(error.message);
+        setIsWrong(true);
         return;
       }
 
@@ -152,6 +154,7 @@ export function SignInForm() {
             </FieldGroup>
           </form>
         </CardContent>
+        <p className={isWrong ? 'text-red-700 text-center' : 'hidden'}>이메일 혹은 패스워드가 틀렸습니다</p>
 
         <CardFooter className="flex flex-col gap-4">
           <Button
