@@ -39,6 +39,7 @@ export const useHandleOnSubmit = () => {
         email: values.email,
         department: values.department,
         position: values.position,
+        employee_number: values.employee_number,
         role: values.role,
         status: 'ACTIVE',
         hire_date: values.hire_date,

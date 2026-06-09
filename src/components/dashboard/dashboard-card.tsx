@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface DashboardCardProps {
   title: string;
-  value: string;
+  value: number;
   description: string;
   icon: LucideIcon;
 }

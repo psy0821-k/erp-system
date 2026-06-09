@@ -3,25 +3,25 @@ import { CalendarDays, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 export const vacationSummary = [
   {
     title: '오늘 휴가자',
-    value: '3명',
+    value: 3,
     description: '오늘 휴가 사용 직원',
     icon: CalendarDays,
   },
   {
     title: '승인 완료',
-    value: '18건',
+    value: 18,
     description: '승인 처리 완료',
     icon: CheckCircle2,
   },
   {
     title: '승인 대기',
-    value: '4건',
+    value: 4,
     description: '결재 대기 중',
     icon: Clock3,
   },
   {
     title: '반려',
-    value: '2건',
+    value: 2,
     description: '반려된 신청',
     icon: XCircle,
   },
