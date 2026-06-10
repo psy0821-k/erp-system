@@ -12,7 +12,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
@@ -41,13 +40,13 @@ export function SignInForm() {
       });
 
       if (error) {
-        toast.error(error.message);
+        form.resetField('password');
+        form.setFocus('password');
         setIsWrong(true);
         return;
       }
 
       if (data) {
-        toast.success('로그인에 성공했습니다');
         router.push('/');
       }
     } catch (error) {
