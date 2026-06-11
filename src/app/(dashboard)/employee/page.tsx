@@ -1,20 +1,8 @@
 import Filtering from '@/components/filtering';
 import { SearchComponent } from '@/components/SearchComponent';
-import TableComponent from '@/components/table/tableComponent';
-import { getFilterParams } from '@/lib/getFilterparams';
+import EmployeeListClient from './components/employeesListClient';
 
-interface Props {
-  searchParams: Promise<{
-    keyword?: string;
-    page?: string;
-    limit?: string;
-  }>;
-}
-
-export default async function Page({ searchParams }: Props) {
-  const params = await searchParams;
-  const filters = getFilterParams(params);
-
+export default async function Page() {
   return (
     <div>
       <div className="flex justify-between">
@@ -24,7 +12,7 @@ export default async function Page({ searchParams }: Props) {
 
       <main>
         <section>
-          <TableComponent keyword={filters.keyword} page={filters.page} />
+          <EmployeeListClient />
         </section>
       </main>
     </div>
