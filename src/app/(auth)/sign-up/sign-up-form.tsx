@@ -8,20 +8,24 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import PasswordInput from './password-input';
-import { useHandleOnSubmit } from './useHandleOnSubmit';
-import { signUpDefaultValues } from './sign-up-default-values';
-import z from 'zod';
-import { formSchema } from './sign-up-schema';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { FormSelectField } from './SelectField';
 import { departments, positions, roles } from './role';
+import { useCreateEmployee } from '@/app/(dashboard)/employee/hooks/useCreateEmployee';
+import { EmployeeCreateInput, employeeCreateSchema } from './schema/employeeSchema';
+import { employeeCreateDefaultValues } from './schema/employeeCreateDefaultValue';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export function SignUpForm() {
-  const { onSubmit } = useHandleOnSubmit();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: signUpDefaultValues,
+  const { mutate, isPending } = useCreateEmployee();
+
+  const onSubmit = (values: EmployeeCreateInput) => {
+    mutate(values);
+  };
+  const form = useForm<EmployeeCreateInput>({
+    resolver: zodResolver(employeeCreateSchema),
+    defaultValues: employeeCreateDefaultValues,
   });
+
   return (
     <section className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
       <Card className="w-full max-w-md border-none shadow-xl">
@@ -37,7 +41,12 @@ export function SignUpForm() {
         </CardHeader>
 
         <CardContent>
-          <form id="sign-up-form" onSubmit={form.handleSubmit(onSubmit)}>
+          <form
+            id="sign-up-form"
+            onSubmit={form.handleSubmit(onSubmit, errors => {
+              console.log('검증 실패:', errors);
+            })}
+          >
             <FieldGroup className="gap-5">
               <Controller
                 name="name"
@@ -123,7 +132,7 @@ export function SignUpForm() {
                   </Field>
                 )}
               />
-              <PasswordInput />
+              <PasswordInput control={form.control} />
               <FormSelectField name="position" label="직급" control={form.control} options={positions.items} />
               <FormSelectField name="role" label="역할" control={form.control} options={roles.items} />
               <FormSelectField name={departments.value} label={departments.title} control={form.control} options={departments.items} />{' '}
@@ -132,9 +141,10 @@ export function SignUpForm() {
           <Button
             type="submit"
             form="sign-up-form"
+            disabled={isPending}
             className="w-full h-11 bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold py-3.5 px-4 rounded-xl cursor-pointer shadow-md active:translate-y-0.5 shadow-amber-400/20 mt-2"
           >
-            직원 등록
+            {isPending ? '등록 중...' : '직원 등록'}
           </Button>
         </CardContent>
 

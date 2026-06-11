@@ -1,14 +1,15 @@
 import { z } from 'zod';
-import { formSchema } from './sign-up-schema';
+import { employeeCreateSchema } from './schema/employeeSchema';
 
-export const signUpDefaultValues: z.infer<typeof formSchema> = {
+export const signUpDefaultValues: z.infer<typeof employeeCreateSchema> = {
   name: '',
   email: '',
+  employee_number: '',
   password: 'Password123!',
   department: '',
   position: '',
   role: 'EMPLOYEE',
   status: 'ACTIVE',
   hire_date: '',
-  authority_value: 0,
+  authority_level: 0,
 };
