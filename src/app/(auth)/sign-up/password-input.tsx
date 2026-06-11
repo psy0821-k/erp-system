@@ -23,7 +23,7 @@ export default function PasswordInput({ control }: PasswordInputProps) {
 
   const passwordChecks = {
     minLength: password.length >= 8,
-    hasCombination: /[a-z]/.test(password) && /[A-Z]/.test(password) && /\d/.test(password),
+    hasCombination: /[a-z]/.test(password) && /[A-Z]/.test(password) && /\d/.test(password) && /[$@$!%*?&]/.test(password),
   };
 
   return (
@@ -61,7 +61,7 @@ export default function PasswordInput({ control }: PasswordInputProps) {
 
           <div className="mt-3 rounded-lg bg-muted/60 p-3 text-sm">
             <PasswordCheck active={passwordChecks.minLength}>8자 이상</PasswordCheck>
-            <PasswordCheck active={passwordChecks.hasCombination}>소문자, 대문자, 숫자 포함</PasswordCheck>
+            <PasswordCheck active={passwordChecks.hasCombination}>소문자, 대문자, 숫자, 특수문자 포함</PasswordCheck>
           </div>
 
           {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
