@@ -1,6 +1,6 @@
 'use client';
 
-import { useEmployees } from '../hooks/useEmployees';
+import { useEmployees } from '../../../feature/employees/hooks/useEmployees';
 import EmployeeTable from './employeeTable';
 
 export default function EmployeeListClient() {

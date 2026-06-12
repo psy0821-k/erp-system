@@ -6,16 +6,16 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 import { useState } from 'react';
-import { useUpdateEmployee } from '../hooks/useUpdateEmployee';
-import { UpdateEmployeeInput } from '../type/employeeType';
-import { updateEmployeeSchema } from '@/app/(auth)/sign-up/schema/updateEmployeeSchema';
+import { useUpdateEmployee } from '../../../feature/employees/hooks/useUpdateEmployee';
+import { UpdateEmployeeInput } from '../../../feature/employees/types/employeeType';
+import { updateEmployeeSchema } from '@/app/feature/sign-up/schema/updateEmployeeSchema';
 
 import { Controller, useForm } from 'react-hook-form';
 import { Calendar } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
-import { FormSelectField } from '@/app/(auth)/sign-up/SelectField';
-import { departments, positions, roles } from '@/app/(auth)/sign-up/role';
+import { FormSelectField } from '@/app/(auth)/sign-up/components/SelectField';
+import { departments, positions, roles } from '@/app/feature/sign-up/types/role';
 
 type EmployeeEditDialogProps = {
   employee: {

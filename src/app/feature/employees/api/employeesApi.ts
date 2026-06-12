@@ -1,7 +1,7 @@
-import { employeeCreateSchema } from '@/app/(auth)/sign-up/schema/employeeSchema';
+import { employeeCreateSchema } from '@/app/feature/sign-up/schema/employeeSchema';
 import { createClient } from '@/lib/client';
 import { z } from 'zod';
-import { UpdateEmployeeInput } from '../type/employeeType';
+import { UpdateEmployeeInput } from '../types/employeeType';
 
 export const getEmployees = async () => {
   const supabase = createClient();

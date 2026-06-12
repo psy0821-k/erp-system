@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getEmployees } from '../api/employeesApi';
-import { employeeKeys } from '../query/queryKeys';
+import { employeeKeys } from '../keys/queryKeys';
 
 export function useEmployees() {
   return useQuery({

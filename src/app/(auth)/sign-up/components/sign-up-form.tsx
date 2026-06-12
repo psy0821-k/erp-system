@@ -9,10 +9,10 @@ import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field
 import { Input } from '@/components/ui/input';
 import PasswordInput from './password-input';
 import { FormSelectField } from './SelectField';
-import { departments, positions, roles } from './role';
-import { useCreateEmployee } from '@/app/(dashboard)/employee/hooks/useCreateEmployee';
-import { EmployeeCreateInput, employeeCreateSchema } from './schema/employeeSchema';
-import { employeeCreateDefaultValues } from './schema/employeeCreateDefaultValue';
+import { departments, positions, roles } from '../../../feature/sign-up/types/role';
+import { useCreateEmployee } from '@/app/feature/employees/hooks/useCreateEmployee';
+import { EmployeeCreateInput, employeeCreateSchema } from '../../../feature/sign-up/schema/employeeSchema';
+import { employeeCreateDefaultValues } from '../../../feature/sign-up/schema/employeeCreateDefaultValue';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 export function SignUpForm() {

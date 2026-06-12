@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { CheckCircle2, Eye, EyeClosed, Lock } from 'lucide-react';
 import { useState } from 'react';
 import { Control, Controller, useWatch } from 'react-hook-form';
-import { EmployeeCreateInput } from './schema/employeeSchema';
+import { EmployeeCreateInput } from '../../../feature/sign-up/schema/employeeSchema';
 
 type PasswordInputProps = {
   control: Control<EmployeeCreateInput>;

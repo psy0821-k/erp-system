@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { employeeCreateSchema } from './schema/employeeSchema';
+import { employeeCreateSchema } from '../schema/employeeSchema';
 
 export const signUpDefaultValues: z.infer<typeof employeeCreateSchema> = {
   name: '',

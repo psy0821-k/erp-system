@@ -1,7 +1,7 @@
 import { employeeTableHeaders } from '@/app/mock-data/hr';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
 import Link from 'next/link';
-import { getEmployees } from '@/app/(dashboard)/employee/getEmployees';
+import { getEmployees } from '@/app/feature/employees/api/employeesApi';
 
 interface Props {
   keyword: string;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const TableComponent = async ({ keyword, page }: Props) => {
-  const employees = await getEmployees(keyword, page);
+  const employees = await getEmployees();
   return (
     <Table>
       <TableCaption className="sr-only">직원 목록</TableCaption>

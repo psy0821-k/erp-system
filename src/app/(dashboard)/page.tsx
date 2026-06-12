@@ -15,25 +15,25 @@ import AssetBoard from '@/components/dashboard/asset-board';
 const stats = [
   {
     title: '총 직원 수',
-    value: '124',
+    value: 124,
     description: '총 직원수',
     icon: ShoppingCart,
   },
   {
     title: '총 프로젝트',
-    value: '200',
+    value: 200,
     description: '현재까지 진행한 프로젝트',
     icon: Truck,
   },
   {
     title: '승인대기',
-    value: '3',
+    value: 3,
     description: '현재 승인 대기 중',
     icon: Package,
   },
   {
     title: '긴급 요청',
-    value: '36',
+    value: 36,
     description: '활성 직원 수',
     icon: Users,
   },
