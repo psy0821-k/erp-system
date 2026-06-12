@@ -6,6 +6,7 @@ export interface employeesType {
   position: string;
   status: string;
   role: string;
+  hire_date: string;
   created_at: string;
   employee_number: string;
   authority_level: number;
@@ -19,5 +20,16 @@ export type CreateEmployeeInput = {
   position: string;
   role: string;
   status: string;
+  authority_level: number;
+};
+
+export type UpdateEmployeeInput = {
+  id: string;
+  name: string;
+  department: string;
+  position: string;
+  role: string;
+  status: string;
+  hire_date: string;
   authority_level: number;
 };

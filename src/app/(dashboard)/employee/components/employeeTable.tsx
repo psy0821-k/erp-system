@@ -3,6 +3,9 @@ import { employeeTableHeaders } from '@/app/mock-data/hr';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import Link from 'next/link';
 import { employeesType } from '@/app/(dashboard)/employee/type/employeeType';
+import { Button } from '@base-ui/react';
+import EmployeeEditDialog from './employee-edit-dialog';
+import EmployeeDeleteButton from './employee-delete-button';
 
 type Props = {
   employees: employeesType[];
@@ -34,7 +37,11 @@ const EmployeeTable = ({ employees }: Props) => {
             <TableCell>{employee.role}</TableCell>
             <TableCell>{employee.status}</TableCell>
             <TableCell>
-              <Link href={`/employee/${employee.id}`}>자세히보기</Link>
+              <Link href={`/employee/${employee.id}`} className="mr-4">
+                자세히보기
+              </Link>
+              <EmployeeEditDialog employee={employee} />
+              <EmployeeDeleteButton id={employee.id} />
             </TableCell>
           </TableRow>
         ))}

@@ -1,6 +1,7 @@
+import { employeeCreateSchema } from '@/app/(auth)/sign-up/schema/employeeSchema';
 import { createClient } from '@/lib/client';
 import { z } from 'zod';
-import { formSchema } from '@/app/(auth)/sign-up/sign-up-schema';
+import { UpdateEmployeeInput } from '../type/employeeType';
 
 export const getEmployees = async () => {
   const supabase = createClient();
@@ -14,7 +15,7 @@ export const getEmployees = async () => {
   return data;
 };
 
-export const createEmployee = async (values: z.infer<typeof formSchema>) => {
+export const createEmployee = async (values: z.infer<typeof employeeCreateSchema>) => {
   const supabase = createClient();
 
   const { data: authData, error: authError } = await supabase.auth.signUp({
@@ -52,4 +53,32 @@ export const createEmployee = async (values: z.infer<typeof formSchema>) => {
   }
 
   return data;
+};
+
+export const updateEmployee = async (input: UpdateEmployeeInput) => {
+  const supabase = createClient();
+
+  const { id, ...updateData } = input;
+
+  const { data, error } = await supabase.from('employees').update(updateData).eq('id', id).select().single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
+export const deleteEmployee = async (id: string) => {
+  const response = await fetch(`/api/employees/${id}`, {
+    method: 'DELETE',
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message);
+  }
+
+  return result;
 };
