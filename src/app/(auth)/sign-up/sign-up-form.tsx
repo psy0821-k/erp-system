@@ -27,7 +27,7 @@ export function SignUpForm() {
   });
 
   return (
-    <section className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
+    <section className="flex min-h-screen items-center justify-center bg-muted/40 px-4 p-10">
       <Card className="w-full max-w-md border-none shadow-xl">
         <CardHeader className="space-y-3 text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
@@ -135,7 +135,7 @@ export function SignUpForm() {
               <PasswordInput control={form.control} />
               <FormSelectField name="position" label="직급" control={form.control} options={positions.items} />
               <FormSelectField name="role" label="역할" control={form.control} options={roles.items} />
-              <FormSelectField name={departments.value} label={departments.title} control={form.control} options={departments.items} />{' '}
+              <FormSelectField name={departments.value} label={departments.title} control={form.control} options={departments.items} />
             </FieldGroup>
           </form>
           <Button

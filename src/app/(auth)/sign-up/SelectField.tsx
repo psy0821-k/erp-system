@@ -1,25 +1,20 @@
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Controller, Control, Path } from 'react-hook-form';
-import z from 'zod';
-import { formSchema } from './sign-up-schema';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 
-type SignUpFormValues = z.infer<typeof formSchema>;
-
-type SelectOption = {
+type Option = {
   title: string;
   value: string;
 };
 
-type FormSelectFieldProps = {
-  name: Path<SignUpFormValues>;
+type FormSelectFieldProps<T extends FieldValues> = {
+  name: Path<T>;
   label: string;
-  placeholder?: string;
-  control: Control<SignUpFormValues>;
-  options: readonly SelectOption[];
+  control: Control<T>;
+  options: readonly Option[];
 };
 
-export const FormSelectField = ({ name, label, placeholder, control, options }: FormSelectFieldProps) => {
+export function FormSelectField<T extends FieldValues>({ name, label, control, options }: FormSelectFieldProps<T>) {
   return (
     <Controller
       name={name}
@@ -28,14 +23,14 @@ export const FormSelectField = ({ name, label, placeholder, control, options }: 
         <Field data-invalid={fieldState.invalid}>
           <FieldLabel>{label}</FieldLabel>
 
-          <Select value={String(field.value ?? '')} onValueChange={field.onChange}>
-            <SelectTrigger className="h-11 w-full">
-              <SelectValue placeholder={placeholder ?? `${label} 선택`} />
+          <Select value={field.value} onValueChange={field.onChange}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder={`${label} 선택`} />
             </SelectTrigger>
 
-            <SelectContent position="popper" className="bg-white">
+            <SelectContent position="popper" className="bg-amber-50">
               {options.map(option => (
-                <SelectItem key={option.value} className="cursor-pointer hover:bg-slate-200" value={option.value}>
+                <SelectItem key={option.value} value={option.value}>
                   {option.title}
                 </SelectItem>
               ))}
@@ -47,4 +42,4 @@ export const FormSelectField = ({ name, label, placeholder, control, options }: 
       )}
     />
   );
-};
+}
