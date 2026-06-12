@@ -3,7 +3,6 @@ import { employeeTableHeaders } from '@/app/mock-data/hr';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import Link from 'next/link';
 import { employeesType } from '@/app/feature/employees/types/employeeType';
-import { Button } from '@base-ui/react';
 import EmployeeEditDialog from './employee-edit-dialog';
 import EmployeeDeleteButton from './employee-delete-button';
 

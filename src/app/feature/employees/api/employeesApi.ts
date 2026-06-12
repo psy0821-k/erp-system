@@ -16,43 +16,21 @@ export const getEmployees = async () => {
 };
 
 export const createEmployee = async (values: z.infer<typeof employeeCreateSchema>) => {
-  const supabase = createClient();
-
-  const { data: authData, error: authError } = await supabase.auth.signUp({
-    email: values.email,
-    password: values.password,
+  const response = await fetch('/api/employees', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(values),
   });
 
-  if (authError) {
-    throw authError;
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message ?? '직원 등록에 실패했습니다.');
   }
 
-  if (!authData.user) {
-    throw new Error('회원가입 정보를 확인할 수 없습니다.');
-  }
-
-  const { data, error } = await supabase
-    .from('employees')
-    .insert({
-      id: authData.user.id,
-      name: values.name,
-      email: values.email,
-      department: values.department,
-      position: values.position,
-      employee_number: values.employee_number,
-      role: values.role,
-      status: 'ACTIVE',
-      hire_date: values.hire_date,
-      authority_level: 0,
-    })
-    .select()
-    .single();
-
-  if (error) {
-    throw error;
-  }
-
-  return data;
+  return result.data;
 };
 
 export const updateEmployee = async (input: UpdateEmployeeInput) => {
