@@ -2,17 +2,42 @@ import { employeeCreateSchema } from '@/app/feature/sign-up/schema/employeeSchem
 import { createClient } from '@/lib/client';
 import { z } from 'zod';
 import { UpdateEmployeeInput } from '../types/employeeType';
+import { EmployeeListParams } from '../types/searchType';
 
-export const getEmployees = async () => {
+const PAGE_SIZE = 10;
+
+export const getEmployees = async (params: EmployeeListParams) => {
   const supabase = createClient();
 
-  const { data, error } = await supabase.from('employees').select('*').order('employee_number', { ascending: false });
+  const page = params.page ?? 1;
+
+  const from = (page - 1) * PAGE_SIZE;
+  const to = from + PAGE_SIZE - 1;
+
+  let query = supabase.from('employees').select('*', { count: 'exact' }).order('employee_number', {
+    ascending: false,
+  });
+
+  if (params.keyword) {
+    query = query.or(`name.ilike.%${params.keyword}%,email.ilike.%${params.keyword}%`);
+  }
+
+  if (params.department) {
+    query = query.eq('department', params.department);
+  }
+
+  const { data, error, count } = await query.range(from, to);
 
   if (error) {
     throw error;
   }
 
-  return data;
+  return {
+    employees: data ?? [],
+    totalCount: count ?? 0,
+    page,
+    pageSize: PAGE_SIZE,
+  };
 };
 
 export const createEmployee = async (values: z.infer<typeof employeeCreateSchema>) => {
