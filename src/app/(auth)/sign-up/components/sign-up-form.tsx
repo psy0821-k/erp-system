@@ -53,7 +53,7 @@ export function SignUpForm() {
                 control={form.control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="email">이메일</FieldLabel>
+                    <FieldLabel htmlFor="email">이름</FieldLabel>
 
                     <div className="relative">
                       <Input {...field} id="name" aria-invalid={fieldState.invalid} placeholder="이름을 입력해 주세요" autoComplete="off" />
