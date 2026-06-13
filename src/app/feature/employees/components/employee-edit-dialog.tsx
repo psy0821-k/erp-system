@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 import { useState } from 'react';
-import { useUpdateEmployee } from '../../../feature/employees/hooks/useUpdateEmployee';
-import { UpdateEmployeeInput } from '../../../feature/employees/types/employeeType';
+import { useUpdateEmployee } from '../hooks/useUpdateEmployee';
+import { UpdateEmployeeInput } from '../types/employeeType';
 import { updateEmployeeSchema } from '@/app/feature/sign-up/schema/updateEmployeeSchema';
 
 import { Controller, useForm } from 'react-hook-form';

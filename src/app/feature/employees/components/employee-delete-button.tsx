@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { useDeleteEmployee } from '../../../feature/employees/hooks/useDeleteEmployee';
+import { useDeleteEmployee } from '../hooks/useDeleteEmployee';
 
 type EmployeeDeleteButtonProps = {
   id: string;

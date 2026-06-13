@@ -1,5 +1,5 @@
 import Filtering from '@/components/filtering';
-import EmployeeListClient from './components/employeesListClient';
+import EmployeeListClient from '../../feature/employees/components/employeesListClient';
 import Link from 'next/link';
 import EmployeeSearch from '@/app/feature/employees/components/EmployeeSearch';
 
