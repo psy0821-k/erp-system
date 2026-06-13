@@ -1,7 +1,5 @@
 import { vacationSummary } from '@/app/mock-data/vacation';
 import DashboardCard from '@/components/dashboard/dashboard-card';
-import TableComponent from '@/components/table/tableComponent';
-import UserInfo from '@/components/userCard/userInfo';
 import Link from 'next/link';
 
 const VacationPage = () => {
@@ -34,8 +32,6 @@ const VacationPage = () => {
               <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
             </div>
           </div>
-
-          <TableComponent />
         </div>
 
         <aside className="space-y-4">
@@ -43,9 +39,7 @@ const VacationPage = () => {
             <h2 className="text-lg font-semibold">오늘 휴가자</h2>
             <p className="mt-1 text-sm text-muted-foreground">오늘 휴가를 사용 중인 직원입니다.</p>
 
-            <div className="mt-5 space-y-3">
-              <UserInfo />
-            </div>
+            <div className="mt-5 space-y-3"></div>
           </div>
 
           <div className="rounded-xl border bg-background p-5">

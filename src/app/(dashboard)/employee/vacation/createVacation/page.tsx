@@ -1,11 +1,14 @@
-import CreateWrite from '@/components/common/createWrite';
+import VacationClientForm from '@/app/feature/vacations/components/vacationForm';
+import { getCurrentEmployee } from '@/app/api/getEmployee';
 
-const CreateVacationPage = () => {
+const VacationCreatePage = async () => {
+  const employee = await getCurrentEmployee();
+
   return (
     <main className="w-full h-full">
-      <CreateWrite />
+      <VacationClientForm employee={employee} />
     </main>
   );
 };
 
-export default CreateVacationPage;
+export default VacationCreatePage;

@@ -12,7 +12,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
@@ -41,13 +40,13 @@ export function SignInForm() {
       });
 
       if (error) {
-        toast.error(error.message);
+        form.resetField('password');
+        form.setFocus('password');
         setIsWrong(true);
         return;
       }
 
       if (data) {
-        toast.success('로그인에 성공했습니다');
         router.push('/');
       }
     } catch (error) {
@@ -65,7 +64,7 @@ export function SignInForm() {
 
   const passwordChecks = {
     minLength: password.length >= 8,
-    hasCombination: /[a-z]/.test(password) && /[A-Z]/.test(password) && /\d/.test(password),
+    hasCombination: /[a-z]/.test(password) && /[A-Z]/.test(password) && /\d/.test(password) && /[$@$!%*?&]/.test(password),
   };
 
   function handleToggleView() {
@@ -73,7 +72,7 @@ export function SignInForm() {
   }
 
   return (
-    <section className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
+    <section className="flex min-h-screen items-center justify-center bg-muted/40 px-4 p-10">
       <Card className="w-full max-w-md border-none shadow-xl">
         <CardHeader className="space-y-3 text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
@@ -144,7 +143,7 @@ export function SignInForm() {
 
                     <div className="mt-3 rounded-lg bg-muted/60 p-3 text-sm">
                       <PasswordCheck active={passwordChecks.minLength}>8자 이상</PasswordCheck>
-                      <PasswordCheck active={passwordChecks.hasCombination}>소문자, 대문자, 숫자 포함</PasswordCheck>
+                      <PasswordCheck active={passwordChecks.hasCombination}>소문자, 대문자, 숫자 특수문자 포함</PasswordCheck>
                     </div>
 
                     {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
