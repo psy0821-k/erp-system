@@ -1,10 +1,9 @@
 import AttendanceCharts from '@/components/dashboard/attendance-chart';
 import DashboardCard from '@/components/dashboard/dashboard-card';
 import Filtering from '@/components/filtering';
-import TableComponent from '@/components/table/tableComponent';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import UserInfo from '@/components/userCard/userInfo';
 import { getDashboardStats } from '../../attendence';
+import UserInfo from '@/components/layout/sidebar/userInfo';
 
 export default async function AttendancePage() {
   const stats = await getDashboardStats();
@@ -31,9 +30,7 @@ export default async function AttendancePage() {
         <CardHeader>
           <CardTitle>근태 목록</CardTitle>
         </CardHeader>
-        <CardContent>
-          <TableComponent />
-        </CardContent>
+        <CardContent></CardContent>
       </Card>
     </main>
   );

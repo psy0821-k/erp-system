@@ -1,17 +1,26 @@
 import Filtering from '@/components/filtering';
-import TableComponent from '@/components/table/tableComponent';
+import EmployeeListClient from '../../feature/employees/components/employeesListClient';
+import Link from 'next/link';
+import EmployeeSearch from '@/app/feature/employees/components/EmployeeSearch';
 
-const Page = async () => {
+export default async function Page() {
   return (
     <div>
-      <Filtering />
+      <div className="flex justify-between">
+        <EmployeeSearch />
+        <div className="flex gap-4 items-start">
+          <Filtering />
+          <Link href="/sign-up" className="bg-blue-700 p-2  text-white font-semibold rounded-2xl">
+            직원 등록하기
+          </Link>
+        </div>
+      </div>
+
       <main>
         <section>
-          <TableComponent />
+          <EmployeeListClient />
         </section>
       </main>
     </div>
   );
-};
-
-export default Page;
+}

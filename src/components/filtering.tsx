@@ -1,27 +1,41 @@
-import { Search } from 'lucide-react';
-import React from 'react';
-import { Input } from './ui/input';
+'use client';
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 const Filtering = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const handleFilterChange = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (value === 'all') {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+
+    params.set('page', '1');
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
   return (
     <header className="flex justify-between mb-8">
-      <div className="relative w-72">
-        <label htmlFor="search" className="sr-only">
-          검색
-        </label>
-
-        <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-        <Input id="search" type="text" placeholder="검색어를 입력하세요" className="pl-10" />
-      </div>
       <div className="flex gap-4">
-        <Select>
-          <SelectTrigger className="w-25">
+        <Select value={searchParams.get('position') ?? 'all'} onValueChange={value => handleFilterChange('position', value)}>
+          <SelectTrigger className="w-26">
             <SelectValue placeholder="직급 선택" />
           </SelectTrigger>
 
           <SelectContent position="popper" className="bg-white">
             <SelectGroup>
+              <SelectItem className="hover:bg-slate-100" value="all">
+                직급 선택
+              </SelectItem>
               <SelectItem className="hover:bg-slate-100" value="STAFF">
                 사원
               </SelectItem>
@@ -31,18 +45,31 @@ const Filtering = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
-        <Select>
+
+        <Select value={searchParams.get('department') ?? 'all'} onValueChange={value => handleFilterChange('department', value)}>
           <SelectTrigger className="w-30">
             <SelectValue placeholder="부서 선택" />
           </SelectTrigger>
 
           <SelectContent position="popper" className="bg-white">
             <SelectGroup>
-              <SelectItem className="hover:bg-slate-100" value="backend">
+              <SelectItem className="hover:bg-slate-100" value="all">
+                부서 선택
+              </SelectItem>
+              <SelectItem className="hover:bg-slate-100" value="BACKEND">
                 백엔드
               </SelectItem>
-              <SelectItem className="hover:bg-slate-100" value="frontend">
+              <SelectItem className="hover:bg-slate-100" value="FRONTEND">
                 프론트엔드
+              </SelectItem>
+              <SelectItem className="hover:bg-slate-100" value="DESIGN">
+                디자이너
+              </SelectItem>
+              <SelectItem className="hover:bg-slate-100" value="PLANNING">
+                기획
+              </SelectItem>
+              <SelectItem className="hover:bg-slate-100" value="HR">
+                인사
               </SelectItem>
             </SelectGroup>
           </SelectContent>

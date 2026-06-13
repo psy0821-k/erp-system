@@ -1,6 +1,6 @@
-import { getCurrentEmployee } from '@/app/api/getEmployee';
 import { ChevronDown, UserCircle } from 'lucide-react';
 import LogoutButton from './LogoutButton';
+import { getCurrentEmployee } from '@/app/api/getEmployee';
 
 export async function UserInfo() {
   const employee = await getCurrentEmployee();

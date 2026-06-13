@@ -1,15 +1,16 @@
+'use client';
 import { employeeTableHeaders } from '@/app/mock-data/hr';
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../ui/table';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import Link from 'next/link';
-import { getEmployees } from '@/app/feature/employees/api/employeesApi';
+import { employeesType } from '@/app/feature/employees/types/employeeType';
+import EmployeeEditDialog from './employee-edit-dialog';
+import EmployeeDeleteButton from './employee-delete-button';
 
-interface Props {
-  keyword: string;
-  page: number;
-}
+type Props = {
+  employees: employeesType[];
+};
 
-const TableComponent = async ({ keyword, page }: Props) => {
-  const employees = await getEmployees();
+const EmployeeTable = ({ employees }: Props) => {
   return (
     <Table>
       <TableCaption className="sr-only">직원 목록</TableCaption>
@@ -25,6 +26,7 @@ const TableComponent = async ({ keyword, page }: Props) => {
       </TableHeader>
 
       <TableBody className="border">
+        {}
         {employees?.map(employee => (
           <TableRow key={employee.id} className="text-center">
             <TableCell>{employee.employee_number}</TableCell>
@@ -34,7 +36,11 @@ const TableComponent = async ({ keyword, page }: Props) => {
             <TableCell>{employee.role}</TableCell>
             <TableCell>{employee.status}</TableCell>
             <TableCell>
-              <Link href={`/employee/${employee.id}`}>자세히보기</Link>
+              <Link href={`/employee/${employee.id}`} className="mr-4">
+                자세히보기
+              </Link>
+              <EmployeeEditDialog employee={employee} />
+              <EmployeeDeleteButton id={employee.id} />
             </TableCell>
           </TableRow>
         ))}
@@ -43,4 +49,4 @@ const TableComponent = async ({ keyword, page }: Props) => {
   );
 };
 
-export default TableComponent;
+export default EmployeeTable;
