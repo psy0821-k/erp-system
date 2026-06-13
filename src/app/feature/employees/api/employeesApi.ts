@@ -88,3 +88,24 @@ export const deleteEmployee = async (id: string) => {
 
   return result;
 };
+
+export const getCurrentEmployee = async () => {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    throw new Error('로그인이 필요합니다.');
+  }
+
+  const { data, error } = await supabase.from('employees').select('id, name, email, department, position').eq('user_id', user.id).single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
