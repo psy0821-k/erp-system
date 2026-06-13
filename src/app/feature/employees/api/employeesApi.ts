@@ -25,6 +25,9 @@ export const getEmployees = async (params: EmployeeListParams) => {
   if (params.department) {
     query = query.eq('department', params.department);
   }
+  if (params.position) {
+    query = query.eq('position', params.position);
+  }
 
   const { data, error, count } = await query.range(from, to);
 

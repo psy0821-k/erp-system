@@ -13,6 +13,7 @@ export default function EmployeeListClient() {
     page: Number(searchParams.get('page') ?? 1),
     keyword: searchParams.get('keyword') ?? '',
     department: searchParams.get('department') ?? '',
+    position: searchParams.get('position') ?? '',
   };
   const { data, isLoading, isError } = useEmployees(params);
 

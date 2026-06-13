@@ -5,5 +5,6 @@ export const getEmployeeSearchParams = (searchParams: ReadonlyURLSearchParams) =
     page: Number(searchParams.get('page') ?? 1),
     keyword: searchParams.get('keyword') ?? '',
     department: searchParams.get('department') ?? '',
+    position: searchParams.get('position') ?? '',
   };
 };

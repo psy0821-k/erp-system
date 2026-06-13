@@ -9,13 +9,13 @@ const Filtering = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const handleDepartmentChange = (value: string) => {
+  const handleFilterChange = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
 
     if (value === 'all') {
-      params.delete('department');
+      params.delete(key);
     } else {
-      params.set('department', value);
+      params.set(key, value);
     }
 
     params.set('page', '1');
@@ -26,13 +26,16 @@ const Filtering = () => {
   return (
     <header className="flex justify-between mb-8">
       <div className="flex gap-4">
-        <Select>
+        <Select value={searchParams.get('position') ?? 'all'} onValueChange={value => handleFilterChange('position', value)}>
           <SelectTrigger className="w-26">
             <SelectValue placeholder="직급 선택" />
           </SelectTrigger>
 
           <SelectContent position="popper" className="bg-white">
             <SelectGroup>
+              <SelectItem className="hover:bg-slate-100" value="all">
+                직급 선택
+              </SelectItem>
               <SelectItem className="hover:bg-slate-100" value="STAFF">
                 사원
               </SelectItem>
@@ -43,7 +46,7 @@ const Filtering = () => {
           </SelectContent>
         </Select>
 
-        <Select value={searchParams.get('department') ?? 'all'} onValueChange={handleDepartmentChange}>
+        <Select value={searchParams.get('department') ?? 'all'} onValueChange={value => handleFilterChange('department', value)}>
           <SelectTrigger className="w-30">
             <SelectValue placeholder="부서 선택" />
           </SelectTrigger>
@@ -51,7 +54,7 @@ const Filtering = () => {
           <SelectContent position="popper" className="bg-white">
             <SelectGroup>
               <SelectItem className="hover:bg-slate-100" value="all">
-                전체
+                부서 선택
               </SelectItem>
               <SelectItem className="hover:bg-slate-100" value="BACKEND">
                 백엔드
