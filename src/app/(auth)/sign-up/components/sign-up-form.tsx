@@ -1,12 +1,11 @@
 'use client';
 
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { Calendar, Lock, Mail } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
+import { FieldGroup } from '@/components/ui/field';
 import PasswordInput from './password-input';
 import { FormSelectField } from './SelectField';
 import { departments, positions, roles } from '../../../feature/sign-up/types/role';
@@ -14,6 +13,7 @@ import { useCreateEmployee } from '@/app/feature/employees/hooks/useCreateEmploy
 import { EmployeeCreateInput, employeeCreateSchema } from '../../../feature/sign-up/schema/employeeSchema';
 import { employeeCreateDefaultValues } from '../../../feature/sign-up/schema/employeeCreateDefaultValue';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FormInputField } from '@/components/ui/form-input-field';
 
 export function SignUpForm() {
   const { mutate, isPending } = useCreateEmployee();
@@ -48,90 +48,17 @@ export function SignUpForm() {
             })}
           >
             <FieldGroup className="gap-5">
-              <Controller
-                name="name"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="email">이름</FieldLabel>
-
-                    <div className="relative">
-                      <Input {...field} id="name" aria-invalid={fieldState.invalid} placeholder="이름을 입력해 주세요" autoComplete="off" />
-                    </div>
-
-                    {fieldState.invalid && <FieldError className="text-red-600" errors={[fieldState.error]} />}
-                  </Field>
-                )}
-              />
-              <Controller
-                name="email"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="email">이메일</FieldLabel>
-
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <Input
-                        {...field}
-                        id="email"
-                        aria-invalid={fieldState.invalid}
-                        placeholder="example@company.com"
-                        autoComplete="email"
-                        className="h-11 pl-10"
-                      />
-                    </div>
-
-                    {fieldState.invalid && <FieldError className="text-red-600" errors={[fieldState.error]} />}
-                  </Field>
-                )}
-              />
-              <Controller
+              <FormInputField name="name" control={form.control} label="이름" placeholder="이름을 입력해 주세요" autoComplete="off" />
+              <FormInputField name="email" control={form.control} label="이메일" placeholder="example@company.com" autoComplete="email" icon={Mail} />
+              <FormInputField
                 name="employee_number"
                 control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="employee_number">사번</FieldLabel>
-
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <Input
-                        {...field}
-                        id="employee_number"
-                        aria-invalid={fieldState.invalid}
-                        placeholder="EMP-year-number"
-                        autoComplete="cc-number"
-                        className="h-11 pl-10"
-                      />
-                    </div>
-
-                    {fieldState.invalid && <FieldError className="text-red-600" errors={[fieldState.error]} />}
-                  </Field>
-                )}
+                label="사번"
+                placeholder="EMP-year-number"
+                autoComplete="off"
+                icon={Mail}
               />
-              <Controller
-                name="hire_date"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="hire_date">입사일</FieldLabel>
-
-                    <div className="relative">
-                      <Calendar className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <Input
-                        {...field}
-                        id="hire_date"
-                        aria-invalid={fieldState.invalid}
-                        autoComplete="bday-year"
-                        type="date"
-                        className="h-11 pl-10"
-                      />
-                    </div>
-
-                    {fieldState.invalid && <FieldError className="text-red-600" errors={[fieldState.error]} />}
-                  </Field>
-                )}
-              />
+              <FormInputField name="hire_date" control={form.control} label="입사일" type="date" autoComplete="bday-year" icon={Calendar} />
               <PasswordInput control={form.control} />
               <FormSelectField name="position" label="직급" control={form.control} options={positions.items} />
               <FormSelectField name="role" label="역할" control={form.control} options={roles.items} />
