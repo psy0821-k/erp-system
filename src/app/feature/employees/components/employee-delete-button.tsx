@@ -19,7 +19,14 @@ export default function EmployeeDeleteButton({ id }: EmployeeDeleteButtonProps) 
   };
 
   return (
-    <Button type="button" variant="destructive" size="sm" disabled={isPending} onClick={handleDelete}>
+    <Button
+      type="button"
+      variant="destructive"
+      className=" ml-3 cursor-pointer bg-red-600 text-white "
+      size="sm"
+      disabled={isPending}
+      onClick={handleDelete}
+    >
       {isPending ? '삭제 중...' : '삭제'}
     </Button>
   );
