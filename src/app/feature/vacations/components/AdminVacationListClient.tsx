@@ -4,7 +4,15 @@ import { Button } from '@/components/ui/button';
 import { useVacationsInfinite } from '../hooks/useVacationsInfinite';
 import AdminVacationTable from './AdminVacationTable';
 
-export default function AdminVacationListClient() {
+interface Employee {
+  id: string;
+  name: string;
+}
+
+type Props = {
+  employee: Employee;
+};
+export default function AdminVacationListClient({ employee }: Props) {
   const { data, isLoading, error, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useVacationsInfinite();
 
   const vacations = data?.pages.flatMap(page => page.vacations) ?? [];
@@ -23,12 +31,12 @@ export default function AdminVacationListClient() {
   }
 
   if (vacations.length === 0) {
-    return <div>등록된 휴가 신청이 없습니다.</div>;
+    return <div className="my-8">대기 중인 휴가 신청이 없습니다.</div>;
   }
 
   return (
     <div className="space-y-4">
-      <AdminVacationTable vacations={vacations} />
+      <AdminVacationTable vacations={vacations} approverId={employee.id} />
 
       {hasNextPage && (
         <div className="flex justify-center">

@@ -13,8 +13,4 @@ export const employeeNavigation: NavigationItem[] = [
     title: '휴가 관리',
     href: '/employee/vacation',
   },
-  {
-    title: '채용 관리',
-    href: '/employee/recruitment',
-  },
 ];

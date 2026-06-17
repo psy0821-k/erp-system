@@ -1,10 +1,15 @@
+import { getCurrentEmployee } from '@/app/api/getEmployee';
 import AdminVacationListClient from '@/app/feature/vacations/components/AdminVacationListClient';
 import MyVacationListClient from '@/app/feature/vacations/components/MyVacationClientTable';
 import SummaryVacationCard from '@/app/feature/vacations/components/SummaryVacationCard';
 import VacationListClient from '@/app/feature/vacations/components/VacationClientTable';
 import Link from 'next/link';
 
-const VacationPage = () => {
+const VacationPage = async () => {
+  const employee = await getCurrentEmployee();
+  if (employee === null) {
+    return <div>직원 정보를 불러올 수 없습니다.</div>;
+  }
   return (
     <main className="space-y-6">
       <section className="flex justify-between">
@@ -56,7 +61,7 @@ const VacationPage = () => {
         <div className="rounded-xl border bg-background p-5">
           <h2 className="text-lg font-semibold">휴가 관리 테이블</h2>
           <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
-          <AdminVacationListClient />
+          <AdminVacationListClient employee={employee} />
         </div>
       </section>
     </main>
