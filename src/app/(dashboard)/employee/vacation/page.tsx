@@ -1,5 +1,7 @@
-import { vacationSummary } from '@/app/mock-data/vacation';
-import DashboardCard from '@/components/dashboard/dashboard-card';
+import AdminVacationListClient from '@/app/feature/vacations/components/AdminVacationListClient';
+import MyVacationListClient from '@/app/feature/vacations/components/MyVacationClientTable';
+import SummaryVacationCard from '@/app/feature/vacations/components/SummaryVacationCard';
+import VacationListClient from '@/app/feature/vacations/components/VacationClientTable';
 import Link from 'next/link';
 
 const VacationPage = () => {
@@ -19,36 +21,43 @@ const VacationPage = () => {
       </section>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {vacationSummary.map(stat => (
-          <DashboardCard key={stat.title} title={stat.title} value={stat.value} description={stat.description} icon={stat.icon} />
-        ))}
+        <SummaryVacationCard />
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1fr_320px]">
+      <section className="grid gap-6 xl:grid-cols-[1fr_360px]">
         <div className="rounded-xl border bg-background p-5">
-          <div className="mb-5 flex items-center justify-between">
-            <div>
-              <h2 className="text-lg font-semibold">휴가 신청 목록</h2>
-              <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
-            </div>
-          </div>
+          <h2 className="text-lg font-semibold">금일 휴가자</h2>
+          <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
+          <VacationListClient />
         </div>
 
         <aside className="space-y-4">
           <div className="rounded-xl border bg-background p-5">
-            <h2 className="text-lg font-semibold">오늘 휴가자</h2>
-            <p className="mt-1 text-sm text-muted-foreground">오늘 휴가를 사용 중인 직원입니다.</p>
+            <h2 className="text-lg font-semibold">휴가 승인 대기</h2>
+            <p className="mt-1 text-sm text-muted-foreground">내가 신청한 휴가 정보</p>
 
-            <div className="mt-5 space-y-3"></div>
+            <div className="mt-5 space-y-3 h-60">
+              <MyVacationListClient statuses={['PENDING']} />
+            </div>
           </div>
 
           <div className="rounded-xl border bg-background p-5">
-            <h2 className="text-lg font-semibold">나의 휴가</h2>
-            <p className="mt-1 text-sm text-muted-foreground">내가 신청한 휴가에 대해 확인합니다</p>
+            <h2 className="text-lg font-semibold">휴가 승인 결과</h2>
+            <p className="mt-1 text-sm text-muted-foreground">내가 신청한 휴가 승인 결과</p>
 
-            <div className="mt-5 space-y-3"></div>
+            <div className="mt-5 space-y-3 h-60">
+              <MyVacationListClient statuses={['APPROVED', 'REJECTED']} />
+            </div>
           </div>
         </aside>
+      </section>
+      <section>
+        <h2>관리자용 휴가승인 테이블</h2>
+        <div className="rounded-xl border bg-background p-5">
+          <h2 className="text-lg font-semibold">휴가 관리 테이블</h2>
+          <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
+          <AdminVacationListClient />
+        </div>
       </section>
     </main>
   );

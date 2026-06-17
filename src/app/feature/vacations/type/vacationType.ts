@@ -1,4 +1,4 @@
-type ApprovalStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+export type ApprovalStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
 
 export const VACATION_TYPE = {
   ANNUAL: 'ANNUAL',
@@ -13,18 +13,37 @@ export const VACATION_TYPE = {
 
 export type VacationType = (typeof VACATION_TYPE)[keyof typeof VACATION_TYPE];
 
-export interface Vacation {
+export type Vacation = {
   id: string;
   employee_id: string;
-  name: string;
   vacation_title: string;
   vacation_type: VacationType;
   start_date: string;
   end_date: string;
   reason: string;
   status: ApprovalStatus;
+  approver_id: string | null;
+  approved_at: string | null;
+  result_message: string | null;
   created_at: string;
-}
+
+  employee: {
+    id: string;
+    employee_number: string;
+    name: string;
+    email: string;
+    department: string;
+    position: string;
+  } | null;
+
+  approver: {
+    id: string;
+    name: string;
+    email: string;
+    department: string;
+    position: string;
+  } | null;
+};
 export interface CreateVacationDTO {
   employee_id: string;
   name: string;
@@ -41,3 +60,9 @@ export interface VacationListParams {
   department?: string;
   status?: ApprovalStatus;
 }
+
+export type VacationsResponse = {
+  vacations: Vacation[];
+  nextPage?: number;
+  count: number;
+};

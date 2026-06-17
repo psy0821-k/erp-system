@@ -1,11 +1,11 @@
-import { VacationListParams } from '../type/vacationType';
+import { ApprovalStatus } from '../type/vacationType';
 
 export const vacationKeys = {
   all: ['vacations'] as const,
 
   lists: () => [...vacationKeys.all, 'list'] as const,
 
-  list: (params: VacationListParams) => [...vacationKeys.lists(), params] as const,
+  list: (status: ApprovalStatus[]) => [...vacationKeys.lists(), status] as const,
 
   detail: (id: string) => [...vacationKeys.all, 'detail', id] as const,
 };
