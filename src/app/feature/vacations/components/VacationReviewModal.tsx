@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Vacation, ApprovalStatus } from '../type/vacationType';
@@ -46,6 +46,7 @@ export default function VacationReviewModal({ vacation, open, onOpenChange, appr
       <DialogContent className="bg-white">
         <DialogHeader>
           <DialogTitle>휴가 신청 검토</DialogTitle>
+          <DialogDescription>휴가 승인 반려 테이블 검토 완료 시 테이블에서 제거됩니다 </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">

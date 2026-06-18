@@ -12,7 +12,7 @@ const VacationPage = async () => {
     return <div>직원 정보를 불러올 수 없습니다.</div>;
   }
   return (
-    <main className="space-y-6">
+    <div className="space-y-6">
       <section className="flex justify-between">
         <div>
           <h1 className="text-2xl font-bold">휴가관리</h1>
@@ -27,6 +27,7 @@ const VacationPage = async () => {
       </section>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <h2 className="hidden">휴가 요약 카드</h2>
         <SummaryVacationCard />
       </section>
 
@@ -59,7 +60,7 @@ const VacationPage = async () => {
       </section>
       {isAdmin && (
         <section>
-          <h2>관리자용 휴가승인 테이블</h2>
+          <h2 className="hidden">관리자용 휴가승인 테이블</h2>
           <div className="rounded-xl border bg-background p-5">
             <h2 className="text-lg font-semibold">휴가 관리 테이블</h2>
             <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
@@ -67,7 +68,7 @@ const VacationPage = async () => {
           </div>
         </section>
       )}
-    </main>
+    </div>
   );
 };
 

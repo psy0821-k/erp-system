@@ -21,7 +21,7 @@ export default async function EmployeeDetailPage({ params }: Props) {
   const department = departments.find(department => department.id === employee.departmentId);
 
   return (
-    <main className="space-y-6">
+    <div className="space-y-6">
       <section>
         <h1 className="text-2xl font-bold">직원 상세</h1>
         <p className="mt-1 text-sm text-muted-foreground">직원의 기본 정보와 근태 정보를 확인합니다.</p>
@@ -54,7 +54,6 @@ export default async function EmployeeDetailPage({ params }: Props) {
           <CardContent className="grid gap-4 md:grid-cols-2">
             <InfoItem label="이름" value={employee.name} />
             <InfoItem label="이메일" value={employee.email} />
-            <InfoItem label="연락처" value={employee.phone} />
             <InfoItem label="사번" value={employee.id} />
             <InfoItem label="소속 부서" value={employee.department} />
             <InfoItem label="부서장" value={department?.manager ?? '-'} />
@@ -99,7 +98,7 @@ export default async function EmployeeDetailPage({ params }: Props) {
           </ul>
         </CardContent>
       </Card>
-    </main>
+    </div>
   );
 }
 

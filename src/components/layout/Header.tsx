@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import { Bell, Search } from 'lucide-react';
+import { Bell } from 'lucide-react';
 
 import { DarkModeToggle } from '../ui/darkmode';
 

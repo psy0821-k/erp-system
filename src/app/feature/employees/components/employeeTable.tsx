@@ -26,7 +26,6 @@ const EmployeeTable = ({ employees }: Props) => {
       </TableHeader>
 
       <TableBody className="border">
-        {}
         {employees?.map(employee => (
           <TableRow key={employee.id} className="text-center">
             <TableCell>{employee.employee_number}</TableCell>

@@ -9,13 +9,14 @@ export default async function AttendancePage() {
   const stats = await getDashboardStats();
 
   return (
-    <main className="space-y-6">
+    <div className="space-y-6">
       <section>
         <h1 className="text-2xl font-bold">근태관리</h1>
         <p className="mt-1 text-sm text-muted-foreground">직원들의 출근, 지각, 결근, 휴가 현황을 관리합니다.</p>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+        <h2>근태관리 요약</h2>
         {stats.map(stat => (
           <DashboardCard key={stat.title} title={stat.title} value={stat.value} description={stat.description} icon={stat.icon} />
         ))}
@@ -32,6 +33,6 @@ export default async function AttendancePage() {
         </CardHeader>
         <CardContent></CardContent>
       </Card>
-    </main>
+    </div>
   );
 }

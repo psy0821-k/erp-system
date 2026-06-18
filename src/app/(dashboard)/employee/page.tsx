@@ -16,11 +16,10 @@ export default async function Page() {
         </div>
       </div>
 
-      <main>
-        <section>
-          <EmployeeListClient />
-        </section>
-      </main>
+      <section>
+        <h2 className="text-4xl font-bold my-4">직원 리스트</h2>
+        <EmployeeListClient />
+      </section>
     </div>
   );
 }

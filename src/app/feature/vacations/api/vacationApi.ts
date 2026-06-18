@@ -89,7 +89,8 @@ export const getMyVacations = async (statuses?: ApprovalStatus[]) => {
     )
   `
     )
-    .eq('employee_id', user.id);
+    .eq('employee_id', user.id)
+    .limit(3);
 
   if (statuses?.length) {
     query = query.in('status', statuses);

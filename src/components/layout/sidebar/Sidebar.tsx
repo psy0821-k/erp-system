@@ -9,6 +9,7 @@ import { UserInfo } from './userInfo';
 const Sidebar = () => {
   return (
     <aside className="sticky left-0 top-0 flex h-screen w-64 flex-col justify-between border-r border-white/10 bg-slate-950 text-white">
+      <h1 className="hidden">erp 시스템 메뉴</h1>
       <div>
         <div className="flex h-18 items-center gap-3 border-b border-white/10 px-6">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 font-bold">E</div>

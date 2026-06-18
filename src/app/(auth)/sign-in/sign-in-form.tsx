@@ -73,6 +73,7 @@ export function SignInForm() {
 
   return (
     <section className="flex min-h-screen items-center justify-center bg-muted/40 px-4 p-10">
+      <h2 className="hidden">로그인</h2>
       <Card className="w-full max-w-md border-none shadow-xl">
         <CardHeader className="space-y-3 text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">

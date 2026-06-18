@@ -5,9 +5,9 @@ const VacationCreatePage = async () => {
   const employee = await getCurrentEmployee();
 
   return (
-    <main className="w-full h-full">
+    <div className="w-full h-full">
       <VacationClientForm employee={employee} />
-    </main>
+    </div>
   );
 };
 

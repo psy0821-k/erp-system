@@ -31,7 +31,7 @@ const AdminVacationTable = ({ vacations, approverId }: Props) => {
           </TableRow>
         </TableHeader>
 
-        <TableBody>
+        <TableBody className="border">
           {vacations.map(vacation => {
             const employee = vacation.employee;
             const isReviewed = vacation.status === 'APPROVED' || vacation.status === 'REJECTED';
