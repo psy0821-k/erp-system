@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Label } from './ui/label';
 
 const Filtering = () => {
   const router = useRouter();
@@ -26,8 +27,12 @@ const Filtering = () => {
   return (
     <header className="flex justify-between mb-8">
       <div className="flex gap-4">
+        <Label htmlFor="filtering-position" className="sr-only">
+          직급 필터링
+        </Label>
+
         <Select value={searchParams.get('position') ?? 'all'} onValueChange={value => handleFilterChange('position', value)}>
-          <SelectTrigger className="w-26">
+          <SelectTrigger id="filtering-position" className="w-26">
             <SelectValue placeholder="직급 선택" />
           </SelectTrigger>
 
@@ -46,8 +51,11 @@ const Filtering = () => {
           </SelectContent>
         </Select>
 
+        <Label htmlFor="filtering-department" className="sr-only">
+          부서 선택 필터링
+        </Label>
         <Select value={searchParams.get('department') ?? 'all'} onValueChange={value => handleFilterChange('department', value)}>
-          <SelectTrigger className="w-30">
+          <SelectTrigger id="filtering-department" className="w-30">
             <SelectValue placeholder="부서 선택" />
           </SelectTrigger>
 

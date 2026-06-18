@@ -6,7 +6,7 @@ import { dashboardNavigation } from '@/config/navigation';
 import { cn } from '@/lib/utils';
 import { UserInfo } from './userInfo';
 
-const Sidebar = () => {
+const AppSidebar = () => {
   return (
     <aside className="sticky left-0 top-0 flex h-screen w-64 flex-col justify-between border-r border-white/10 bg-slate-950 text-white">
       <h1 className="hidden">erp 시스템 메뉴</h1>
@@ -74,4 +74,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default AppSidebar;

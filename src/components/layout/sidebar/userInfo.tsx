@@ -15,8 +15,6 @@ export async function UserInfo() {
 
           <p className="truncate text-xs text-slate-400">{employee?.email ?? '로그인이 필요한 기능입니다'}</p>
         </div>
-
-        <ChevronDown className="ml-auto h-4 w-4 text-slate-400" />
       </div>
       <LogoutButton />
     </div>
