@@ -1,6 +1,3 @@
-import Link from 'next/link';
-import { ChevronDown, LayoutDashboard, User } from 'lucide-react';
-
 import {
   Sidebar,
   SidebarContent,
@@ -10,31 +7,20 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
-
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 import { dashboardNavigation } from '@/config/navigation';
 import { UserInfo } from './userInfo';
+import { SidebarDashboardLink } from './SidebarDashboardLink';
+import { SidebarMenuLink } from './SidebarMenuLink';
+import { SidebarCollapsibleMenu } from './SidebarCollapsibleMenu';
 
 const AppSidebar = () => {
   return (
-    <Sidebar>
-      <SidebarHeader>
+    <Sidebar className="border-r border-slate-800 bg-slate-950 text-slate-100">
+      <SidebarHeader className="border-b border-slate-800 px-3 py-4">
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <Link href="/">
-                <LayoutDashboard aria-hidden="true" />
-                <span>대시보드</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+          <SidebarDashboardLink />
         </SidebarMenu>
       </SidebarHeader>
 
@@ -45,51 +31,16 @@ const AppSidebar = () => {
           <SidebarGroupContent>
             <SidebarMenu>
               {dashboardNavigation.map(menu =>
-                menu.href ? (
-                  <SidebarMenuItem key={menu.title}>
-                    <SidebarMenuButton asChild>
-                      <Link href={menu.href}>
-                        <LayoutDashboard aria-hidden="true" />
-                        <span>{menu.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ) : (
-                  <Collapsible key={menu.title} asChild defaultOpen={false} className="group/collapsible">
-                    <SidebarMenuItem>
-                      <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
-                          <span>{menu.title}</span>
-                          <ChevronDown aria-hidden="true" className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
-                        </SidebarMenuButton>
-                      </CollapsibleTrigger>
-
-                      <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                        <SidebarMenuSub>
-                          {menu.children?.map(subMenu => (
-                            <SidebarMenuSubItem key={subMenu.title}>
-                              <SidebarMenuSubButton asChild>
-                                <Link href={subMenu.href ?? '/'}>
-                                  <span>{subMenu.title}</span>
-                                </Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          ))}
-                        </SidebarMenuSub>
-                      </CollapsibleContent>
-                    </SidebarMenuItem>
-                  </Collapsible>
-                )
+                menu.children?.length ? <SidebarCollapsibleMenu key={menu.title} menu={menu} /> : <SidebarMenuLink key={menu.title} menu={menu} />
               )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <UserInfo />
-        </SidebarMenuItem>
-      </SidebarMenu>
+
+      <SidebarFooter className="border-t border-slate-800 p-3">
+        <UserInfo />
+      </SidebarFooter>
     </Sidebar>
   );
 };
