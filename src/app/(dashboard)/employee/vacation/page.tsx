@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 const VacationPage = async () => {
   const employee = await getCurrentEmployee();
+  const isAdmin = true;
   if (employee === null) {
     return <div>직원 정보를 불러올 수 없습니다.</div>;
   }
@@ -29,7 +30,7 @@ const VacationPage = async () => {
         <SummaryVacationCard />
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1fr_360px]">
+      <section className="grid gap-6 xl:grid-cols-[1fr_480px]">
         <div className="rounded-xl border bg-background p-5">
           <h2 className="text-lg font-semibold">금일 휴가자</h2>
           <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
@@ -41,8 +42,8 @@ const VacationPage = async () => {
             <h2 className="text-lg font-semibold">휴가 승인 대기</h2>
             <p className="mt-1 text-sm text-muted-foreground">내가 신청한 휴가 정보</p>
 
-            <div className="mt-5 space-y-3 h-60">
-              <MyVacationListClient statuses={['PENDING']} />
+            <div className="mt-5 space-y-3 h-50">
+              <MyVacationListClient statuses={['PENDING']} isModalBtn={false} />
             </div>
           </div>
 
@@ -50,20 +51,22 @@ const VacationPage = async () => {
             <h2 className="text-lg font-semibold">휴가 승인 결과</h2>
             <p className="mt-1 text-sm text-muted-foreground">내가 신청한 휴가 승인 결과</p>
 
-            <div className="mt-5 space-y-3 h-60">
-              <MyVacationListClient statuses={['APPROVED', 'REJECTED']} />
+            <div className="mt-5 space-y-3 h-50">
+              <MyVacationListClient statuses={['APPROVED', 'REJECTED']} isModalBtn={true} />
             </div>
           </div>
         </aside>
       </section>
-      <section>
-        <h2>관리자용 휴가승인 테이블</h2>
-        <div className="rounded-xl border bg-background p-5">
-          <h2 className="text-lg font-semibold">휴가 관리 테이블</h2>
-          <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
-          <AdminVacationListClient employee={employee} />
-        </div>
-      </section>
+      {isAdmin && (
+        <section>
+          <h2>관리자용 휴가승인 테이블</h2>
+          <div className="rounded-xl border bg-background p-5">
+            <h2 className="text-lg font-semibold">휴가 관리 테이블</h2>
+            <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
+            <AdminVacationListClient employee={employee} />
+          </div>
+        </section>
+      )}
     </main>
   );
 };

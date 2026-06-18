@@ -23,16 +23,8 @@ export const getVacations = async ({ pageParam = 0 }: { pageParam?: number }): P
         email,
         department,
         position
-      ),
-      approver:employees!vacations_approver_id_fkey (
-        id,
-        name,
-        email,
-        department,
-        position
       )
-    `,
-      { count: 'exact' }
+    `
     )
     .order('created_at', { ascending: false })
     .range(from, to);
@@ -75,7 +67,29 @@ export const getMyVacations = async (statuses?: ApprovalStatus[]) => {
 
   if (!user) return [];
 
-  let query = supabase.from('vacations').select('*').eq('employee_id', user.id);
+  let query = supabase
+    .from('vacations')
+    .select(
+      `
+    *,
+    employee:employees!vacations_employee_id_fkey (
+      id,
+      name,
+      employee_number,
+      email,
+      department,
+      position
+    ),
+    approver:employees!vacations_approver_id_fkey (
+      id,
+      name,
+      email,
+      department,
+      position
+    )
+  `
+    )
+    .eq('employee_id', user.id);
 
   if (statuses?.length) {
     query = query.in('status', statuses);
