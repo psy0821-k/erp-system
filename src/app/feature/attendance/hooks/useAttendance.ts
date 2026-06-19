@@ -1,0 +1,29 @@
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+import { attendanceKeys } from '../queryKey/queryKeys';
+import { getAttendanceDetail, getAttendanceList, getTodayAttendance } from '../api/attendanceApi';
+import { AttendanceListParams } from '../type/attendance';
+
+export const useTodayAttendance = (employeeId: string) => {
+  return useQuery({
+    queryKey: attendanceKeys.today(employeeId),
+    queryFn: () => getTodayAttendance(employeeId),
+    enabled: !!employeeId,
+  });
+};
+
+export const useAttendanceList = (params: AttendanceListParams) => {
+  return useQuery({
+    queryKey: attendanceKeys.list(params),
+    queryFn: () => getAttendanceList(params),
+  });
+};
+
+export const useAttendanceDetail = (id: string) => {
+  return useQuery({
+    queryKey: attendanceKeys.detail(id),
+    queryFn: () => getAttendanceDetail(id),
+    enabled: !!id,
+  });
+};

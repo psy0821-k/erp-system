@@ -4,10 +4,16 @@ import Filtering from '@/components/filtering';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { getDashboardStats } from '../../attendence';
 import UserInfo from '@/components/layout/sidebar/userInfo';
+import { getCurrentEmployee } from '@/app/api/getEmployee';
+import { AttendanceButtons } from '@/app/feature/attendance/components/AttendanceButtons';
 
 export default async function AttendancePage() {
   const stats = await getDashboardStats();
+  const employee = await getCurrentEmployee();
 
+  if (!employee) {
+    return null;
+  }
   return (
     <div className="space-y-6">
       <section>
@@ -17,6 +23,7 @@ export default async function AttendancePage() {
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
         <h2>근태관리 요약</h2>
+        <AttendanceButtons employeeId={employee.id} />
         {stats.map(stat => (
           <DashboardCard key={stat.title} title={stat.title} value={stat.value} description={stat.description} icon={stat.icon} />
         ))}
