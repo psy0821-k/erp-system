@@ -32,11 +32,11 @@ export const SidebarCollapsibleMenu = ({ menu }: SidebarCollapsibleMenuProps) =>
           <SidebarMenuSub>
             {menu.children?.map(subMenu => (
               <SidebarMenuSubItem key={subMenu.title}>
-                <Link href={subMenu.href ?? '/'}>
-                  <SidebarMenuSubButton className="text-slate-400 hover:bg-slate-800 hover:text-white">
+                <SidebarMenuSubButton asChild className="text-slate-400 hover:bg-slate-800 hover:text-white">
+                  <Link href={subMenu.href ?? '/'}>
                     <span>{subMenu.title}</span>
-                  </SidebarMenuSubButton>
-                </Link>
+                  </Link>
+                </SidebarMenuSubButton>
               </SidebarMenuSubItem>
             ))}
           </SidebarMenuSub>
