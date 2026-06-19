@@ -2,7 +2,7 @@
 
 import MyVacationTable from './myVacationTable';
 import { ApprovalStatus } from '../type/vacationType';
-import { useVacationEmployees } from '../api/vacationApi';
+import { useVacationEmployees } from '../hooks/useVacation';
 
 type Props = {
   statuses: ApprovalStatus[];

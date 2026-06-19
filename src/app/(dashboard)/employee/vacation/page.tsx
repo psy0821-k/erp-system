@@ -60,10 +60,9 @@ const VacationPage = async () => {
       </section>
       {isAdmin && (
         <section>
-          <h2 className="hidden">관리자용 휴가승인 테이블</h2>
           <div className="rounded-xl border bg-background p-5">
-            <h2 className="text-lg font-semibold">휴가 관리 테이블</h2>
-            <p className="mt-1 text-sm text-muted-foreground">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
+            <h3 className="text-lg font-semibold">휴가 관리 테이블</h3>
+            <p className="mt-1 text-sm text-muted-foreground my-4">신청일, 휴가 유형, 승인 상태를 확인합니다.</p>
             <AdminVacationListClient employee={employee} />
           </div>
         </section>

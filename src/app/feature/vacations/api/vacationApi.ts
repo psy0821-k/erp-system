@@ -1,7 +1,5 @@
 import { createClient } from '@/lib/client';
 import { ApprovalStatus, CreateVacationDTO, VacationsResponse } from '../type/vacationType';
-import { useQuery } from '@tanstack/react-query';
-import { vacationKeys } from '../keys/queryKeys';
 
 const PAGE_SIZE = 10;
 
@@ -153,11 +151,33 @@ export const getVacationSummary = async () => {
   ];
 };
 
-export function useVacationEmployees(statuses: ApprovalStatus[]) {
-  return useQuery({
-    queryKey: vacationKeys.list(statuses),
-    queryFn: () => getMyVacations(statuses),
-    staleTime: 5 * 60 * 1000,
-    gcTime: 30 * 60 * 1000,
-  });
-}
+export const getTodayVacations = async () => {
+  const supabase = createClient();
+
+  const today = new Date().toISOString().split('T')[0];
+
+  const { data, error } = await supabase
+    .from('vacations')
+    .select(
+      `
+      *,
+      employee:employees!vacations_employee_id_fkey (
+        id,
+        employee_number,
+        name,
+        email,
+        department,
+        position
+      )
+    `
+    )
+    .eq('status', 'APPROVED')
+    .lte('start_date', today)
+    .gte('end_date', today);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
