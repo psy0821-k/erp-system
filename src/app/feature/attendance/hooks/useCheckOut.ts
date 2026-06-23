@@ -3,8 +3,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { checkOut } from '../api/attendanceApi';
 import { attendanceKeys } from '../queryKey/queryKeys';
+import { checkOut } from '../api/check_in_out';
 
 export const useCheckOut = (attendanceId: string, employeeId: string) => {
   const queryClient = useQueryClient();
