@@ -16,16 +16,16 @@ export const getAttendanceList = async (params: AttendanceListParams) => {
     .from('attendance')
     .select(
       `
-      *,
-      employee:employees!attendance_employee_id_fkey (
-        id,
-        name,
-        email,
-        employee_number,
-        department,
-        position
-      )
-    `,
+    *,
+    employee:employees!attendance_employee_id_fkey!inner (
+      id,
+      name,
+      email,
+      employee_number,
+      department,
+      position
+    )
+  `,
       { count: 'exact' }
     )
     .order('work_date', { ascending: false });
@@ -33,13 +33,20 @@ export const getAttendanceList = async (params: AttendanceListParams) => {
   if (params.status) {
     query = query.eq('status', params.status);
   }
-  if (params.keyword) {
-    query = query.or(`employee.name.ilike.%${params.keyword}%`);
-  }
 
+  if (params.keyword) {
+    query = query.or(`name.ilike.%${params.keyword}%,email.ilike.%${params.keyword}%`, {
+      foreignTable: 'employee',
+    });
+  }
   if (params.department) {
     query = query.eq('employee.department', params.department);
   }
+
+  if (params.workDate) {
+    query = query.eq('work_date', params.workDate);
+  }
+
   if (params.position) {
     query = query.eq('employee.position', params.position);
   }

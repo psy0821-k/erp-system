@@ -16,13 +16,14 @@ export default function AttendanceClientList() {
     keyword: searchParams.get('keyword') ?? '',
     department: searchParams.get('department') ?? '',
     position: searchParams.get('position') ?? '',
+    workDate: searchParams.get('workDate') ?? '',
     status: rawStatus ? (rawStatus as AttendanceStatus) : undefined,
   };
   const { data, isLoading, isError } = useAttendanceList(params);
 
   const attendances = data?.attendance ?? [];
   const totalCount = data?.totalCount ?? 0;
-  const pageSize = data?.pageSize ?? 10;
+  const pageSize = data?.pageSize ?? 5;
 
   if (isLoading) {
     return <div>직원 목록을 불러오는 중입니다...</div>;

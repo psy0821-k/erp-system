@@ -2,8 +2,9 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { attendanceKeys } from '../queryKey/queryKeys';
-import { getAttendanceDetail, getAttendanceList, getTodayAttendance } from '../api/attendanceApi';
+import { getAttendanceDetail, getAttendanceList } from '../api/attendanceApi';
 import { AttendanceListParams } from '../type/attendance';
+import { getTodayAttendance } from '../api/check_in_out';
 
 export const useTodayAttendance = (employeeId: string) => {
   return useQuery({

@@ -26,4 +26,5 @@ export interface AttendanceListParams {
   department?: string;
   position?: string;
   status?: AttendanceStatus;
+  workDate?: string;
 }

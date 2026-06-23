@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import PositionFilter from './PositionFilter';
 import DepartmentFilter from './DepartmentFilter';
 import StatusFilter from './StatusFilter';
+import WorkDateFilter from './WorkDateFilter';
 
 const AttendanceFiltering = () => {
   const router = useRouter();
@@ -13,6 +14,7 @@ const AttendanceFiltering = () => {
   const position = searchParams.get('position') ?? 'all';
   const department = searchParams.get('department') ?? 'all';
   const status = searchParams.get('status') ?? 'all';
+  const workDate = searchParams.get('workDate') ?? '';
 
   const handleFilterChange = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -34,6 +36,7 @@ const AttendanceFiltering = () => {
         <PositionFilter value={position} onChange={handleFilterChange} />
         <DepartmentFilter value={department} onChange={handleFilterChange} />
         <StatusFilter value={status} onChange={handleFilterChange} />
+        <WorkDateFilter value={workDate} onChange={handleFilterChange} />
       </div>
     </header>
   );
