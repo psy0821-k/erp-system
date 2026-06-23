@@ -1,45 +1,49 @@
-import AttendanceCharts from '@/components/dashboard/attendance-chart';
 import DashboardCard from '@/components/dashboard/dashboard-card';
-import Filtering from '@/components/filtering';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getDashboardStats } from '../../attendence';
-import UserInfo from '@/components/layout/sidebar/userInfo';
-import { getCurrentEmployee } from '@/app/api/getEmployee';
-import { AttendanceButtons } from '@/app/feature/attendance/components/AttendanceButtons';
+import Filtering from '@/components/filtering/employeeFiltering';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import EmployeeDashboard from '../../employeeDashboard';
+import { getDashboardStats } from '@/app/feature/attendance/api/getDashboardStats';
+import AttendanceClientList from '@/app/feature/attendance/components/AttendanceClientList';
+import AttendanceFiltering from '@/components/filtering/attendanceFiltering';
 
 export default async function AttendancePage() {
   const stats = await getDashboardStats();
-  const employee = await getCurrentEmployee();
 
-  if (!employee) {
-    return null;
-  }
   return (
     <div className="space-y-6">
-      <section>
-        <h1 className="text-2xl font-bold">근태관리</h1>
-        <p className="mt-1 text-sm text-muted-foreground">직원들의 출근, 지각, 결근, 휴가 현황을 관리합니다.</p>
+      <EmployeeDashboard />
+      <section className="space-y-1">
+        <h1 className="text-2xl font-bold tracking-tight">근태관리</h1>
+        <p className="text-sm text-muted-foreground">직원들의 출근, 지각, 결근, 휴가 현황을 관리합니다.</p>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-        <h2>근태관리 요약</h2>
-        <AttendanceButtons employeeId={employee.id} />
+      <section className="grid gap-4 lg:grid-cols-[1fr_1fr_1fr_1fr_1fr] xs:grid-cols-[1fr]">
+        <h2 className="sr-only">근태관리 요약</h2>
         {stats.map(stat => (
           <DashboardCard key={stat.title} title={stat.title} value={stat.value} description={stat.description} icon={stat.icon} />
         ))}
       </section>
-      <section className="grid grid-cols-3">
-        <AttendanceCharts />
-        <UserInfo />
-        <UserInfo />
+
+      <section className="space-y-4">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <h2 className="text-lg font-semibold">근태 목록</h2>
+            <p className="text-sm text-muted-foreground">직원별 근태 기록을 조회하고 필터링합니다.</p>
+          </div>
+
+          <AttendanceFiltering />
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>근태 기록</CardTitle>
+            <CardDescription>일자별 출근, 퇴근, 상태 정보를 표시합니다.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <AttendanceClientList />
+          </CardContent>
+        </Card>
       </section>
-      <Filtering />
-      <Card>
-        <CardHeader>
-          <CardTitle>근태 목록</CardTitle>
-        </CardHeader>
-        <CardContent></CardContent>
-      </Card>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export type AttendanceStatus = 'PRESENT' | 'LATE' | 'ABSENCE' | 'VACATION' | 'BUSINESS_TRIP';
+import { AttendanceStatus } from '@/config/types/attendanceStatus';
 
 export interface Attendance {
   id: string;
@@ -9,11 +9,21 @@ export interface Attendance {
   status: AttendanceStatus;
   late_reason: string | null;
   created_at: string;
+
+  employee?: {
+    id: string;
+    name: string;
+    employee_number: string;
+    email: string;
+    department: string;
+    position: string;
+  };
 }
 
 export interface AttendanceListParams {
   page?: number;
   keyword?: string;
   department?: string;
+  position?: string;
   status?: AttendanceStatus;
 }
