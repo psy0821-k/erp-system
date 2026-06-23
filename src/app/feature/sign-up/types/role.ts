@@ -9,18 +9,6 @@ export interface OptionGroup {
   items: OptionItem[];
 }
 
-export const departments = {
-  title: '부서',
-  value: 'department',
-  items: [
-    { title: '프론트엔드팀', value: 'FRONTEND' },
-    { title: '백엔드팀', value: 'BACKEND' },
-    { title: '디자인팀', value: 'DESIGN' },
-    { title: '기획팀', value: 'PLANNING' },
-    { title: '인사팀', value: 'HR' },
-  ],
-} as const;
-
 export const positions = {
   title: '직급',
   value: 'position',

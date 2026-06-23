@@ -1,4 +1,4 @@
-export type AttendanceStatus = null | 'PRESENT' | 'LATE' | 'ABSENCE' | 'BUSINESS_TRIP' | 'VACATION';
+export type AttendanceStatus = null | 'PRESENT' | 'LATE' | 'ABSENT' | 'BUSINESS_TRIP' | 'VACATION';
 export type EmployeeRole = 'ADMIN' | 'HR_MANAGER' | 'INVENTORY_MANAGER' | 'EMPLOYEE';
 
 export interface Employee {
@@ -59,7 +59,7 @@ export const employees: Employee[] = [
     department: '인사팀',
     position: 'HR 매니저',
     role: 'HR_MANAGER',
-    status: 'ABSENCE',
+    status: 'ABSENT',
     checkIn: null,
     checkOut: null,
     workHours: 0,

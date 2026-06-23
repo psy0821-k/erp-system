@@ -15,7 +15,9 @@ import { Calendar } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { FormSelectField } from '@/app/(auth)/sign-up/components/SelectField';
-import { departments, positions, roles } from '@/app/feature/sign-up/types/role';
+import { roles } from '@/app/feature/sign-up/types/role';
+import { DEPARTMENT_TYPE_OPTIONS } from '@/config/types/department';
+import { POSITION_OPTIONS } from '@/config/types/position';
 
 type EmployeeEditDialogProps = {
   employee: {
@@ -102,9 +104,9 @@ export default function EmployeeEditDialog({ employee }: EmployeeEditDialogProps
             )}
           />
 
-          <FormSelectField name="department" label="부서" control={form.control} options={departments.items} />
+          <FormSelectField name="department" label="부서" control={form.control} options={DEPARTMENT_TYPE_OPTIONS} />
 
-          <FormSelectField name="position" label="직급" control={form.control} options={positions.items} />
+          <FormSelectField name="position" label="직급" control={form.control} options={POSITION_OPTIONS} />
 
           <FormSelectField name="role" label="역할" control={form.control} options={roles.items} />
 

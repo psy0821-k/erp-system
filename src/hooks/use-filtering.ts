@@ -8,7 +8,6 @@ export const useFiltering = () => {
 
   const keyword = searchParams.get('keyword') ?? '';
   const page = Number(searchParams.get('page')) || 1;
-  const status = searchParams.get('status') ?? '';
 
   const updateQuery = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -25,7 +24,6 @@ export const useFiltering = () => {
   return {
     keyword,
     page,
-    status,
     setPage: (page: number) => updateQuery('page', String(page)),
     setStatus: (status: string) => updateQuery('status', status),
     handleSearch: (keyword: string) => {
