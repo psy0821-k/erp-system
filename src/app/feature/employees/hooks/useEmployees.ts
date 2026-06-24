@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { EmployeeListParams } from '../types/searchType';
+import { EmployeeListParams } from '../../../../config/types/searchType';
 import { employeeKeys } from '../keys/queryKeys';
 import { getEmployees } from '../api/employeesApi';
 

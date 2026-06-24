@@ -17,12 +17,6 @@ export const dashboardNavigation: NavigationItem[] = [
     value: 'hr',
     children: employeeNavigation,
   },
-
-  {
-    title: '업무승인',
-    value: 'approval',
-    children: approvalNavigation,
-  },
   {
     title: '프로젝트',
     value: 'project',

@@ -6,15 +6,11 @@ export const assetNavigation: NavigationItem[] = [
     href: '/asset',
   },
   {
-    title: '자산 등록',
-    href: '/asset/create',
+    title: 'IT 물품 요청',
+    href: '/asset/request',
   },
   {
-    title: '재고 관리',
-    href: '/asset/inventory',
-  },
-  {
-    title: '지급·회수 관리',
-    href: '/asset/assignment',
+    title: '고장 신고',
+    href: '/asset/report',
   },
 ];

@@ -2,7 +2,7 @@ import { employeeCreateSchema } from '@/app/feature/sign-up/schema/employeeSchem
 import { createClient } from '@/lib/client';
 import { z } from 'zod';
 import { UpdateEmployeeInput } from '../types/employeeType';
-import { EmployeeListParams } from '../types/searchType';
+import { EmployeeListParams } from '../../../../config/types/searchType';
 
 const PAGE_SIZE = 10;
 

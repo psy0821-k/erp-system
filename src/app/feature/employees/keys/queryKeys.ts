@@ -1,4 +1,4 @@
-import { EmployeeListParams } from '../types/searchType';
+import { EmployeeListParams } from '../../../../config/types/searchType';
 
 export const employeeKeys = {
   all: ['employees'] as const,
