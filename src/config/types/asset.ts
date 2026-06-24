@@ -16,6 +16,14 @@ export const ASSET_TYPE_OPTIONS = [
   { title: '마우스', value: ASSET_TYPE.MOUSE },
 ];
 
+export const ASSET_TYPE_LABEL: Record<AssetType, string> = {
+  [ASSET_TYPE.LAPTOP]: '노트북',
+  [ASSET_TYPE.MONITOR]: '모니터',
+  [ASSET_TYPE.DESKTOP]: '본체',
+  [ASSET_TYPE.KEYBOARD]: '키보드',
+  [ASSET_TYPE.MOUSE]: '마우스',
+};
+
 export const ASSET_STATUS = {
   AVAILABLE: 'AVAILABLE',
   IN_USE: 'IN_USE',

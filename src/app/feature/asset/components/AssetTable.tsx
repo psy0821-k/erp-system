@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import { Badge } from '@/components/ui/badge';
-import { Asset, ASSET_STATUS_LABEL } from '@/config/types/asset';
+import { Asset, ASSET_STATUS_LABEL, ASSET_TYPE_LABEL, ASSET_TYPE_OPTIONS } from '@/config/types/asset';
 import AssetDeleteButton from './AssetDeleteButton';
 
 type AssetsTableProps = {
@@ -28,7 +28,7 @@ function AssetsTable({ assets }: AssetsTableProps) {
         {assets.map(asset => (
           <TableRow key={asset.id}>
             <TableCell className="text-center font-medium">{asset.asset_name}</TableCell>
-            <TableCell className="text-center">{asset.asset_name}</TableCell>
+            <TableCell className="text-center">{ASSET_TYPE_LABEL[asset.asset_type]}</TableCell>
             <TableCell className="text-center">{asset.serial_number ?? '-'}</TableCell>
             <TableCell className="text-center">
               <Badge variant="outline">{ASSET_STATUS_LABEL[asset.status]}</Badge>
