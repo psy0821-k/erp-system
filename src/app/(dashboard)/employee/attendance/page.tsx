@@ -39,7 +39,7 @@ export default async function AttendancePage() {
             <CardTitle>근태 기록</CardTitle>
             <CardDescription>일자별 출근, 퇴근, 상태 정보를 표시합니다.</CardDescription>
             <div className="flex justify-between mt-8 ">
-              <EmployeeSearch />
+              <EmployeeSearch placeholder="직원 이름을 입력해주세요" />
               <AttendanceFiltering />
             </div>
           </CardHeader>

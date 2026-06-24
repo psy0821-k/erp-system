@@ -9,7 +9,7 @@ export default async function Page() {
       <section>
         <h2 className="text-4xl font-bold my-4">직원 리스트</h2>
         <div className="mt-12 flex justify-between">
-          <EmployeeSearch />
+          <EmployeeSearch placeholder="직원 이름을 입력해주세요" />
           <div className="flex gap-4 items-start">
             <EmployeeFiltering />
             <Link href="/sign-up" className="bg-blue-700 p-2  text-white font-semibold rounded-2xl">

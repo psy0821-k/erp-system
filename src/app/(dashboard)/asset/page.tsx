@@ -1,4 +1,5 @@
 import AssetClientList from '@/app/feature/asset/components/assetClientList';
+import EmployeeSearch from '@/app/feature/employees/components/EmployeeSearch';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -70,7 +71,7 @@ export default function AssetPage() {
       </div>
 
       <div className="flex items-center gap-3">
-        <input type="search" placeholder="자산명 또는 시리얼번호 검색" className="h-9 w-72 rounded-md border px-3 text-sm" />
+        <EmployeeSearch placeholder={'제품명 혹은 시리얼 넘버를 입력해주세요'} />
 
         <Button variant="outline">카테고리</Button>
         <Button variant="outline">상태</Button>
