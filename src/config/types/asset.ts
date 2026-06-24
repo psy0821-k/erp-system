@@ -1,14 +1,3 @@
-export interface Asset {
-  id: string;
-  asset_name: string;
-  asset_type: AssetType;
-  status: AssetStatus;
-  serial_number: string | null;
-  memo: string | null;
-  assigned_employee_id: string | null;
-  created_at: string;
-}
-
 export const ASSET_TYPE = {
   LAPTOP: 'LAPTOP',
   MONITOR: 'MONITOR',
@@ -52,3 +41,23 @@ export const ASSET_STATUS_LABEL: Record<AssetStatus, string> = {
   [ASSET_STATUS.LOST]: '분실',
   [ASSET_STATUS.DISCARDED]: '폐기',
 };
+
+export interface Asset {
+  id: string;
+  asset_name: string;
+  asset_type: AssetType;
+  status: AssetStatus;
+  serial_number: string | null;
+  memo: string | null;
+  assigned_employee_id: string | null;
+  created_at: string;
+}
+
+export interface CreateAssetInput {
+  asset_name: string;
+  asset_type: AssetType;
+  serial_number: string;
+  status: AssetStatus;
+  assigned_employee_id?: string | null;
+  memo?: string | null;
+}

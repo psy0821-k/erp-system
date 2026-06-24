@@ -1,8 +1,9 @@
 import AssetClientList from '@/app/feature/asset/components/assetClientList';
+import AssetCreateDialog from '@/app/feature/asset/components/assetCreateDialog';
+import AssetFiltering from '@/app/feature/asset/components/assetFiltering';
 import EmployeeSearch from '@/app/feature/employees/components/EmployeeSearch';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Laptop, Monitor, Mouse, Package } from 'lucide-react';
 
 const assetStats = [
@@ -28,28 +29,15 @@ const assetStats = [
   },
 ];
 
-const mockAssets = [
-  {
-    id: '1',
-    name: 'MacBook Pro 14',
-    category: '노트북',
-    serialNumber: 'MBP-2026-001',
-    status: '지급 중',
-    assignedUser: '홍길동',
-    purchaseDate: '2026-06-24',
-  },
-];
-
 export default function AssetPage() {
   return (
     <section className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold">IT 자산관리</h1>
           <p className="text-sm text-muted-foreground">사내 IT 장비의 등록, 지급, 반납, 상태를 관리합니다.</p>
         </div>
-
-        <Button>자산 등록</Button>
+        <AssetCreateDialog />
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -72,9 +60,7 @@ export default function AssetPage() {
 
       <div className="flex items-center gap-3">
         <EmployeeSearch placeholder={'제품명 혹은 시리얼 넘버를 입력해주세요'} />
-
-        <Button variant="outline">카테고리</Button>
-        <Button variant="outline">상태</Button>
+        <AssetFiltering />
       </div>
 
       <div>

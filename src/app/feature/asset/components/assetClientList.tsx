@@ -11,8 +11,8 @@ function AssetClientList() {
   const params = {
     page: Number(searchParams.get('page') ?? 1),
     keyword: searchParams.get('keyword') ?? '',
-    department: searchParams.get('asset_type') ?? '',
-    position: searchParams.get('status') ?? '',
+    asset_type: searchParams.get('asset_type') ?? '',
+    status: searchParams.get('status') ?? '',
   };
 
   const { data, isLoading, isError } = useAssets(params);

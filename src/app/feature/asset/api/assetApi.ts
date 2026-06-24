@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/client';
 import { AssetsListParams } from '../../../../config/types/searchType';
+import { CreateAssetInput } from '@/config/types/asset';
 
 const PAGE_SIZE = 10;
 
@@ -37,4 +38,33 @@ export const getAssets = async (params: AssetsListParams) => {
     page,
     pageSize: PAGE_SIZE,
   };
+};
+
+export const createAsset = async (input: CreateAssetInput) => {
+  const supabase = createClient();
+
+  const payload = {
+    ...input,
+    memo: input.memo?.trim() || null,
+  };
+
+  const { data, error } = await supabase.from('assets').insert(payload).select().single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
+export const deleteAsset = async (id: string) => {
+  const supabase = createClient();
+
+  const { error } = await supabase.from('assets').delete().eq('id', id);
+
+  if (error) {
+    throw error;
+  }
+
+  return id;
 };
