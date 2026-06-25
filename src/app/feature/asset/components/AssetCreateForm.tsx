@@ -12,6 +12,7 @@ import { useCreateAsset } from '../hooks/useCreateAsset';
 import { AssetCreateInput, assetCreateSchema } from '../queryKey/assetSchema';
 import { assetCreateDefaultValues } from '../queryKey/defaultValueAsset';
 import { Textarea } from '@/components/ui/textarea';
+import { ASSET_STATUS_OPTIONS, ASSET_TYPE_OPTIONS } from '@/config/types/asset';
 
 interface Props {
   onSuccess: () => void;
@@ -69,12 +70,11 @@ export default function AssetCreateForm({ onSuccess }: Props) {
               <SelectValue placeholder="자산 종류 선택" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="LAPTOP">노트북</SelectItem>
-              <SelectItem value="MONITOR">모니터</SelectItem>
-              <SelectItem value="KEYBOARD">키보드</SelectItem>
-              <SelectItem value="MOUSE">마우스</SelectItem>
-              <SelectItem value="TABLET">태블릿</SelectItem>
-              <SelectItem value="ETC">기타</SelectItem>
+              {ASSET_TYPE_OPTIONS.map(item => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.title}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
           {errors.asset_type && <FieldError>{errors.asset_type.message}</FieldError>}
@@ -91,10 +91,11 @@ export default function AssetCreateForm({ onSuccess }: Props) {
               <SelectValue placeholder="상태 선택" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="AVAILABLE">미사용</SelectItem>
-              <SelectItem value="IN_USE">사용중</SelectItem>
-              <SelectItem value="REPAIR">수리중</SelectItem>
-              <SelectItem value="DISCARDED">폐기</SelectItem>
+              {ASSET_STATUS_OPTIONS.map(item => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.title}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
           {errors.status && <FieldError>{errors.status.message}</FieldError>}
