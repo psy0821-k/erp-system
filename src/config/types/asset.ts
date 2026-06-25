@@ -55,7 +55,7 @@ export interface Asset {
   asset_name: string;
   asset_type: AssetType;
   status: AssetStatus;
-  serial_number: string | null;
+  serial_number: string;
   memo: string | null;
   assigned_employee_id: string | null;
   created_at: string;
@@ -69,3 +69,7 @@ export interface CreateAssetInput {
   assigned_employee_id?: string | null;
   memo?: string | null;
 }
+
+export type UpdateAssetInput = CreateAssetInput & {
+  id: string;
+};

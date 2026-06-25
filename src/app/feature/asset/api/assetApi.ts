@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/client';
 import { AssetsListParams } from '../../../../config/types/searchType';
-import { CreateAssetInput } from '@/config/types/asset';
+import { CreateAssetInput, UpdateAssetInput } from '@/config/types/asset';
 
 const PAGE_SIZE = 10;
 
@@ -49,6 +49,18 @@ export const createAsset = async (input: CreateAssetInput) => {
   };
 
   const { data, error } = await supabase.from('assets').insert(payload).select().single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
+export const updateAsset = async ({ id, ...values }: UpdateAssetInput) => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.from('assets').update(values).eq('id', id).select().single();
 
   if (error) {
     throw error;
