@@ -2,7 +2,6 @@ import type { NavigationItem } from './type';
 
 import { employeeNavigation } from './employee-navigation';
 import { systemNavigation } from './system-navigation';
-import { approvalNavigation } from './approval-navigation';
 import { assetNavigation } from './asset-navigation';
 import { projectNavigation } from './project-navigation';
 

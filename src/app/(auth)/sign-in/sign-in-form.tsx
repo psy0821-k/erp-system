@@ -160,7 +160,7 @@ export function SignInForm() {
           <Button
             type="submit"
             form="sign-in-form"
-            className="w-full h-11 bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold py-3.5 px-4 rounded-xl cursor-pointer shadow-md active:translate-y-0.5 shadow-amber-400/20 mt-2"
+            className="w-full h-11 bg-white hover:bg-gray-100 text-gray-900 font-bold py-3.5 px-4 rounded-xl cursor-pointer shadow-md active:translate-y-0.5 shadow-white/20 mt-2"
           >
             로그인
           </Button>

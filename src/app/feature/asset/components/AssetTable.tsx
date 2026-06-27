@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import { Badge } from '@/components/ui/badge';
-import { Asset, ASSET_STATUS_LABEL, ASSET_TYPE_LABEL, ASSET_TYPE_OPTIONS } from '@/config/types/asset';
+import { Asset, ASSET_STATUS_LABEL, ASSET_TYPE_LABEL } from '@/config/types/asset';
 import AssetDeleteButton from './AssetDeleteButton';
 import AssetEditButton from './AssetEditButton';
 
