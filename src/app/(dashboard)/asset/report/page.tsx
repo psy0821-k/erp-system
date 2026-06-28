@@ -17,7 +17,7 @@ export default async function AssetReportPage() {
           <AssetReportCreateDialog reporterId={employee?.id} />
         </div>
 
-        <div className="bg-white p-5 rounded-t-2xl border-t border-x border-slate-200/80 flex items-center gap-2 text-slate-800 -mb-6">
+        <div className="bg-white p-5 rounded-t-2xl border-t border-x border-slate-200/80 flex items-center gap-2 text-slate-800 -mb-2">
           <Wrench className="h-5 w-5 text-indigo-600" />
           <h2 className="font-bold text-lg">고장 신고 목록</h2>
         </div>

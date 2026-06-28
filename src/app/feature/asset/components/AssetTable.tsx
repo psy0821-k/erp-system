@@ -1,5 +1,5 @@
+'use client';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-
 import { Badge } from '@/components/ui/badge';
 import { Asset, ASSET_STATUS_LABEL, ASSET_TYPE_LABEL } from '@/config/types/asset';
 import AssetDeleteButton from './AssetDeleteButton';
@@ -10,40 +10,61 @@ type AssetsTableProps = {
 };
 
 function AssetsTable({ assets }: AssetsTableProps) {
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'AVAILABLE':
+        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      case 'ASSIGNED':
+        return 'bg-blue-50 text-blue-700 border-blue-200';
+      case 'REPAIRING':
+      case 'LOST':
+        return 'bg-rose-50 text-rose-700 border-rose-200';
+      default:
+        return 'bg-slate-50 text-slate-700 border-slate-200';
+    }
+  };
+
   return (
-    <Table>
-      <TableCaption className="sr-only">IT 자산 목록</TableCaption>
+    <div className="w-full">
+      <Table>
+        <TableCaption className="sr-only">IT 자산 목록</TableCaption>
 
-      <TableHeader>
-        <TableRow>
-          <TableHead className="text-center">자산명</TableHead>
-          <TableHead className="text-center">종류</TableHead>
-          <TableHead className="text-center">시리얼 번호</TableHead>
-          <TableHead className="text-center">상태</TableHead>
-          <TableHead className="text-center">비고</TableHead>
-          <TableHead className="text-center">등록일</TableHead>
-        </TableRow>
-      </TableHeader>
-
-      <TableBody className="border">
-        {assets.map(asset => (
-          <TableRow key={asset.id}>
-            <TableCell className="text-center font-medium">{asset.asset_name}</TableCell>
-            <TableCell className="text-center">{ASSET_TYPE_LABEL[asset.asset_type]}</TableCell>
-            <TableCell className="text-center">{asset.serial_number ?? '-'}</TableCell>
-            <TableCell className="text-center">
-              <Badge variant="outline">{ASSET_STATUS_LABEL[asset.status]}</Badge>
-            </TableCell>
-            <TableCell className="text-center">{asset.memo ?? '-'}</TableCell>
-            <TableCell className="text-center">{asset.created_at.slice(0, 10)}</TableCell>
-            <TableCell className="text-center">
-              <AssetEditButton asset={asset} />
-              <AssetDeleteButton assetName={asset.asset_name} id={asset.id} />
-            </TableCell>
+        <TableHeader className="bg-slate-50/70 border-b border-slate-200">
+          <TableRow className="hover:bg-transparent">
+            <TableHead className="text-center font-semibold text-slate-600 h-11">자산명</TableHead>
+            <TableHead className="text-center font-semibold text-slate-600 h-11">종류</TableHead>
+            <TableHead className="text-center font-semibold text-slate-600 h-11">시리얼 번호</TableHead>
+            <TableHead className="text-center font-semibold text-slate-600 h-11">상태</TableHead>
+            <TableHead className="text-center font-semibold text-slate-600 h-11">비고</TableHead>
+            <TableHead className="text-center font-semibold text-slate-600 h-11">등록일</TableHead>
+            <TableHead className="text-right font-semibold text-slate-600 h-11 pr-6">관리</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+
+        <TableBody className="divide-y divide-slate-100">
+          {assets.map(asset => (
+            <TableRow key={asset.id} className="hover:bg-slate-50/40 transition-colors">
+              <TableCell className="text-center font-bold text-slate-800 py-3.5">{asset.asset_name}</TableCell>
+              <TableCell className="text-center text-slate-600 text-sm">{ASSET_TYPE_LABEL[asset.asset_type]}</TableCell>
+              <TableCell className="text-center font-mono text-slate-500 text-xs">{asset.serial_number ?? '-'}</TableCell>
+              <TableCell className="text-center">
+                <Badge variant="outline" className={`rounded-full px-2.5 py-0.5 shadow-none font-medium ${getStatusColor(asset.status)}`}>
+                  {ASSET_STATUS_LABEL[asset.status]}
+                </Badge>
+              </TableCell>
+              <TableCell className="text-center text-slate-500 text-sm max-w-[180px] truncate">{asset.memo ?? '-'}</TableCell>
+              <TableCell className="text-center text-slate-400 text-xs font-mono">{asset.created_at.slice(0, 10)}</TableCell>
+              <TableCell className="text-right py-3.5 pr-6">
+                <div className="inline-flex items-center gap-1">
+                  <AssetEditButton asset={asset} />
+                  <AssetDeleteButton assetName={asset.asset_name} id={asset.id} />
+                </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }
 

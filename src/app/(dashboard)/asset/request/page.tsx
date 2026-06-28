@@ -1,31 +1,37 @@
 import { getCurrentEmployee } from '@/app/api/getEmployee';
 import AssetRequestCreateDialog from '@/app/feature/asset-request/components/AssetRequestCreateDialog';
 import AssetRequestTable from '@/app/feature/asset-request/components/AssetRequestTable.tsx';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Laptop } from 'lucide-react';
 
 export default async function AssetRequestPage() {
   const employee = await getCurrentEmployee();
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold">IT 물품 요청</h1>
-          <p className="text-muted-foreground">업무에 필요한 IT 장비를 요청하고 처리 상태를 확인합니다.</p>
+    <div className="min-h-screen bg-slate-50/50 p-6 sm:p-8">
+      <section className="max-w-7xl mx-auto">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-6 mb-8">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">IT 물품 요청</h1>
+            <p className="text-sm text-slate-500 mt-1">업무에 필요한 IT 장비를 요청하고 실시간 처리 상태를 확인합니다.</p>
+          </div>
+
+          <AssetRequestCreateDialog requesterId={employee?.id} />
         </div>
 
-        <AssetRequestCreateDialog requesterId={employee?.id} />
-      </div>
+        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+          <div className="p-5 border-b border-slate-100 bg-slate-50/30 flex items-center gap-2">
+            <Laptop className="h-5 w-5 text-indigo-600" />
+            <div>
+              <h2 className="text-base font-bold text-slate-800">내 요청 내역</h2>
+              <p className="text-xs text-slate-400 mt-0.5">본인이 신청한 IT 자산의 세부 승인 현황 목록입니다.</p>
+            </div>
+          </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>내 요청 내역</CardTitle>
-        </CardHeader>
-
-        <CardContent>
-          <AssetRequestTable />
-        </CardContent>
-      </Card>
+          <div className="p-0">
+            <AssetRequestTable />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
