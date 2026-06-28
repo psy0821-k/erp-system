@@ -13,7 +13,6 @@ interface Props {
 export default function ProjectDetailDialog({ project }: Props) {
   return (
     <Dialog>
-      1
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
           상세보기

@@ -1,17 +1,23 @@
 export const DEPARTMENT_TYPE = {
+  HR: 'HR',
   FRONTEND: 'FRONTEND',
   BACKEND: 'BACKEND',
   DESIGN: 'DESIGN',
   PLANNING: 'PLANNING',
-  HR: 'HR',
+  MARKETING: 'MARKETING',
+  SALES: 'SALES',
+  FINANCE: 'FINANCE',
 } as const;
 
 export type DepartmentType = (typeof DEPARTMENT_TYPE)[keyof typeof DEPARTMENT_TYPE];
 
 export const DEPARTMENT_TYPE_OPTIONS = [
+  { title: '인사팀', value: 'HR' },
   { title: '프론트엔드팀', value: 'FRONTEND' },
   { title: '백엔드팀', value: 'BACKEND' },
   { title: '디자인팀', value: 'DESIGN' },
   { title: '기획팀', value: 'PLANNING' },
-  { title: '인사팀', value: 'HR' },
+  { title: '마케팅팀', value: 'MARKETING' },
+  { title: '영업팀', value: 'SALES' },
+  { title: '재무팀', value: 'FINANCE' },
 ];

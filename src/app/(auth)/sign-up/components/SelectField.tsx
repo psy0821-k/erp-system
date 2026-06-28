@@ -28,7 +28,7 @@ export function FormSelectField<T extends FieldValues>({ name, label, control, o
               <SelectValue placeholder={`${label} 선택`} />
             </SelectTrigger>
 
-            <SelectContent position="popper" className="bg-amber-50">
+            <SelectContent position="popper" className="bg-white">
               {options.map(option => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.title}

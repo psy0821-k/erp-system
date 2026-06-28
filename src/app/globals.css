@@ -68,6 +68,10 @@ body {
   font-size: 14px;
 }
 
+.focus-ring:focus-visible {
+  @apply ring-2 ring-black ring-offset-2;
+}
+
 @theme {
   --animate-accordion-down: accordion-down 0.3s ease-out;
   --animate-accordion-up: accordion-up 0.3s ease-out;

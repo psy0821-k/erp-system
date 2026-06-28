@@ -31,3 +31,18 @@ export const roles = {
     { title: '일반직원', value: 'EMPLOYEE' },
   ],
 } as const;
+
+export const departments = {
+  title: '부서',
+  value: 'department',
+  items: [
+    { title: '인사팀', value: 'HR' },
+    { title: '프론트엔드팀', value: 'FRONTEND' },
+    { title: '백엔드팀', value: 'BACKEND' },
+    { title: '디자인팀', value: 'DESIGN' },
+    { title: '기획팀', value: 'PLANNING' },
+    { title: '마케팅팀', value: 'MARKETING' },
+    { title: '영업팀', value: 'SALES' },
+    { title: '재무팀', value: 'FINANCE' },
+  ],
+} as const;
