@@ -7,4 +7,15 @@ export const noticeCreateSchema = z.object({
   is_pinned: z.boolean(),
 });
 
+export const noticeUpdateSchema = z.object({
+  title: z.string().min(1, '제목을 입력해주세요.'),
+  content: z.string().min(1, '내용을 입력해주세요.'),
+  is_pinned: z.boolean(),
+});
+
 export type NoticeCreateInput = z.infer<typeof noticeCreateSchema>;
+export type NoticeUpdateInput = z.infer<typeof noticeUpdateSchema>;
+
+export type UpdateNoticeDTO = NoticeUpdateInput & {
+  id: string;
+};

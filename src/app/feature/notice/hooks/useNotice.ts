@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { getNotices } from '../api/noticeApi';
-import { noticeKeys } from '../queryKey/noticeKeys';
-import { NoticeListParams } from '../type/noticeType';
 
-export const useNotices = (params: NoticeListParams) => {
+import { getNotice } from '../api/noticeApi';
+import { noticeKeys } from '../queryKey/noticeKeys';
+
+export const useNotice = (id: string) => {
   return useQuery({
-    queryKey: noticeKeys.list(params),
-    queryFn: () => getNotices(params),
+    queryKey: noticeKeys.detail(id),
+    queryFn: () => getNotice(id),
+    enabled: !!id,
   });
 };

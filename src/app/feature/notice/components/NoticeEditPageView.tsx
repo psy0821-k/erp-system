@@ -1,17 +1,84 @@
+'use client';
+
 import Link from 'next/link';
-import { ArrowLeft, ImagePlus } from 'lucide-react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { Controller, useForm } from 'react-hook-form';
+import { ArrowLeft } from 'lucide-react';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Checkbox } from '@/components/ui/checkbox';
 
-export default function NoticeEditPageView() {
+import NoticeEditor from './NoticeEditor';
+import { noticeUpdateSchema, NoticeUpdateInput } from '../schema/noticeSchema';
+import { useNotice } from '../hooks/useNotice';
+import { useUpdateNotice } from '../hooks/useUpdateNotice';
+
+interface Props {
+  id: string;
+}
+
+export default function NoticeEditPageView({ id }: Props) {
+  const router = useRouter();
+  const { data: notice, isLoading } = useNotice(id);
+  const { mutate: updateNotice, isPending } = useUpdateNotice();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm<NoticeUpdateInput>({
+    resolver: zodResolver(noticeUpdateSchema),
+    defaultValues: {
+      title: '',
+      content: '',
+      is_pinned: false,
+    },
+  });
+
+  useEffect(() => {
+    if (!notice) return;
+
+    reset({
+      title: notice.title,
+      content: notice.content,
+      is_pinned: notice.is_pinned,
+    });
+  }, [notice, reset]);
+
+  const onSubmit = (values: NoticeUpdateInput) => {
+    updateNotice(
+      {
+        id,
+        ...values,
+      },
+      {
+        onSuccess: () => {
+          router.push(`/notice/${id}`);
+        },
+      }
+    );
+  };
+
+  if (isLoading) {
+    return <p className="text-sm text-muted-foreground">공지사항을 불러오는 중입니다.</p>;
+  }
+
+  if (!notice) {
+    return <p className="text-sm text-muted-foreground">공지사항을 찾을 수 없습니다.</p>;
+  }
+
   return (
     <main className="space-y-6">
       <Button variant="ghost" asChild>
-        <Link href="/notice/1">
+        <Link href={`/notice/${id}`}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           상세로
         </Link>
@@ -22,36 +89,52 @@ export default function NoticeEditPageView() {
         <p className="text-sm text-muted-foreground">등록된 공지사항 내용을 수정합니다.</p>
       </section>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">공지 정보 수정</CardTitle>
-        </CardHeader>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">공지 정보 수정</CardTitle>
+          </CardHeader>
 
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="title">제목</Label>
-            <Input id="title" defaultValue="ERP 시스템 점검 안내" />
-          </div>
+          <CardContent>
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="title">제목</FieldLabel>
+                <Input id="title" placeholder="공지사항 제목을 입력해주세요." {...register('title')} />
+                {errors.title && <FieldError>{errors.title.message}</FieldError>}
+              </Field>
 
-          <div className="space-y-2">
-            <Label htmlFor="content">내용</Label>
-            <Textarea
-              id="content"
-              className="min-h-80"
-              defaultValue={`안녕하세요. 시스템 관리자입니다.
-ERP 시스템 안정화를 위해 금일 야간 점검이 진행될 예정입니다.
-점검 시간 동안 일부 기능 사용이 제한될 수 있습니다.`}
-            />
-          </div>
+              <Field>
+                <Controller
+                  name="is_pinned"
+                  control={control}
+                  render={({ field }) => (
+                    <div className="flex items-center gap-2">
+                      <Checkbox id="is_pinned" checked={field.value} onCheckedChange={checked => field.onChange(checked === true)} />
+                      <FieldLabel htmlFor="is_pinned">상단 고정 공지로 등록</FieldLabel>
+                    </div>
+                  )}
+                />
+              </Field>
 
-          <div className="flex justify-end gap-2">
-            <Button variant="outline" asChild>
-              <Link href="/notice/1">취소</Link>
-            </Button>
-            <Button type="button">수정 완료</Button>
-          </div>
-        </CardContent>
-      </Card>
+              <Field>
+                <FieldLabel>내용</FieldLabel>
+                <NoticeEditor initialValue={notice.content} onChange={value => setValue('content', value)} />
+                {errors.content && <FieldError>{errors.content.message}</FieldError>}
+              </Field>
+
+              <div className="flex justify-end gap-2">
+                <Button variant="outline" asChild>
+                  <Link href={`/notice/${id}`}>취소</Link>
+                </Button>
+
+                <Button type="submit" disabled={isPending}>
+                  {isPending ? '수정 중...' : '수정 완료'}
+                </Button>
+              </div>
+            </FieldGroup>
+          </CardContent>
+        </Card>
+      </form>
     </main>
   );
 }

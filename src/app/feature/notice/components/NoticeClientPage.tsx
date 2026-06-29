@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import NoticeTable from './NoticeTable';
-import { useNotices } from '../hooks/useNotice';
+import { useNotices } from '../hooks/useNotices';
 
 export default function NoticeClientPage() {
   const searchParams = useSearchParams();
