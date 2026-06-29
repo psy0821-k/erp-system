@@ -1,5 +1,8 @@
+import { getCurrentEmployee } from '@/app/api/getEmployee';
 import NoticeCreatePageView from '@/app/feature/notice/components/NoticeCreatePageView';
 
-export default function NoticeCreatePage() {
-  return <NoticeCreatePageView />;
+export default async function NoticeCreatePage() {
+  const employee = await getCurrentEmployee();
+
+  return <NoticeCreatePageView employee={employee} />;
 }

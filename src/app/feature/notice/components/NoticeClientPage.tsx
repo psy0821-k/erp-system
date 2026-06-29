@@ -1,12 +1,26 @@
+'use client';
+
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Megaphone, Plus, Search } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import NoticeTable from './NoticeTable';
+import { useNotices } from '../hooks/useNotice';
 
 export default function NoticeClientPage() {
+  const searchParams = useSearchParams();
+
+  const params = {
+    page: searchParams.get('page') || '1',
+    keyword: searchParams.get('keyword') || '',
+  };
+
+  const { data, isLoading } = useNotices(params);
+
   return (
     <main className="space-y-6">
       <section className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -37,7 +51,7 @@ export default function NoticeClientPage() {
             <Input className="pl-9" placeholder="공지 제목 검색" />
           </div>
 
-          <NoticeTable />
+          <NoticeTable notices={data?.notices ?? []} isLoading={isLoading} />
         </CardContent>
       </Card>
     </main>

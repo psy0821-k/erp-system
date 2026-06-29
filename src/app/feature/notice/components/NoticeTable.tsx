@@ -1,28 +1,17 @@
 import Link from 'next/link';
-import { MoreHorizontal, Pin } from 'lucide-react';
+import { Pin } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-const notices = [
-  {
-    id: '1',
-    title: 'ERP 시스템 점검 안내',
-    author: '관리자',
-    createdAt: '2026.06.29',
-    isPinned: true,
-  },
-  {
-    id: '2',
-    title: '하반기 휴가 신청 일정 안내',
-    author: '인사팀',
-    createdAt: '2026.06.28',
-    isPinned: false,
-  },
-];
+import { Notice } from '../type/noticeType';
 
-export default function NoticeTable() {
+interface Props {
+  notices: Notice[];
+  isLoading: boolean;
+}
+
+export default function NoticeTable({ notices, isLoading }: Props) {
   return (
     <Table>
       <caption className="sr-only">공지사항 목록</caption>
@@ -33,15 +22,30 @@ export default function NoticeTable() {
           <TableHead>제목</TableHead>
           <TableHead className="w-35">작성자</TableHead>
           <TableHead className="w-35">작성일</TableHead>
-          <TableHead className="w-20 text-center">관리</TableHead>
         </TableRow>
       </TableHeader>
 
       <TableBody>
+        {isLoading && (
+          <TableRow>
+            <TableCell colSpan={4} className="h-24 text-center text-muted-foreground">
+              공지사항을 불러오는 중입니다.
+            </TableCell>
+          </TableRow>
+        )}
+
+        {!isLoading && notices.length === 0 && (
+          <TableRow>
+            <TableCell colSpan={4} className="h-24 text-center text-muted-foreground">
+              등록된 공지사항이 없습니다.
+            </TableCell>
+          </TableRow>
+        )}
+
         {notices.map(notice => (
           <TableRow key={notice.id}>
             <TableCell className="text-center">
-              {notice.isPinned ? (
+              {notice.is_pinned ? (
                 <Badge variant="secondary" className="gap-1">
                   <Pin className="h-3 w-3" />
                   고정
@@ -57,15 +61,9 @@ export default function NoticeTable() {
               </Link>
             </TableCell>
 
-            <TableCell>{notice.author}</TableCell>
-            <TableCell>{notice.createdAt}</TableCell>
+            <TableCell>{notice.author?.name ?? '관리자'}</TableCell>
 
-            <TableCell className="text-center">
-              <Button variant="ghost" size="icon">
-                <MoreHorizontal className="h-4 w-4" />
-                <span className="sr-only">공지사항 관리</span>
-              </Button>
-            </TableCell>
+            <TableCell>{new Date(notice.created_at).toLocaleDateString('ko-KR')}</TableCell>
           </TableRow>
         ))}
       </TableBody>

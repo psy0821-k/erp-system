@@ -34,22 +34,6 @@ export default function NoticeEditPageView() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="thumbnail">대표 이미지</Label>
-
-            <div className="flex h-40 items-center justify-center rounded-lg border bg-muted text-sm text-muted-foreground">현재 대표 이미지</div>
-
-            <label
-              htmlFor="thumbnail"
-              className="flex h-28 cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed bg-muted/30 text-sm text-muted-foreground hover:bg-muted"
-            >
-              <ImagePlus className="mb-2 h-6 w-6" />새 이미지로 변경
-              <span className="mt-1 text-xs">PNG, JPG, WEBP / 최대 5MB</span>
-            </label>
-
-            <Input id="thumbnail" type="file" accept="image/*" className="sr-only" />
-          </div>
-
-          <div className="space-y-2">
             <Label htmlFor="content">내용</Label>
             <Textarea
               id="content"

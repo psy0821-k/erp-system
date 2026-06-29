@@ -71,3 +71,21 @@ export const deleteNotice = async (id: string) => {
 
   return id;
 };
+
+export const uploadNoticeImage = async (file: File) => {
+  const supabase = createClient();
+
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${crypto.randomUUID()}.${fileExt}`;
+  const filePath = `notices/${fileName}`;
+
+  const { error } = await supabase.storage.from('notice-images').upload(filePath, file);
+
+  if (error) {
+    throw error;
+  }
+
+  const { data } = supabase.storage.from('notice-images').getPublicUrl(filePath);
+
+  return data.publicUrl;
+};

@@ -1,13 +1,63 @@
+'use client';
+
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 import { ArrowLeft, ImagePlus } from 'lucide-react';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Checkbox } from '@/components/ui/checkbox';
 
-export default function NoticeCreatePageView() {
+import NoticeEditor from './NoticeEditor';
+import { noticeCreateSchema, NoticeCreateInput } from '../schema/noticeSchema';
+import { useCreateNotice } from '../hooks/useCreateNotice';
+
+interface Props {
+  employee: {
+    id: string;
+    name: string;
+    email: string;
+  } | null;
+}
+
+export default function NoticeCreatePageView({ employee }: Props) {
+  const router = useRouter();
+  const { mutate: createNotice, isPending } = useCreateNotice();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<NoticeCreateInput>({
+    resolver: zodResolver(noticeCreateSchema),
+    defaultValues: {
+      title: '',
+      content: '',
+      author_id: employee?.id ?? '',
+      is_pinned: false,
+    },
+  });
+
+  const onSubmit = (values: NoticeCreateInput) => {
+    if (!employee) return;
+
+    createNotice(
+      {
+        ...values,
+        author_id: employee.id,
+      },
+      {
+        onSuccess: () => {
+          router.push('/notice');
+        },
+      }
+    );
+  };
   return (
     <main className="space-y-6">
       <Button variant="ghost" asChild>
@@ -22,45 +72,46 @@ export default function NoticeCreatePageView() {
         <p className="text-sm text-muted-foreground">직원들에게 전달할 공지사항을 작성합니다.</p>
       </section>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">공지 정보</CardTitle>
-        </CardHeader>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">공지 정보</CardTitle>
+          </CardHeader>
 
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="title">제목</Label>
-            <Input id="title" placeholder="공지사항 제목을 입력해주세요." />
-          </div>
+          <CardContent>
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="title">제목</FieldLabel>
+                <Input id="title" placeholder="공지사항 제목을 입력해주세요." {...register('title')} />
+                {errors.title && <FieldError>{errors.title.message}</FieldError>}
+              </Field>
 
-          <div className="space-y-2">
-            <Label htmlFor="thumbnail">대표 이미지</Label>
+              <Field>
+                <div className="flex items-center gap-2">
+                  <Checkbox id="is_pinned" onCheckedChange={checked => setValue('is_pinned', checked === true)} />
+                  <FieldLabel htmlFor="is_pinned">상단 고정 공지로 등록</FieldLabel>
+                </div>
+              </Field>
 
-            <label
-              htmlFor="thumbnail"
-              className="flex h-40 cursor-pointer flex-col items-center justify-center rounded-lg border border-dashed bg-muted/30 text-sm text-muted-foreground hover:bg-muted"
-            >
-              <ImagePlus className="mb-2 h-6 w-6" />
-              이미지를 업로드해주세요.
-              <span className="mt-1 text-xs">PNG, JPG, WEBP / 최대 5MB</span>
-            </label>
+              <Field>
+                <FieldLabel>내용</FieldLabel>
+                <NoticeEditor onChange={value => setValue('content', value)} />
+                {errors.content && <FieldError>{errors.content.message}</FieldError>}
+              </Field>
 
-            <Input id="thumbnail" type="file" accept="image/*" className="sr-only" />
-          </div>
+              <div className="flex justify-end gap-2">
+                <Button variant="outline" asChild>
+                  <Link href="/notice">취소</Link>
+                </Button>
 
-          <div className="space-y-2">
-            <Label htmlFor="content">내용</Label>
-            <Textarea id="content" className="min-h-80" placeholder="공지사항 내용을 입력해주세요." />
-          </div>
-
-          <div className="flex justify-end gap-2">
-            <Button variant="outline" asChild>
-              <Link href="/notice">취소</Link>
-            </Button>
-            <Button type="button">등록</Button>
-          </div>
-        </CardContent>
-      </Card>
+                <Button type="submit" disabled={isPending || !employee}>
+                  {isPending ? '등록 중...' : '등록'}
+                </Button>
+              </div>
+            </FieldGroup>
+          </CardContent>
+        </Card>
+      </form>
     </main>
   );
 }

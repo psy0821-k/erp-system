@@ -2,7 +2,6 @@ export interface Notice {
   id: string;
   title: string;
   content: string;
-  thumbnail_url: string | null;
   author_id: string | null;
   is_pinned: boolean;
   created_at: string;
