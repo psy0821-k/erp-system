@@ -17,6 +17,10 @@ export const dashboardNavigation: NavigationItem[] = [
     children: employeeNavigation,
   },
   {
+    title: '공지사항',
+    href: '/notice',
+  },
+  {
     title: '프로젝트',
     value: 'project',
     children: projectNavigation,
