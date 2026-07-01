@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { ApprovalStatus } from '../type/vacationType';
+import { ApprovalStatus, Vacation } from '../type/vacationType';
 import { vacationKeys } from '../keys/queryKeys';
 import { getMyVacations, getTodayVacations } from '../api/vacationApi';
 
@@ -17,6 +17,13 @@ export function useVacationEmployees(statuses: ApprovalStatus[]) {
 export const useTodayVacations = () => {
   return useQuery({
     queryKey: ['today-vacations'],
+    queryFn: getTodayVacations,
+  });
+};
+
+export const useTodayDashboardVacations = () => {
+  return useQuery<Vacation[]>({
+    queryKey: vacationKeys.today(),
     queryFn: getTodayVacations,
   });
 };

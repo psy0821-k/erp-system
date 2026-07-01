@@ -13,6 +13,17 @@ export const VACATION_TYPE = {
 
 export type VacationType = (typeof VACATION_TYPE)[keyof typeof VACATION_TYPE];
 
+export const VACATION_TYPE_LABEL: Record<VacationType, string> = {
+  ANNUAL: '연차',
+  HALF_DAY_AM: '오전 반차',
+  HALF_DAY_PM: '오후 반차',
+  SICK: '병가',
+  OFFICIAL: '공가',
+  BUSINESS_TRIP: '출장',
+  COMPENSATORY: '대체 휴가',
+  ETC: '기타',
+};
+
 export type Vacation = {
   id: string;
   employee_id: string;

@@ -19,3 +19,14 @@ export interface NoticeListParams {
   page?: string;
   keyword?: string;
 }
+
+export type DashboardNotice = {
+  id: string;
+  title: string;
+  is_pinned: boolean;
+  created_at: string;
+  author: {
+    id: string;
+    name: string;
+  } | null;
+};

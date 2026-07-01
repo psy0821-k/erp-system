@@ -5,4 +5,6 @@ export const noticeKeys = {
   lists: () => [...noticeKeys.all, 'list'] as const,
   list: (params: NoticeListParams) => [...noticeKeys.lists(), params] as const,
   detail: (id: string) => [...noticeKeys.all, 'detail', id] as const,
+
+  dashboard: () => [...noticeKeys.all, 'dashboard'] as const,
 };
