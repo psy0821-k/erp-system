@@ -1,9 +1,8 @@
-// EmployeeTable.tsx (미니멀 로우 스타일)
 'use client';
-import Link from 'next/link';
 import { employeesType } from '@/app/feature/employees/types/employeeType';
 import EmployeeEditDialog from './employee-edit-dialog';
 import EmployeeDeleteButton from './employee-delete-button';
+import EmployeeDetailDialog from './EmployeeDetailDialog';
 
 type Props = {
   employees: employeesType[];
@@ -51,9 +50,7 @@ const EmployeeTable = ({ employees }: Props) => {
             </div>
 
             <div className="w-full md:w-[20%] flex items-center justify-center md:justify-end gap-3 pt-3 md:pt-0 border-t md:border-none border-slate-100 mt-2 md:mt-0">
-              <Link href={`/employee/${employee.id}`} className="text-xs font-medium text-indigo-600 hover:text-indigo-800 ">
-                자세히보기
-              </Link>
+              <EmployeeDetailDialog employee={employee} />
               <div className="flex items-center gap-1">
                 <EmployeeEditDialog employee={employee} />
                 <EmployeeDeleteButton id={employee.id} />

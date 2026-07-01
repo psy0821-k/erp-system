@@ -1,5 +1,4 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import React from 'react';
 import { AttendanceButtons } from '../feature/attendance/components/AttendanceButtons';
 import { getCurrentEmployee } from '../api/getEmployee';
 
