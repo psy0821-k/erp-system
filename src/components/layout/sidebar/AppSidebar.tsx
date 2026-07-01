@@ -11,22 +11,17 @@ import {
 
 import { dashboardNavigation } from '@/config/navigation';
 import { UserInfo } from './userInfo';
-import { SidebarDashboardLink } from './SidebarDashboardLink';
 import { SidebarMenuLink } from './SidebarMenuLink';
 import { SidebarCollapsibleMenu } from './SidebarCollapsibleMenu';
 
 const AppSidebar = () => {
   return (
     <Sidebar className="border-r border-slate-800 bg-slate-950 text-slate-100">
-      <SidebarHeader className="border-b border-slate-800 px-3 py-4">
-        <SidebarMenu>
-          <SidebarDashboardLink />
-        </SidebarMenu>
-      </SidebarHeader>
+      <SidebarHeader className="border-b border-slate-800 px-3 py-4">erp 컴패니</SidebarHeader>
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>ERP 메뉴</SidebarGroupLabel>
+          <SidebarGroupLabel className="sr-only">ERP 메뉴</SidebarGroupLabel>
 
           <SidebarGroupContent>
             <SidebarMenu>

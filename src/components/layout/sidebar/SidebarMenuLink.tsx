@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { LayoutDashboard } from 'lucide-react';
 
 import { SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 
@@ -17,7 +16,6 @@ export const SidebarMenuLink = ({ menu }: SidebarMenuLinkProps) => {
     <SidebarMenuItem>
       <Link href={menu.href}>
         <SidebarMenuButton>
-          <LayoutDashboard aria-hidden="true" />
           <span>{menu.title}</span>
         </SidebarMenuButton>
       </Link>
