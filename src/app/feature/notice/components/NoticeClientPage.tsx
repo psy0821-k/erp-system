@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { Megaphone, Plus, Search } from 'lucide-react';
+import { Megaphone, Plus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import NoticeTable from './NoticeTable';
 import { useNotices } from '../hooks/useNotices';
+import EmployeeSearch from '../../employees/components/EmployeeSearch';
 
 export default function NoticeClientPage() {
   const searchParams = useSearchParams();
@@ -46,11 +46,7 @@ export default function NoticeClientPage() {
         </CardHeader>
 
         <CardContent className="space-y-4">
-          <div className="relative max-w-sm">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input className="pl-9" placeholder="공지 제목 검색" />
-          </div>
-
+          <EmployeeSearch placeholder="공지사항 검색" />
           <NoticeTable notices={data?.notices ?? []} isLoading={isLoading} />
         </CardContent>
       </Card>
