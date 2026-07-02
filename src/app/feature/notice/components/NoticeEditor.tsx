@@ -1,16 +1,11 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useRef } from 'react';
-import type { Editor as ToastEditor } from '@toast-ui/react-editor';
+import { useEffect, useRef } from 'react';
+import type ToastUIEditor from '@toast-ui/editor';
 
 import '@toast-ui/editor/dist/toastui-editor.css';
 
 import { uploadNoticeImage } from '../api/noticeApi';
-
-const Editor = dynamic(() => import('@toast-ui/react-editor').then(mod => mod.Editor), {
-  ssr: false,
-});
 
 type ImageBlobHookCallback = (url: string, text?: string) => void;
 
@@ -20,39 +15,67 @@ interface Props {
 }
 
 export default function NoticeEditor({ initialValue = '', onChange }: Props) {
-  const editorRef = useRef<ToastEditor | null>(null);
+  const editorContainerRef = useRef<HTMLDivElement | null>(null);
+  const editorInstanceRef = useRef<ToastUIEditor | null>(null);
 
-  return (
-    <Editor
-      ref={editorRef}
-      initialValue={initialValue || ' '}
-      previewStyle="vertical"
-      height="420px"
-      initialEditType="wysiwyg"
-      useCommandShortcut
-      onChange={() => {
-        const editorInstance = editorRef.current?.getInstance();
-        const html = editorInstance?.getHTML() ?? '';
+  useEffect(() => {
+    if (!editorContainerRef.current) return;
+    if (editorInstanceRef.current) return;
 
-        onChange(html);
-      }}
-      hooks={{
-        addImageBlobHook: async (blob: Blob, callback: ImageBlobHookCallback) => {
-          const file = blob instanceof File ? blob : new File([blob], 'notice-image.png', { type: blob.type });
+    let isMounted = true;
 
-          const imageUrl = await uploadNoticeImage(file);
+    const createEditor = async () => {
+      const ToastUIEditorModule = await import('@toast-ui/editor');
+      const ToastUIEditorClass = ToastUIEditorModule.default;
 
-          callback(imageUrl, file.name);
+      if (!isMounted || !editorContainerRef.current) return;
+
+      const editor = new ToastUIEditorClass({
+        el: editorContainerRef.current,
+        height: '420px',
+        initialEditType: 'wysiwyg',
+        previewStyle: 'vertical',
+        initialValue: initialValue || ' ',
+        useCommandShortcut: true,
+        toolbarItems: [
+          ['heading', 'bold', 'italic', 'strike'],
+          ['hr', 'quote'],
+          ['ul', 'ol', 'task'],
+          ['table', 'link'],
+          ['image'],
+          ['code', 'codeblock'],
+        ],
+        hooks: {
+          addImageBlobHook: async (blob: Blob, callback: ImageBlobHookCallback) => {
+            const file =
+              blob instanceof File
+                ? blob
+                : new File([blob], 'notice-image.png', {
+                    type: blob.type,
+                  });
+
+            const imageUrl = await uploadNoticeImage(file);
+            callback(imageUrl, file.name);
+          },
         },
-      }}
-      toolbarItems={[
-        ['heading', 'bold', 'italic', 'strike'],
-        ['hr', 'quote'],
-        ['ul', 'ol', 'task'],
-        ['table', 'link'],
-        ['image'],
-        ['code', 'codeblock'],
-      ]}
-    />
-  );
+        events: {
+          change: () => {
+            onChange(editor.getHTML());
+          },
+        },
+      });
+
+      editorInstanceRef.current = editor;
+    };
+
+    createEditor();
+
+    return () => {
+      isMounted = false;
+      editorInstanceRef.current?.destroy();
+      editorInstanceRef.current = null;
+    };
+  }, [initialValue, onChange]);
+
+  return <div ref={editorContainerRef} />;
 }
