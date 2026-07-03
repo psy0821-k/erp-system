@@ -9,6 +9,7 @@ export interface Attendance {
   status: AttendanceStatus;
   late_reason: string | null;
   created_at: string;
+  late_reason_reviewed: boolean;
 
   employee?: {
     id: string;

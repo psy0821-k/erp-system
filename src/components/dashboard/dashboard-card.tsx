@@ -9,7 +9,7 @@ interface DashboardCardProps {
   icon: LucideIcon;
 }
 
-const DashboardCard = ({ title, value, description, icon: Icon }: DashboardCardProps) => {
+const DashboardCard = ({ title, value, description }: DashboardCardProps) => {
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

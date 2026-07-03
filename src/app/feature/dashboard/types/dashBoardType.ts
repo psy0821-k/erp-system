@@ -1,5 +1,7 @@
+import { DepartmentType } from '@/config/types/department';
+
 export interface DepartmentChartItem {
-  department: string;
+  department: DepartmentType;
   count: number;
 }
 

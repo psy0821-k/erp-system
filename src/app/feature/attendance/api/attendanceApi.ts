@@ -56,6 +56,8 @@ export const getAttendanceList = async (params: AttendanceListParams) => {
     throw error;
   }
 
+  console.log(data);
+
   return {
     attendance: data as Attendance[],
     count,
@@ -103,8 +105,15 @@ export const updateAttendance = async (input: UpdateAttendanceInput) => {
 
   const { id, ...updateData } = input;
 
-  const { data, error } = await supabase.from('attendance').update(updateData).eq('id', id).select().single();
-
+  const { data, error } = await supabase
+    .from('attendance')
+    .update({
+      ...updateData,
+      late_reason_reviewed: true,
+    })
+    .eq('id', id)
+    .select()
+    .single();
   if (error) {
     throw error;
   }

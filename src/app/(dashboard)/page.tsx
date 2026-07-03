@@ -9,6 +9,7 @@ import TodayVacationCard from '../feature/dashboard/components/TodayVacationCard
 import AdminTodoCard from '../feature/dashboard/components/AdminTodoCard';
 import DepartmentStatusCard from '../feature/dashboard/components/DepartmentStatusCard';
 import TodayAttendanceIssueCard from '../feature/dashboard/components/TodayAttendanceIssueCard';
+import DepartmentChartCard from '../feature/dashboard/components/ChartDepartment';
 
 export default async function DashboardPage() {
   const employee = await getCurrentEmployee();
@@ -32,7 +33,7 @@ export default async function DashboardPage() {
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             <AdminTodoCard />
-            <DepartmentStatusCard />
+            <DepartmentChartCard />
             <TodayAttendanceIssueCard />
           </div>
         </section>

@@ -21,3 +21,14 @@ export const DEPARTMENT_TYPE_OPTIONS = [
   { title: '영업팀', value: 'SALES' },
   { title: '재무팀', value: 'FINANCE' },
 ];
+
+export const DEPARTMENT_LABEL: Record<DepartmentType, string> = {
+  HR: '인사팀',
+  FRONTEND: '프론트엔드팀',
+  BACKEND: '백엔드팀',
+  DESIGN: '디자인팀',
+  PLANNING: '기획팀',
+  MARKETING: '마케팅팀',
+  SALES: '영업팀',
+  FINANCE: '재무팀',
+};
