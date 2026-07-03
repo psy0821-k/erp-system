@@ -23,7 +23,6 @@ export const SidebarMenuLink = ({ menu }: SidebarMenuLinkProps) => {
       <SidebarMenuButton
         asChild
         isActive={isActive}
-        tooltip={menu.title}
         className={isActive ? 'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground' : ''}
       >
         <Link
