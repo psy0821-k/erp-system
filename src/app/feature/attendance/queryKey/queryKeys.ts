@@ -10,4 +10,5 @@ export const attendanceKeys = {
   detail: (id: string) => [...attendanceKeys.all, 'detail', id] as const,
 
   today: (employeeId: string) => [...attendanceKeys.all, 'today', employeeId] as const,
+  todayAll: () => [...attendanceKeys.all, 'todayAll'] as const,
 };

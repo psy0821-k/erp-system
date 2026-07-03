@@ -5,6 +5,7 @@ import { attendanceKeys } from '../queryKey/queryKeys';
 import { getAttendanceDetail, getAttendanceList } from '../api/attendanceApi';
 import { AttendanceListParams } from '../type/attendance';
 import { getTodayAttendance } from '../api/check_in_out';
+import { getTodayAttendanceAll } from '../api/getDashboardStats';
 
 export const useTodayAttendance = (employeeId: string) => {
   return useQuery({
@@ -26,5 +27,12 @@ export const useAttendanceDetail = (id: string) => {
     queryKey: attendanceKeys.detail(id),
     queryFn: () => getAttendanceDetail(id),
     enabled: !!id,
+  });
+};
+
+export const useTodayAttendanceAll = () => {
+  return useQuery({
+    queryKey: attendanceKeys.todayAll(),
+    queryFn: () => getTodayAttendanceAll(),
   });
 };

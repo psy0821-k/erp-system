@@ -1,18 +1,15 @@
 import DashboardCard from '@/components/dashboard/dashboard-card';
-import EmployeeDashboard from '../../employeeDashboard';
 import { getDashboardStats } from '@/app/feature/attendance/api/getDashboardStats';
 import AttendanceClientList from '@/app/feature/attendance/components/AttendanceClientList';
 import AttendanceFiltering from '@/components/filtering/attendanceFiltering';
 import EmployeeSearch from '@/app/feature/employees/components/EmployeeSearch';
 
 export default async function AttendancePage() {
-  const stats = await getDashboardStats();
+  const { attendanceStats, totalEmployee } = await getDashboardStats();
 
   return (
     <div className="min-h-screen bg-slate-50/50 p-6 sm:p-8">
       <section className="max-w-7xl mx-auto space-y-6">
-        <EmployeeDashboard />
-
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-6 mb-6 mt-4">
           <div>
             <h1 className="text-3xl font-bold tracking-tight text-slate-900">근태관리</h1>
@@ -21,7 +18,14 @@ export default async function AttendancePage() {
         </div>
 
         <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {stats.map(stat => (
+          <DashboardCard
+            key={totalEmployee.title}
+            title={totalEmployee.title}
+            value={totalEmployee.value}
+            description={totalEmployee.description}
+            icon={totalEmployee.icon}
+          />
+          {attendanceStats.map(stat => (
             <DashboardCard key={stat.title} title={stat.title} value={stat.value} description={stat.description} icon={stat.icon} />
           ))}
         </div>

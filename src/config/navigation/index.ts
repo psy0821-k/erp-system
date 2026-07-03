@@ -2,7 +2,6 @@ import type { NavigationItem } from './type';
 
 import { employeeNavigation } from './employee-navigation';
 import { assetNavigation } from './asset-navigation';
-import { projectNavigation } from './project-navigation';
 
 export const dashboardNavigation: NavigationItem[] = [
   {
@@ -21,8 +20,7 @@ export const dashboardNavigation: NavigationItem[] = [
   },
   {
     title: '프로젝트',
-    value: 'project',
-    children: projectNavigation,
+    href: '/project',
   },
 
   {

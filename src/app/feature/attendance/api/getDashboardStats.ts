@@ -1,4 +1,5 @@
-import { createClient } from '@/lib/server';
+import { createClient } from '@/lib/client';
+import { getToday } from '@/lib/utils';
 import { Package, Truck, Users, UserX } from 'lucide-react';
 
 export const getDashboardStats = async () => {
@@ -27,36 +28,67 @@ export const getDashboardStats = async () => {
     .select('*', { count: 'exact', head: true })
     .eq('status', 'VACATION')
     .eq('work_date', today);
-  return [
-    {
+  return {
+    totalEmployee: {
       title: '총 직원 수',
       value: totalEmployees ?? 0,
       description: '전체 등록 직원',
       icon: Users,
     },
-    {
-      title: '출근 인원',
-      value: activeEmployees ?? 0,
-      description: '오늘 출근 인원',
-      icon: Truck,
-    },
-    {
-      title: '지각 인원',
-      value: lateEmployees ?? 0,
-      description: '오늘 지각 인원',
-      icon: Truck,
-    },
-    {
-      title: '결근 인원',
-      value: absentEmployees ?? 0,
-      description: '오늘 결근 인원',
-      icon: UserX,
-    },
-    {
-      title: '휴가',
-      value: vacationEmployees ?? 0,
-      description: '휴가 중인 직원',
-      icon: Package,
-    },
-  ];
+
+    attendanceStats: [
+      {
+        title: '출근 인원',
+        value: activeEmployees ?? 0,
+        description: '오늘 출근 인원',
+        icon: Truck,
+      },
+      {
+        title: '지각 인원',
+        value: lateEmployees ?? 0,
+        description: '오늘 지각 인원',
+        icon: Truck,
+      },
+      {
+        title: '결근 인원',
+        value: absentEmployees ?? 0,
+        description: '오늘 결근 인원',
+        icon: UserX,
+      },
+      {
+        title: '휴가',
+        value: vacationEmployees ?? 0,
+        description: '휴가 중인 직원',
+        icon: Package,
+      },
+    ],
+  };
+};
+
+export const getTodayAttendanceAll = async () => {
+  const supabase = await createClient();
+
+  const today = getToday();
+
+  const { data, error } = await supabase
+    .from('attendance')
+    .select(
+      `
+        *,
+        employee:employees!attendance_employee_id_fkey (
+          id,
+          name,
+          department,
+          position
+        )
+      `
+    )
+    .eq('work_date', today)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
 };
