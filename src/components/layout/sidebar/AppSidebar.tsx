@@ -16,8 +16,12 @@ import { SidebarCollapsibleMenu } from './SidebarCollapsibleMenu';
 
 const AppSidebar = () => {
   return (
-    <Sidebar className="border-r border-slate-800 bg-slate-950 text-slate-100">
-      <SidebarHeader className="border-b border-slate-800 px-3 py-4">erp 컴패니</SidebarHeader>
+    <Sidebar collapsible="offcanvas" variant="sidebar" className="border-r bg-background">
+      <SidebarHeader className="border-b px-3 py-3">
+        <div className="flex flex-col group-data-[collapsible=icon]:items-center">
+          <span className="text-sm font-bold tracking-tight group-data-[collapsible=icon]:hidden">ERP Company</span>
+        </div>
+      </SidebarHeader>
 
       <SidebarContent>
         <SidebarGroup>
@@ -33,7 +37,7 @@ const AppSidebar = () => {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-slate-800 p-3">
+      <SidebarFooter className="border-t p-3">
         <UserInfo />
       </SidebarFooter>
     </Sidebar>
