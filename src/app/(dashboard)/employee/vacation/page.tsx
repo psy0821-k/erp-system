@@ -29,7 +29,7 @@ const VacationPage = async () => {
             <p className="text-sm text-slate-500 mt-1">직원 휴가 신청 현황과 승인 상태를 통합 관리합니다.</p>
           </div>
           <Link
-            href={'/employee/vacation/createVacation'}
+            href={'/employee/vacation/create'}
             className="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition-colors px-4 py-2.5 text-white font-medium rounded-xl shadow-sm shadow-indigo-100"
           >
             <Plus className="w-4 h-4" />

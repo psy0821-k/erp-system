@@ -10,7 +10,7 @@ const actions = [
   {
     title: '휴가 신청',
     description: '연차 및 휴가를 신청합니다.',
-    href: '/vacation/create',
+    href: '/employee/vacation/create',
     icon: CalendarPlus,
   },
   {

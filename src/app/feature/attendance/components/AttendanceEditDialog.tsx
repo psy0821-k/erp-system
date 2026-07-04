@@ -60,7 +60,6 @@ export default function AttendanceEditDialog({ attendance }: AttendanceEditDialo
         </div>
 
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          {/* options는 대개 고정된 값이거나 공통 컴포넌트용 배열이어야 하므로 수정 시 유의하세요 */}
           <FormSelectField name="status" label="근태정보" control={form.control} options={ATTENDANCE_STATUS_OPTIONS} />
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? '수정 중...' : '수정 완료'}

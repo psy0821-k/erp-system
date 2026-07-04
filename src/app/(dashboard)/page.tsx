@@ -7,7 +7,6 @@ import NoticeSummaryCard from '../feature/dashboard/components/NoticeSummaryCard
 import QuickActionCard from '../feature/dashboard/components/QuickActionCard';
 import TodayVacationCard from '../feature/dashboard/components/TodayVacationCard';
 import AdminTodoCard from '../feature/dashboard/components/AdminTodoCard';
-import DepartmentStatusCard from '../feature/dashboard/components/DepartmentStatusCard';
 import TodayAttendanceIssueCard from '../feature/dashboard/components/TodayAttendanceIssueCard';
 import DepartmentChartCard from '../feature/dashboard/components/ChartDepartment';
 

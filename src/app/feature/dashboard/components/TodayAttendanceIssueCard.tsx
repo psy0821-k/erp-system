@@ -25,7 +25,7 @@ export default async function TodayAttendanceIssueCard() {
         </div>
 
         <Button asChild variant="outline" className="w-full">
-          <Link href="/attendance">
+          <Link href="/employee/attendance">
             근태관리 바로가기
             <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
           </Link>

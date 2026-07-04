@@ -9,7 +9,7 @@ export const getTodoSummary = async (): Promise<TodoSummary> => {
 
     supabase.from('asset_requests').select('*', { count: 'exact', head: true }).eq('status', 'PENDING'),
 
-    supabase.from('asset_repairs').select('*', { count: 'exact', head: true }).eq('status', 'PENDING'),
+    supabase.from('asset_reports').select('*', { count: 'exact', head: true }).eq('status', 'PENDING'),
 
     supabase
       .from('attendance')
