@@ -5,6 +5,7 @@ import { Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTodayAttendance } from '../../attendance/hooks/useAttendance';
 import { AttendanceButtons } from '../../attendance/components/AttendanceButtons';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   employeeId: string;
@@ -22,23 +23,28 @@ export default function TodayAttendanceCard({ employeeId }: Props) {
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-4 flex justify-center gap-10">
-        {isLoading ? (
-          <p className="text-sm text-muted-foreground">근태 정보를 불러오는 중입니다.</p>
-        ) : (
-          <div className="grid grid-cols-2 ">
-            <div className="aspect-square flex flex-col justify-center border-r p-8">
-              <p className="text-sm text-muted-foreground">출근 시간</p>
-              <p className="text-2xl font-bold">{attendance?.check_in}</p>
-            </div>
+      <CardContent>
+        <div className="space-y-4 flex justify-center gap-10">
+          {isLoading ? (
+            <p className="text-sm text-muted-foreground">근태 정보를 불러오는 중입니다.</p>
+          ) : (
+            <div className="grid grid-cols-2 ">
+              <div className="aspect-square flex flex-col justify-center border-r p-8">
+                <p className="text-sm text-muted-foreground">출근 시간</p>
+                <p className="text-2xl font-bold">{attendance?.check_in}</p>
+              </div>
 
-            <div className="aspect-square flex flex-col justify-center border-r p-8">
-              <p className="text-sm text-muted-foreground">퇴근 시간</p>
-              <p className="text-2xl font-bold">{attendance?.check_out}</p>
+              <div className="aspect-square flex flex-col justify-center border-r p-8">
+                <p className="text-sm text-muted-foreground">퇴근 시간</p>
+                <p className="text-2xl font-bold">{attendance?.check_out}</p>
+              </div>
             </div>
-          </div>
-        )}
-        <AttendanceButtons employeeId={employeeId} />
+          )}
+          <AttendanceButtons employeeId={employeeId} />
+        </div>
+        <div>
+          <Button className={attendance?.status === 'LATE' ? 'active bg-amber-700' : 'in-active'}>지각 사유 입력하기</Button>
+        </div>
       </CardContent>
     </Card>
   );

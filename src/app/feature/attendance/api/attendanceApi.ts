@@ -56,8 +56,6 @@ export const getAttendanceList = async (params: AttendanceListParams) => {
     throw error;
   }
 
-  console.log(data);
-
   return {
     attendance: data as Attendance[],
     count,
