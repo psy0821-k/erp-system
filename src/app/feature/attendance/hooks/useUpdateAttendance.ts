@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { updateAttendance, UpdateAttendanceInput } from '../api/attendanceApi';
-// import { attendanceKeys } from './attendanceKeys';
+import { updateLateReason, UpdateLateReasonInput } from '../api/lateReasonApi';
 
 export const useUpdateAttendance = () => {
   const queryClient = useQueryClient();
@@ -15,6 +15,25 @@ export const useUpdateAttendance = () => {
 
       queryClient.invalidateQueries({
         queryKey: ['attendance'],
+      });
+    },
+
+    onError: () => {
+      toast.error('근태 정보 수정에 실패했습니다.');
+    },
+  });
+};
+export const useUpdateLateReason = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (input: UpdateLateReasonInput) => updateLateReason(input),
+
+    onSuccess: () => {
+      toast.success('지각 사유가 수정되었습니다.');
+
+      queryClient.invalidateQueries({
+        queryKey: ['late'],
       });
     },
 

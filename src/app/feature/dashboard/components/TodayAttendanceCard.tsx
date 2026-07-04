@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTodayAttendance } from '../../attendance/hooks/useAttendance';
 import { AttendanceButtons } from '../../attendance/components/AttendanceButtons';
 import { Button } from '@/components/ui/button';
+import LateReasonDialog from '../../attendance/components/LateReasonButton';
 
 interface Props {
   employeeId: string;
@@ -42,9 +43,7 @@ export default function TodayAttendanceCard({ employeeId }: Props) {
           )}
           <AttendanceButtons employeeId={employeeId} />
         </div>
-        <div>
-          <Button className={attendance?.status === 'LATE' ? 'active bg-amber-700' : 'in-active'}>지각 사유 입력하기</Button>
-        </div>
+        <div>{attendance && <LateReasonDialog attendance={attendance} />} </div>
       </CardContent>
     </Card>
   );
