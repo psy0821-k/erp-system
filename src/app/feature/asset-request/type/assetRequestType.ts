@@ -5,6 +5,7 @@ export const ASSET_REQUEST_STATUS = {
   APPROVED: 'APPROVED',
   REJECTED: 'REJECTED',
   COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
 } as const;
 
 export type AssetRequestStatus = (typeof ASSET_REQUEST_STATUS)[keyof typeof ASSET_REQUEST_STATUS];
@@ -14,6 +15,7 @@ export const ASSET_REQUEST_STATUS_OPTIONS = [
   { title: '승인', value: ASSET_REQUEST_STATUS.APPROVED },
   { title: '반려', value: ASSET_REQUEST_STATUS.REJECTED },
   { title: '지급 완료', value: ASSET_REQUEST_STATUS.COMPLETED },
+  { title: '취소', value: ASSET_REQUEST_STATUS.CANCELLED },
 ] as const;
 
 export const ASSET_REQUEST_STATUS_LABEL: Record<AssetRequestStatus, string> = {
@@ -21,6 +23,7 @@ export const ASSET_REQUEST_STATUS_LABEL: Record<AssetRequestStatus, string> = {
   [ASSET_REQUEST_STATUS.APPROVED]: '승인',
   [ASSET_REQUEST_STATUS.REJECTED]: '반려',
   [ASSET_REQUEST_STATUS.COMPLETED]: '지급 완료',
+  [ASSET_REQUEST_STATUS.CANCELLED]: '취소',
 };
 
 export const ASSET_REQUEST_STATUS_BADGE_VARIANT: Record<AssetRequestStatus, 'default' | 'secondary' | 'destructive' | 'outline'> = {
@@ -28,6 +31,7 @@ export const ASSET_REQUEST_STATUS_BADGE_VARIANT: Record<AssetRequestStatus, 'def
   [ASSET_REQUEST_STATUS.APPROVED]: 'default',
   [ASSET_REQUEST_STATUS.REJECTED]: 'destructive',
   [ASSET_REQUEST_STATUS.COMPLETED]: 'outline',
+  [ASSET_REQUEST_STATUS.CANCELLED]: 'destructive',
 };
 
 export interface AssetRequestRow {

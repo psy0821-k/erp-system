@@ -5,7 +5,6 @@ import { Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTodayAttendance } from '../../attendance/hooks/useAttendance';
 import { AttendanceButtons } from '../../attendance/components/AttendanceButtons';
-import { Button } from '@/components/ui/button';
 import LateReasonDialog from '../../attendance/components/LateReasonButton';
 
 interface Props {

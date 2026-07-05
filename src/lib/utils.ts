@@ -10,3 +10,12 @@ export const getToday = () => {
     timeZone: 'Asia/Seoul',
   }).format(new Date());
 };
+
+export const formatTime = (value?: string | null) => {
+  if (!value) return '-';
+
+  return new Date(value).toLocaleTimeString('ko-KR', {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};

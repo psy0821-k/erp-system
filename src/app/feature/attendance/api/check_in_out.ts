@@ -83,3 +83,15 @@ export const checkOut = async (attendanceId: string) => {
 
   return data as Attendance;
 };
+
+export const checkOutToday = async (): Promise<Attendance> => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.rpc('checkout_today');
+
+  if (error) {
+    throw error;
+  }
+
+  return data as Attendance;
+};

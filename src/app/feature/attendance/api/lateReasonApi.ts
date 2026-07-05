@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/client';
+import { Attendance } from '../type/attendance';
 
 export interface UpdateLateReasonInput {
   id: string;
@@ -22,4 +23,36 @@ export const updateLateReason = async ({ id, late_reason }: UpdateLateReasonInpu
   }
 
   return data;
+};
+
+export const getLateUserList = async () => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase
+    .from('attendance')
+    .select(
+      `
+      *,
+      employee:employees!attendance_employee_id_fkey!inner (
+        id,
+        name,
+        email,
+        employee_number,
+        department,
+        position
+      )
+    `
+    )
+    .eq('status', 'LATE')
+    .not('late_reason', 'is', null)
+    .eq('late_reason_reviewed', false)
+    .order('work_date', { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+
+  return {
+    late_user: data as Attendance[],
+  };
 };

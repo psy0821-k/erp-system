@@ -12,7 +12,7 @@ type DepartmentFilterProps = {
 function DepartmentFilter({ value, onChange }: DepartmentFilterProps) {
   return (
     <div>
-      <Label htmlFor="filtering-position" className="sr-only">
+      <Label htmlFor="filtering-department" className="sr-only">
         부서 별 필터링
       </Label>
 

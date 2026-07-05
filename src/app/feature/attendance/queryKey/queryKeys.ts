@@ -11,4 +11,5 @@ export const attendanceKeys = {
   todayAll: () => [...attendanceKeys.all, 'todayAll'] as const,
 
   late: () => [...attendanceKeys.all, 'list'] as const,
+  late_user: () => [...attendanceKeys.all, 'late_user'] as const,
 };

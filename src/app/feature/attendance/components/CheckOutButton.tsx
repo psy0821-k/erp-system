@@ -20,8 +20,8 @@ interface Props {
   employeeId: string;
 }
 
-export default function CheckOutButton({ attendanceId, employeeId }: Props) {
-  const { mutate: checkOutMutate, isPending } = useCheckOut(attendanceId, employeeId);
+export default function CheckOutButton({ employeeId }: Props) {
+  const { mutate: checkOutMutate, isPending } = useCheckOut(employeeId);
 
   return (
     <AlertDialog>

@@ -52,7 +52,7 @@ function AssetsTable({ assets }: AssetsTableProps) {
                   {ASSET_STATUS_LABEL[asset.status]}
                 </Badge>
               </TableCell>
-              <TableCell className="text-center text-slate-500 text-sm max-w-[180px] truncate">{asset.memo ?? '-'}</TableCell>
+              <TableCell className="text-center text-slate-500 text-sm max-w-45 truncate">{asset.memo ?? '-'}</TableCell>
               <TableCell className="text-center text-slate-400 text-xs font-mono">{asset.created_at.slice(0, 10)}</TableCell>
               <TableCell className="text-right py-3.5 pr-6">
                 <div className="inline-flex items-center gap-1">

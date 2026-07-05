@@ -9,8 +9,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
 
-import { useUpdateLateReason } from '../hooks/useUpdateAttendance';
-import { UpdateLateReasonInput } from '../api/lateReasonApi';
+import { useSubmitLateReason } from '../hooks/useAttendance';
+import { SubmitLateReasonInput } from '../api/attendanceApi';
 import { updateUserAttendanceSchema } from '../Schema/updateAttendanceSchema';
 import { AttendanceStatus } from '@/config/types/attendanceStatus';
 
@@ -22,15 +22,18 @@ type LateReasonDialogProps = {
   };
 };
 
+type LateReasonFormInput = {
+  lateReason: string;
+};
+
 export default function LateReasonDialog({ attendance }: LateReasonDialogProps) {
-  const { mutate, isPending } = useUpdateLateReason();
+  const { mutate, isPending } = useSubmitLateReason();
   const [open, setOpen] = useState(false);
 
-  const form = useForm<UpdateLateReasonInput>({
+  const form = useForm<LateReasonFormInput>({
     resolver: zodResolver(updateUserAttendanceSchema),
     defaultValues: {
-      id: attendance.id,
-      late_reason: attendance.late_reason ?? '',
+      lateReason: attendance.late_reason ?? '',
     },
   });
 
@@ -41,8 +44,13 @@ export default function LateReasonDialog({ attendance }: LateReasonDialogProps) 
     ? 'cursor-pointer border-amber-700 bg-amber-100 text-amber-950 hover:bg-amber-200 hover:text-amber-950 focus-visible:ring-2 focus-visible:ring-amber-700'
     : 'cursor-not-allowed border-muted bg-muted text-muted-foreground opacity-70';
 
-  const onSubmit = (values: UpdateLateReasonInput) => {
-    mutate(values, {
+  const onSubmit = (values: LateReasonFormInput) => {
+    const payload: SubmitLateReasonInput = {
+      attendanceId: attendance.id,
+      lateReason: values.lateReason,
+    };
+
+    mutate(payload, {
       onSuccess: () => {
         form.reset(values);
         setOpen(false);
@@ -73,13 +81,13 @@ export default function LateReasonDialog({ attendance }: LateReasonDialogProps) 
 
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <Controller
-            name="late_reason"
+            name="lateReason"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="late_reason">지각 사유</FieldLabel>
+                <FieldLabel htmlFor="lateReason">지각 사유</FieldLabel>
 
-                <Textarea {...field} id="late_reason" placeholder="예: 대중교통 지연으로 인해 지각했습니다." aria-invalid={fieldState.invalid} />
+                <Textarea {...field} id="lateReason" placeholder="예: 대중교통 지연으로 인해 지각했습니다." aria-invalid={fieldState.invalid} />
 
                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
               </Field>

@@ -43,14 +43,19 @@ export const getAssets = async (params: AssetsListParams) => {
 export const createAsset = async (input: CreateAssetInput) => {
   const supabase = createClient();
 
+  const assignedEmployeeId = input.assigned_employee_id || null;
+
   const payload = {
     ...input,
+    assigned_employee_id: assignedEmployeeId,
+    status: assignedEmployeeId ? 'IN_USE' : 'AVAILABLE',
     memo: input.memo?.trim() || null,
   };
 
   const { data, error } = await supabase.from('assets').insert(payload).select().single();
 
   if (error) {
+    console.error('자산 등록 실패:', error);
     throw error;
   }
 

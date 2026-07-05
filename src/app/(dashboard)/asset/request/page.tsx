@@ -1,6 +1,7 @@
 import { getCurrentEmployee } from '@/app/api/getEmployee';
 import AssetRequestCreateDialog from '@/app/feature/asset-request/components/AssetRequestCreateDialog';
 import AssetRequestTable from '@/app/feature/asset-request/components/AssetRequestTable.tsx';
+import AssetFiltering from '@/app/feature/asset/components/assetFiltering';
 import { Laptop } from 'lucide-react';
 
 export default async function AssetRequestPage() {
@@ -16,6 +17,11 @@ export default async function AssetRequestPage() {
           </div>
 
           <AssetRequestCreateDialog requesterId={employee?.id} />
+        </div>
+        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
+          <div className="w-full sm:w-auto flex justify-end">
+            <AssetFiltering />
+          </div>
         </div>
 
         <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">

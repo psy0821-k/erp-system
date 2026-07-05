@@ -118,3 +118,22 @@ export const updateAttendance = async (input: UpdateAttendanceInput) => {
 
   return data;
 };
+export type SubmitLateReasonInput = {
+  attendanceId: string;
+  lateReason: string;
+};
+
+export const submitLateReason = async ({ attendanceId, lateReason }: SubmitLateReasonInput): Promise<Attendance> => {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.rpc('submit_late_reason', {
+    p_attendance_id: attendanceId,
+    p_late_reason: lateReason,
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return data as Attendance;
+};

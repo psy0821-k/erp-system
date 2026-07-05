@@ -16,9 +16,18 @@ export type CreateAssetRequestFormInput = z.infer<typeof createAssetRequestSchem
 
 export const updateAssetRequestStatusSchema = z.object({
   id: z.string().min(1, '요청 ID가 필요합니다.'),
-  status: z.enum([ASSET_REQUEST_STATUS.PENDING, ASSET_REQUEST_STATUS.APPROVED, ASSET_REQUEST_STATUS.REJECTED, ASSET_REQUEST_STATUS.COMPLETED], {
-    message: '요청 상태를 선택해주세요',
-  }),
+  status: z.enum(
+    [
+      ASSET_REQUEST_STATUS.PENDING,
+      ASSET_REQUEST_STATUS.APPROVED,
+      ASSET_REQUEST_STATUS.REJECTED,
+      ASSET_REQUEST_STATUS.COMPLETED,
+      ASSET_REQUEST_STATUS.CANCELLED,
+    ],
+    {
+      message: '요청 상태를 선택해주세요',
+    }
+  ),
   admin_message: z.string().max(300, '관리자 메세지는 300자 이하로 입력해주세요.').nullable().optional(),
 });
 

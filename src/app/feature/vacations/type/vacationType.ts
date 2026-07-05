@@ -1,4 +1,4 @@
-export type ApprovalStatus = 'PENDING' | 'APPROVED' | 'REJECTED';
+export type ApprovalStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'CANCELLED';
 
 export const VACATION_TYPE = {
   ANNUAL: 'ANNUAL',
