@@ -27,7 +27,7 @@ export const SidebarCollapsibleMenu = ({ menu }: SidebarCollapsibleMenuProps) =>
       <Collapsible defaultOpen={isParentActive} className="group/collapsible">
         <CollapsibleTrigger asChild>
           <SidebarMenuButton type="button" isActive={isParentActive}>
-            <span>{menu.title}</span>
+            <span className="font-bold">{menu.title}</span>
             <ChevronDown aria-hidden="true" className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
           </SidebarMenuButton>
         </CollapsibleTrigger>
@@ -45,8 +45,8 @@ export const SidebarCollapsibleMenu = ({ menu }: SidebarCollapsibleMenuProps) =>
                     isActive={isActive}
                     className={
                       isActive
-                        ? 'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground'
-                        : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                        ? 'bg-blue-700 text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 font-semibold'
+                        : 'hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-50'
                     }
                   >
                     <Link

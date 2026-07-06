@@ -23,7 +23,11 @@ export const SidebarMenuLink = ({ menu }: SidebarMenuLinkProps) => {
       <SidebarMenuButton
         asChild
         isActive={isActive}
-        className={isActive ? 'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground' : ''}
+        className={
+          isActive
+            ? 'bg-blue-700 text-white hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 font-bold'
+            : 'font-semibold hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-50'
+        }
       >
         <Link
           href={menu.href}
@@ -34,7 +38,7 @@ export const SidebarMenuLink = ({ menu }: SidebarMenuLinkProps) => {
             }
           }}
         >
-          <span>{menu.title}</span>
+          <span className="font-bold">{menu.title}</span>
         </Link>
       </SidebarMenuButton>
     </SidebarMenuItem>
