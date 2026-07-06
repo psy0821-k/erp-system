@@ -1,33 +1,44 @@
 import { createClient } from '@/lib/client';
 import { getToday } from '@/lib/utils';
-import { Package, Truck, Users, UserX } from 'lucide-react';
+import { CalendarDays, Clock, Truck, Users, UserX } from 'lucide-react';
 
 export const getDashboardStats = async () => {
-  const supabase = await createClient();
+  const supabase = createClient();
 
-  const today = new Date().toLocaleDateString('sv-SE');
+  const today = getToday();
 
-  const { count: totalEmployees } = await supabase.from('employees').select('*', { count: 'exact', head: true });
-  const { count: activeEmployees } = await supabase
+  const { count: totalEmployees, error: totalEmployeesError } = await supabase.from('employees').select('*', { count: 'exact', head: true });
+
+  const { count: presentEmployees, error: presentError } = await supabase
     .from('attendance')
     .select('*', { count: 'exact', head: true })
     .eq('status', 'PRESENT')
     .eq('work_date', today);
-  const { count: absentEmployees } = await supabase
-    .from('attendance')
-    .select('*', { count: 'exact', head: true })
-    .eq('status', 'ABSENT')
-    .eq('work_date', today);
-  const { count: lateEmployees } = await supabase
+
+  const { count: lateEmployees, error: lateError } = await supabase
     .from('attendance')
     .select('*', { count: 'exact', head: true })
     .eq('status', 'LATE')
     .eq('work_date', today);
-  const { count: vacationEmployees } = await supabase
-    .from('employees')
+
+  const { count: absentEmployees, error: absentError } = await supabase
+    .from('attendance')
+    .select('*', { count: 'exact', head: true })
+    .eq('status', 'ABSENT')
+    .eq('work_date', today);
+
+  const { count: vacationEmployees, error: vacationError } = await supabase
+    .from('attendance')
     .select('*', { count: 'exact', head: true })
     .eq('status', 'VACATION')
     .eq('work_date', today);
+
+  if (totalEmployeesError) throw totalEmployeesError;
+  if (presentError) throw presentError;
+  if (lateError) throw lateError;
+  if (absentError) throw absentError;
+  if (vacationError) throw vacationError;
+
   return {
     totalEmployee: {
       title: '총 직원 수',
@@ -39,7 +50,7 @@ export const getDashboardStats = async () => {
     attendanceStats: [
       {
         title: '출근 인원',
-        value: activeEmployees ?? 0,
+        value: presentEmployees ?? 0,
         description: '오늘 출근 인원',
         icon: Truck,
       },
@@ -47,7 +58,7 @@ export const getDashboardStats = async () => {
         title: '지각 인원',
         value: lateEmployees ?? 0,
         description: '오늘 지각 인원',
-        icon: Truck,
+        icon: Clock,
       },
       {
         title: '결근 인원',
@@ -56,39 +67,11 @@ export const getDashboardStats = async () => {
         icon: UserX,
       },
       {
-        title: '휴가',
+        title: '휴가 인원',
         value: vacationEmployees ?? 0,
-        description: '휴가 중인 직원',
-        icon: Package,
+        description: '오늘 휴가 인원',
+        icon: CalendarDays,
       },
     ],
   };
-};
-
-export const getTodayAttendanceAll = async () => {
-  const supabase = await createClient();
-
-  const today = getToday();
-
-  const { data, error } = await supabase
-    .from('attendance')
-    .select(
-      `
-        *,
-        employee:employees!attendance_employee_id_fkey (
-          id,
-          name,
-          department,
-          position
-        )
-      `
-    )
-    .eq('work_date', today)
-    .order('created_at', { ascending: false });
-
-  if (error) {
-    throw error;
-  }
-
-  return data;
 };

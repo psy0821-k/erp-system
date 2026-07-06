@@ -5,9 +5,9 @@ import { attendanceKeys } from '../queryKey/queryKeys';
 import { getAttendanceDetail, getAttendanceList, submitLateReason } from '../api/attendanceApi';
 import { AttendanceListParams } from '../type/attendance';
 import { getTodayAttendance } from '../api/check_in_out';
-import { getTodayAttendanceAll } from '../api/getDashboardStats';
 import { getLateUserList } from '../api/lateReasonApi';
 import { toast } from 'sonner';
+import { getTodayAttendanceAll } from '../../dashboard/api/getTodayAttendanceAll';
 
 export const useTodayAttendance = (employeeId: string) => {
   return useQuery({

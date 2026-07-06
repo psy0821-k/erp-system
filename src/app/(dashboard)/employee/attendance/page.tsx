@@ -1,13 +1,10 @@
-import DashboardCard from '@/components/dashboard/dashboard-card';
-import { getDashboardStats } from '@/app/feature/attendance/api/getDashboardStats';
 import AttendanceClientList from '@/app/feature/attendance/components/AttendanceClientList';
 import AttendanceFiltering from '@/components/filtering/attendanceFiltering';
 import EmployeeSearch from '@/app/feature/employees/components/EmployeeSearch';
 import LateUserClientList from '@/app/feature/attendance/components/LateUserClientList';
+import TodayAttendanceStatsGrid from '@/app/feature/attendance/components/TodayAttendanceStatsGrid';
 
-export default async function AttendancePage() {
-  const { attendanceStats, totalEmployee } = await getDashboardStats();
-
+export default function AttendancePage() {
   return (
     <div className="min-h-screen bg-slate-50/50 p-6 sm:p-8">
       <section className="max-w-7xl mx-auto space-y-6">
@@ -18,18 +15,7 @@ export default async function AttendancePage() {
           </div>
         </div>
 
-        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          <DashboardCard
-            key={totalEmployee.title}
-            title={totalEmployee.title}
-            value={totalEmployee.value}
-            description={totalEmployee.description}
-            icon={totalEmployee.icon}
-          />
-          {attendanceStats.map(stat => (
-            <DashboardCard key={stat.title} title={stat.title} value={stat.value} description={stat.description} icon={stat.icon} />
-          ))}
-        </div>
+        <TodayAttendanceStatsGrid />
 
         <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
           <div className="w-full sm:max-w-md">

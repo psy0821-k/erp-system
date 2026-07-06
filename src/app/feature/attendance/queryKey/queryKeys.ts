@@ -13,3 +13,8 @@ export const attendanceKeys = {
   late: () => [...attendanceKeys.all, 'list'] as const,
   late_user: () => [...attendanceKeys.all, 'late_user'] as const,
 };
+
+export const dashboardKeys = {
+  all: ['dashboard'] as const,
+  stats: () => [...dashboardKeys.all, 'stats'] as const,
+};

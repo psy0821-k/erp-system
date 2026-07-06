@@ -1,13 +1,45 @@
+'use client';
+
 import Link from 'next/link';
 import { AlertCircle, ChevronRight } from 'lucide-react';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { getDashboardStats } from '../../attendance/api/getDashboardStats';
 import DashboardCard from '@/components/dashboard/dashboard-card';
+import { useDashboardStats } from '../../attendance/hooks/useDashboardStats';
 
-export default async function TodayAttendanceIssueCard() {
-  const { attendanceStats, totalEmployee } = await getDashboardStats();
+export default function TodayAttendanceIssueCard() {
+  const { data, isLoading, isError } = useDashboardStats();
+
+  if (isLoading) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base font-semibold">오늘 근태 이슈</CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <p className="text-sm text-muted-foreground">근태 정보를 불러오는 중입니다.</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  if (isError || !data) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base font-semibold">오늘 근태 이슈</CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <p className="text-sm text-muted-foreground">근태 정보를 불러오지 못했습니다.</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const { attendanceStats, totalEmployee } = data;
 
   return (
     <Card>
