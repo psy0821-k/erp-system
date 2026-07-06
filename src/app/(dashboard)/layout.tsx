@@ -8,14 +8,26 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <AppSidebar />
 
       <SidebarInset>
-        <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b bg-background px-4">
-          <SidebarTrigger className="size-8" />
+        <header
+          className="
+      sticky top-0 z-40
+      flex w-full items-center justify-between
+      border-b border-border
+      bg-background/80
+      backdrop-blur-md
+      supports-backdrop-filter:bg-background/60
+      px-6 py-2.5
+      shadow-sm
+    "
+        >
+          <div className="flex items-center gap-3">
+            <SidebarTrigger className="size-8" />
+          </div>
 
-          <span className="text-sm font-semibold">ERP System</span>
           <DarkModeToggle />
         </header>
 
-        <main className="p-6">{children}</main>
+        <div className="flex-1 bg-background p-6">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );

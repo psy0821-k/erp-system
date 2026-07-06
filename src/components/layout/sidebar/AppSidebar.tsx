@@ -17,7 +17,7 @@ import { SidebarCollapsibleMenu } from './SidebarCollapsibleMenu';
 const AppSidebar = () => {
   return (
     <Sidebar collapsible="offcanvas" variant="sidebar" className="border-r bg-background">
-      <SidebarHeader className="border-b px-3 py-3">
+      <SidebarHeader className="border-b px-3 py-4.5">
         <div className="flex flex-col group-data-[collapsible=icon]:items-center">
           <span className="text-sm font-bold tracking-tight group-data-[collapsible=icon]:hidden">ERP Company</span>
         </div>
