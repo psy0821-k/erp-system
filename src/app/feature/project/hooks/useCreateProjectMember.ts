@@ -19,7 +19,11 @@ export const useCreateProjectMember = () => {
     },
 
     onError: error => {
-      console.error(error);
+      if ('code' in error && error.code === '23505') {
+        toast.error('이미 프로젝트에 참여 중인 직원입니다.');
+        return;
+      }
+
       toast.error('참여자 추가에 실패했습니다.');
     },
   });
