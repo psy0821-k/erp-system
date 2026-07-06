@@ -16,13 +16,15 @@ export function AttendanceButtons({ employeeId }: Props) {
   }
 
   return (
-    <div>
+    <div className="flex w-full items-center justify-center">
       {!todayAttendance ? (
         <CheckInButton employeeId={employeeId} />
       ) : !todayAttendance.check_out ? (
         <CheckOutButton attendanceId={todayAttendance.id} employeeId={employeeId} />
       ) : (
-        <p>오늘 근무 종료</p>
+        <div className="flex h-10 w-full items-center justify-center rounded-lg bg-muted text-sm font-medium text-muted-foreground">
+          <span>오늘 근무가 종료되었습니다</span>
+        </div>
       )}
     </div>
   );

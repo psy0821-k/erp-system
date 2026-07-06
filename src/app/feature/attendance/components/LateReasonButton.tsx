@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Field, FieldError, FieldLabel } from '@/components/ui/field';
+import { FieldError } from '@/components/ui/field';
 import { Textarea } from '@/components/ui/textarea';
 
 import { useSubmitLateReason } from '../hooks/useAttendance';
@@ -25,7 +25,6 @@ type LateReasonDialogProps = {
 type LateReasonFormInput = {
   lateReason: string;
 };
-
 export default function LateReasonDialog({ attendance }: LateReasonDialogProps) {
   const { mutate, isPending } = useSubmitLateReason();
   const [open, setOpen] = useState(false);
@@ -41,8 +40,8 @@ export default function LateReasonDialog({ attendance }: LateReasonDialogProps) 
   const hasLateReason = Boolean(attendance.late_reason?.trim());
 
   const lateReasonButtonClassName = isLate
-    ? 'cursor-pointer border-amber-700 bg-amber-100 text-amber-950 hover:bg-amber-200 hover:text-amber-950 focus-visible:ring-2 focus-visible:ring-amber-700'
-    : 'cursor-not-allowed border-muted bg-muted text-muted-foreground opacity-70';
+    ? 'w-full cursor-pointer border-amber-200 bg-amber-50 text-amber-900 hover:bg-amber-100 focus-visible:ring-2 focus-visible:ring-amber-500 dark:border-amber-900/50 dark:bg-amber-950/40 dark:text-amber-200 dark:hover:bg-amber-950/60 font-medium'
+    : 'w-full cursor-not-allowed border-border bg-muted/50 text-muted-foreground opacity-60';
 
   const onSubmit = (values: LateReasonFormInput) => {
     const payload: SubmitLateReasonInput = {
@@ -63,39 +62,49 @@ export default function LateReasonDialog({ attendance }: LateReasonDialogProps) 
       <DialogTrigger asChild>
         <Button
           type="button"
-          variant="outline"
+          variant={isLate ? 'default' : 'outline'}
           size="sm"
           disabled={!isLate}
           className={lateReasonButtonClassName}
-          aria-label={isLate ? (hasLateReason ? '지각 사유 수정하기' : '지각 사유 작성하기') : '지각 상태가 아니므로 지각 사유를 작성할 수 없습니다'}
+          aria-label={isLate ? (hasLateReason ? '지각 사유 수정하기' : '지각 사유 작성하기') : '지각 상태가 아닙니다'}
         >
-          {isLate ? (hasLateReason ? '지각사유 수정' : '지각사유 작성') : '지각 아님'}
+          {isLate ? (hasLateReason ? '지각사유 수정하기' : '지각사유 작성하기') : '지각 대상 아님'}
         </Button>
       </DialogTrigger>
 
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>지각 사유 작성</DialogTitle>
-          <DialogDescription>지각한 사유를 입력해주세요. 관리자가 확인할 수 있습니다.</DialogDescription>
+      <DialogContent className="sm:max-w-106">
+        <DialogHeader className="space-y-1.5">
+          <DialogTitle className="text-lg font-semibold tracking-tight">지각 사유 작성</DialogTitle>
+          <DialogDescription className="text-sm text-muted-foreground">
+            지각 사유를 상세히 작성해 주세요. 해당 사유는 인사 관리자가 검토하게 됩니다.
+          </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-2">
           <Controller
             name="lateReason"
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="lateReason">지각 사유</FieldLabel>
+              <div className="space-y-2" data-invalid={fieldState.invalid}>
+                <label htmlFor="lateReason" className="text-sm font-medium text-foreground">
+                  사유 입력
+                </label>
 
-                <Textarea {...field} id="lateReason" placeholder="예: 대중교통 지연으로 인해 지각했습니다." aria-invalid={fieldState.invalid} />
+                <Textarea
+                  {...field}
+                  id="lateReason"
+                  placeholder="예: 대중교통(지하철 2호선) 지연으로 인해 10분 늦게 출근 처리가 되었습니다."
+                  aria-invalid={fieldState.invalid}
+                  className="min-h-25 resize-none focus-visible:ring-2 focus-visible:ring-ring"
+                />
 
                 {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-              </Field>
+              </div>
             )}
           />
 
-          <Button type="submit" disabled={isPending} className="w-full">
-            {isPending ? '등록 중...' : '등록 완료'}
+          <Button type="submit" disabled={isPending} className="w-full font-medium">
+            {isPending ? '제출 요청 중...' : '사유 등록 완료'}
           </Button>
         </form>
       </DialogContent>

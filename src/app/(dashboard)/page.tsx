@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import TodayAttendanceCard from '../feature/dashboard/components/TodayAttendanceCard';
 import { getCurrentEmployee } from '../api/getEmployee';
 import MyVacationStatusCard from '../feature/dashboard/components/MyVacationCard';
@@ -17,36 +16,48 @@ export default async function DashboardPage() {
     return null;
   }
 
-  return (
-    <Fragment>
-      <section className="space-y-1">
-        <h1 className="text-2xl font-bold">안녕하세요, {employee.name}님</h1>
-        <p className="text-sm text-muted-foreground">오늘의 근무 상태를 확인해보세요.</p>
-      </section>
-      <section>
-        <h2>관리자 전용 대시보드</h2>
-        <section aria-labelledby="admin-dashboard-title" className="space-y-4">
-          <h2 id="admin-dashboard-title" className="sr-only">
-            관리자 대시보드 요약
-          </h2>
+  const isAdmin = employee.role === 'ADMIN';
 
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+  return (
+    <div className="container mx-auto space-y-8 px-4 py-6 sm:px-6 lg:px-8">
+      <header className="space-y-1.5">
+        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">안녕하세요, {employee.name}님</h1>
+        <p className="text-sm text-muted-foreground sm:text-base">오늘의 근무 상태와 주요 일정을 확인해보세요.</p>
+      </header>
+
+      {isAdmin && (
+        <section aria-labelledby="admin-dashboard-title" className="space-y-4">
+          <h2 id="admin-dashboard-title" className="text-xl font-semibold tracking-tight">
+            관리자 현황 요약
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <AdminTodoCard />
             <DepartmentChartCard />
-            <TodayAttendanceIssueCard />
+            <div className="sm:col-span-2 lg:col-span-1">
+              <TodayAttendanceIssueCard />
+            </div>
           </div>
         </section>
-      </section>
+      )}
 
-      <section className="mt-6 grid gap-4 xl:grid-cols-3">
-        <h2 className="sr-only">공통 대시보드</h2>
-        <TodayAttendanceCard employeeId={employee.id} />
-        <MyVacationStatusCard employeeId={employee.id} />
-        <MyProjectCard employeeId={employee.id} />
-        <NoticeSummaryCard />
-        <TodayVacationCard />
+      <section aria-labelledby="user-dashboard-title" className="space-y-4">
+        <h2 id="user-dashboard-title" className="sr-only">
+          개인 대시보드 요약
+        </h2>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <TodayAttendanceCard employeeId={employee.id} />
+          </div>
+          <TodayVacationCard />
+
+          <MyVacationStatusCard employeeId={employee.id} />
+          <MyProjectCard employeeId={employee.id} />
+
+          <NoticeSummaryCard />
+        </div>
         <QuickActionCard />
       </section>
-    </Fragment>
+    </div>
   );
 }

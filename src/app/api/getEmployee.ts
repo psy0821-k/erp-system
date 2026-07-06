@@ -10,7 +10,7 @@ export const getCurrentEmployee = async () => {
 
   if (userError || !user) return null;
 
-  const { data: employee, error } = await supabase.from('employees').select('id, name, email').eq('id', user.id).single();
+  const { data: employee, error } = await supabase.from('employees').select('id, name, email,role').eq('id', user.id).single();
   if (error) return null;
 
   return employee;

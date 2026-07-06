@@ -64,24 +64,26 @@ export default function TodayAttendanceIssueCard() {
   const { attendanceStats, totalEmployee } = data;
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0">
-        <CardTitle className="text-base font-semibold">오늘 근태 이슈 ( 총 : {totalEmployee.value} 명 )</CardTitle>
+    <Card className="h-full flex flex-col justify-between">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
+        <CardTitle className="text-base font-semibold tracking-tight text-foreground">
+          오늘 근태 이슈 <span className="text-sm font-normal text-muted-foreground ml-1.5">(총 {totalEmployee.value}명)</span>
+        </CardTitle>
 
-        <AlertCircle className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+        <AlertCircle className="h-5 w-5 text-destructive/90" aria-hidden="true" />
       </CardHeader>
 
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
+      <CardContent className="space-y-4 flex-1 flex flex-col justify-between">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
           {attendanceStats.map(stat => (
             <DashboardCard key={stat.title} title={stat.title} value={stat.value} description={stat.description} icon={stat.icon} />
           ))}
         </div>
 
-        <Button asChild variant="outline" className="w-full">
+        <Button asChild variant="outline" className="w-full mt-2 group justify-center">
           <Link href="/employee/attendance" aria-label="근태관리 페이지로 이동">
-            근태관리 바로가기
-            <ChevronRight className="ml-1 h-4 w-4" aria-hidden="true" />
+            <span className="text-sm font-medium">근태관리 바로가기</span>
+            <ChevronRight className="ml-1 h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
           </Link>
         </Button>
       </CardContent>
