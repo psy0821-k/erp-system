@@ -49,6 +49,7 @@ export default function QuickActionCard() {
               <Link
                 key={action.title}
                 href={action.href}
+                aria-label={`${action.title}페이지로 이동`}
                 className="flex flex-col items-center justify-center rounded-lg border p-5 transition hover:bg-muted"
               >
                 <Icon className="mb-2 h-6 w-6" />

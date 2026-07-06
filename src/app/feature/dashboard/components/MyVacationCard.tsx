@@ -98,7 +98,9 @@ export default function MyVacationStatusCard({ employeeId }: Props) {
 
             <Button variant="outline" size="sm" className="w-full h-9 font-medium text-muted-foreground hover:text-foreground group" asChild>
               <Link href="/employee/vacation">
-                <span>자세히 보기</span>
+                <span>
+                  <span className="sr-only">휴가 정보</span> 자세히 보기
+                </span>
                 <ChevronRight className="h-4 w-4 ml-0.5 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </Button>
