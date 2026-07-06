@@ -2,6 +2,7 @@
 
 import GetTodayVacationTable from './getTodayVacationTable';
 import { useTodayVacations } from '../hooks/useVacation';
+import CardSkeleton from '@/components/ui/cardSkeleton';
 
 export default function VacationListClient() {
   const { data, error, isLoading, isError } = useTodayVacations();
@@ -9,7 +10,7 @@ export default function VacationListClient() {
   const vacations = data ?? [];
 
   if (isLoading) {
-    return <div>오늘 휴가자 정보를 불러오는 중입니다...</div>;
+    return <CardSkeleton />;
   }
 
   if (isError) {

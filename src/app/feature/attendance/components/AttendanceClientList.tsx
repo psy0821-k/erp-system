@@ -6,6 +6,7 @@ import EmployeePagination from '../../employees/components/EmployeePagination';
 import AttendanceTable from './AttendanceTable';
 import { useAttendanceList } from '../hooks/useAttendance';
 import { AttendanceStatus } from '@/config/types/attendanceStatus';
+import TableSkeleton from '@/components/ui/tableSkelleton';
 
 export default function AttendanceClientList() {
   const searchParams = useSearchParams();
@@ -26,7 +27,7 @@ export default function AttendanceClientList() {
   const pageSize = data?.pageSize ?? 5;
 
   if (isLoading) {
-    return <div>직원 목록을 불러오는 중입니다...</div>;
+    return <TableSkeleton columns={8} rows={5} />;
   }
 
   if (isError) {

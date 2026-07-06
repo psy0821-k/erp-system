@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import NoticeTable from './NoticeTable';
 import { useNotices } from '../hooks/useNotices';
 import EmployeeSearch from '../../employees/components/EmployeeSearch';
+import TableSkeleton from '@/components/ui/tableSkelleton';
 
 export default function NoticeClientPage() {
   const searchParams = useSearchParams();
@@ -47,7 +48,7 @@ export default function NoticeClientPage() {
 
         <CardContent className="space-y-4">
           <EmployeeSearch placeholder="공지사항 검색" />
-          <NoticeTable notices={data?.notices ?? []} isLoading={isLoading} />
+          {isLoading ? <TableSkeleton columns={6} rows={5} /> : <NoticeTable notices={data?.notices ?? []} />}
         </CardContent>
       </Card>
     </main>

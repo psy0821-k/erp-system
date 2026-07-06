@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import EmployeeTable from './employeeTable';
 import { useEmployees } from '@/app/feature/employees/hooks/useEmployees';
 import EmployeePagination from './EmployeePagination';
+import TableSkeleton from '@/components/ui/tableSkelleton';
 
 export default function EmployeeListClient() {
   const searchParams = useSearchParams();
@@ -22,7 +23,7 @@ export default function EmployeeListClient() {
   const pageSize = data?.pageSize ?? 10;
 
   if (isLoading) {
-    return <div>직원 목록을 불러오는 중입니다...</div>;
+    return <TableSkeleton columns={8} rows={10} />;
   }
 
   if (isError) {

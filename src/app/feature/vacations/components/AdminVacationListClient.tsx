@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { useVacationsInfinite } from '../hooks/useVacationsInfinite';
 import AdminVacationTable from './AdminVacationTable';
+import TableSkeleton from '@/components/ui/tableSkelleton';
 
 interface Employee {
   id: string;
@@ -18,7 +19,7 @@ export default function AdminVacationListClient({ employee }: Props) {
   const vacations = data?.pages.flatMap(page => page.vacations) ?? [];
 
   if (isLoading) {
-    return <div>휴가 신청 목록을 불러오는 중입니다...</div>;
+    return <TableSkeleton columns={7} rows={10} />;
   }
 
   if (isError) {

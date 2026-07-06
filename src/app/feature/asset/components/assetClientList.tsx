@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { useAssets } from '../hooks/useAssetList';
 import EmployeePagination from '../../employees/components/EmployeePagination';
 import AssetsTable from './AssetTable';
+import TableSkeleton from '@/components/ui/tableSkelleton';
 
 function AssetClientList() {
   const searchParams = useSearchParams();
@@ -22,7 +23,7 @@ function AssetClientList() {
   const pageSize = data?.pageSize ?? 10;
 
   if (isLoading) {
-    return <div>자산 정보를 불러오는 중입니다...</div>;
+    return <TableSkeleton columns={6} rows={5} />;
   }
 
   if (isError) {
