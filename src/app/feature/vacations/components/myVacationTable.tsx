@@ -7,6 +7,7 @@ import { myVacationTableHeaders } from './VacationTableHeader';
 import { Vacation } from '../type/vacationType';
 import VacationResultModal from './VacationResultModal';
 import { Badge } from '@/components/ui/badge';
+import VacationDeleteButton from './VacationDeleteButton';
 
 type Props = {
   vacations: Vacation[];
@@ -87,6 +88,9 @@ const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
                     </Button>
                   </TableCell>
                 )}
+                <TableCell>
+                  <VacationDeleteButton vacationId={vacation.id} status={vacation.status} />
+                </TableCell>
               </TableRow>
             ))
           )}

@@ -1,4 +1,5 @@
 import { getCurrentEmployee } from '@/app/api/getEmployee';
+import AssetRequestAdminTable from '@/app/feature/asset-request/components/AssetRequestAdminTable';
 import AssetRequestCreateDialog from '@/app/feature/asset-request/components/AssetRequestCreateDialog';
 import AssetRequestTable from '@/app/feature/asset-request/components/AssetRequestTable.tsx';
 import AssetFiltering from '@/app/feature/asset/components/assetFiltering';
@@ -18,13 +19,28 @@ export default async function AssetRequestPage() {
 
           <AssetRequestCreateDialog requesterId={employee?.id} />
         </div>
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
+
+        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden mt-10">
+          <div className="p-5 border-b border-slate-100 bg-slate-50/30 flex items-center gap-2">
+            <Laptop className="h-5 w-5 text-indigo-600" />
+            <div>
+              <h2 className="text-base font-bold text-slate-800">기기 요청 내역</h2>
+              <p className="text-xs text-slate-400 mt-0.5">직원 중 신청한 IT 자산의 승인이 필요한 목록입니다.</p>
+            </div>
+          </div>
+
+          <div className="p-0">
+            <AssetRequestAdminTable />
+          </div>
+        </div>
+
+        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between mt-10">
           <div className="w-full sm:w-auto flex justify-end">
             <AssetFiltering />
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden mt-10">
           <div className="p-5 border-b border-slate-100 bg-slate-50/30 flex items-center gap-2">
             <Laptop className="h-5 w-5 text-indigo-600" />
             <div>
