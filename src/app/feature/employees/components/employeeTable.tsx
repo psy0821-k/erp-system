@@ -1,66 +1,67 @@
-'use client';
-import { employeesType } from '@/app/feature/employees/types/employeeType';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import EmployeeDetailDialog from './EmployeeDetailDialog';
 import EmployeeEditDialog from './employee-edit-dialog';
 import EmployeeDeleteButton from './employee-delete-button';
-import EmployeeDetailDialog from './EmployeeDetailDialog';
-
+import { employeesType } from '../types/employeeType';
+import { cn } from '@/lib/utils';
+import { tableStyle } from '@/app/style/tableStyle';
 type Props = {
   employees: employeesType[];
 };
 
-const EmployeeTable = ({ employees }: Props) => {
+export const EmployeeTable = ({ employees }: Props) => {
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
-      <div className="hidden md:flex items-center bg-slate-50/70 px-6 py-3.5 border-b border-slate-200 text-xs font-semibold text-slate-500 text-center">
-        <div className="w-[15%]">사번</div>
-        <div className="w-[15%] text-left">이름</div>
-        <div className="w-[20%] text-left">부서 / 직위</div>
-        <div className="w-[15%]">권한</div>
-        <div className="w-[15%]">상태</div>
-        <div className="w-[20%] text-right">관리</div>
-      </div>
+    <div className="overflow-hidden rounded-2xl bg-white shadow-sm p-4">
+      <Table>
+        <caption className="sr-only">직원 목록</caption>
 
-      <div className="divide-y divide-slate-100">
-        {employees?.map(employee => (
-          <div
-            key={employee.id}
-            className="flex flex-col md:flex-row md:items-center px-6 py-4 hover:bg-slate-50/50 transition-colors text-center md:text-left gap-2 md:gap-0"
-          >
-            <div className="w-full md:w-[15%] text-xs font-mono text-slate-400 md:text-center">{employee.employee_number}</div>
+        <TableHeader>
+          <TableRow className="border-b border-slate-200 hover:bg-transparent">
+            <TableHead>사번</TableHead>
+            <TableHead>이름</TableHead>
+            <TableHead>부서 / 직위</TableHead>
+            <TableHead>권한</TableHead>
+            <TableHead>상태</TableHead>
+            <TableHead>관리</TableHead>
+          </TableRow>
+        </TableHeader>
 
-            <div className="w-full md:w-[15%] text-left font-bold text-slate-800 text-base md:text-sm">{employee.name}</div>
+        <TableBody>
+          {employees?.map(employee => (
+            <TableRow key={employee.id} className={cn(tableStyle.employeeRow, tableStyle.row)}>
+              <TableCell className={cn(tableStyle.employeeNumber)}>{employee.employee_number}</TableCell>
+              <TableCell className={cn(tableStyle.employeeName)}>{employee.name}</TableCell>
+              <TableCell className={cn(tableStyle.employeeDepartment)}>
+                <span className="font-medium text-slate-700">{employee.department}</span>
+                <span aria-hidden className="mx-1.5 text-slate-400">
+                  |
+                </span>
+                <span className="text-xs text-slate-500">{employee.position}</span>
+              </TableCell>
 
-            <div className="w-full md:w-[20%] text-left text-sm text-slate-600">
-              <span className="font-medium text-slate-700">{employee.department}</span>
-              <span className="text-slate-400 mx-1.5">|</span>
-              <span className="text-slate-500 text-xs">{employee.position}</span>
-            </div>
+              <TableCell className="">
+                <span className="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-700">{employee.role}</span>
+              </TableCell>
 
-            <div className="w-full md:w-[15%] md:text-center text-sm text-slate-500">
-              <span className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-xs">{employee.role}</span>
-            </div>
+              <TableCell className="w-full md:w-[15%] md:text-center">
+                <span
+                  className={`mr-2 inline-block h-2 w-2 rounded-full ${
+                    employee.status === '재직' ? 'bg-emerald-500' : employee.status === '휴직' ? 'bg-amber-400' : 'bg-slate-300'
+                  }`}
+                  aria-hidden="true"
+                />
+                <span className="text-sm font-medium text-slate-700">{employee.status}</span>
+              </TableCell>
 
-            <div className="w-full md:w-[15%] md:text-center">
-              <span
-                className={`inline-block w-2 h-2 rounded-full mr-2 ${
-                  employee.status === '재직' ? 'bg-emerald-500' : employee.status === '휴직' ? 'bg-amber-400' : 'bg-slate-300'
-                }`}
-              />
-              <span className="text-sm font-medium text-slate-700">{employee.status}</span>
-            </div>
-
-            <div className="w-full md:w-[20%] flex items-center justify-center md:justify-end gap-3 pt-3 md:pt-0 border-t md:border-none border-slate-100 mt-2 md:mt-0">
-              <EmployeeDetailDialog employee={employee} />
-              <div className="flex items-center gap-1">
+              <TableCell className="w-full text-right md:w-[20%] pr-11">
+                <EmployeeDetailDialog employee={employee} />
                 <EmployeeEditDialog employee={employee} />
                 <EmployeeDeleteButton id={employee.id} />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   );
 };
-
-export default EmployeeTable;

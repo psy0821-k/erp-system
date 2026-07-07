@@ -2,6 +2,8 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { employeesType } from '@/app/feature/employees/types/employeeType';
 import { vacationTableHeaders } from './VacationTableHeader';
+import { cn } from '@/lib/utils';
+import { tableStyle } from '@/app/style/tableStyle';
 
 type Props = {
   employees: employeesType[];
@@ -9,14 +11,14 @@ type Props = {
 
 const VacationTable = ({ employees }: Props) => {
   return (
-    <div className="w-full">
+    <div className="w-full p-4">
       <Table>
         <TableCaption className="sr-only">직원 목록</TableCaption>
 
         <TableHeader className="bg-slate-50/70 border-b border-slate-200">
           <TableRow className="hover:bg-transparent">
             {vacationTableHeaders.map(item => (
-              <TableHead key={item.key} scope="col" className="text-center font-semibold text-slate-600 h-11">
+              <TableHead key={item.key} scope="col" className={cn(tableStyle.header)}>
                 {item.label}
               </TableHead>
             ))}
@@ -25,10 +27,10 @@ const VacationTable = ({ employees }: Props) => {
 
         <TableBody className="divide-y divide-slate-100">
           {employees?.map(employee => (
-            <TableRow key={employee.id} className="hover:bg-slate-50/40 transition-colors text-center">
-              <TableCell className="font-mono text-xs text-slate-400 py-3.5">{employee.employee_number}</TableCell>
-              <TableCell className="font-bold text-slate-800 text-sm">{employee.name}</TableCell>
-              <TableCell className="text-slate-600 text-sm font-medium">{employee.department}</TableCell>
+            <TableRow key={employee.id} className={cn(tableStyle.row)}>
+              <TableCell className={cn(tableStyle.employeeNumber)}>{employee.employee_number}</TableCell>
+              <TableCell className={cn(tableStyle.employeeName)}>{employee.name}</TableCell>
+              <TableCell className={cn(tableStyle.employeeDepartment)}>{employee.department}</TableCell>
               <TableCell className="text-slate-500 text-sm">{employee.position}</TableCell>
             </TableRow>
           ))}

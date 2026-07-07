@@ -7,6 +7,8 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import EmployeePagination from '../../employees/components/EmployeePagination';
 import ApproveAssetRequestDialog from './ApproveAssetRequestDialog';
 import { usePendingAssetRequests, useRejectAssetRequest } from '../hooks/useAdminAssetRequest';
+import { tableStyle } from '@/app/style/tableStyle';
+import { cn } from '@/lib/utils';
 
 export default function AssetRequestAdminTable() {
   const searchParams = useSearchParams();
@@ -23,22 +25,22 @@ export default function AssetRequestAdminTable() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 p-4">
       <div>
         <h2 className="text-lg font-semibold">관리자 요청 처리</h2>
         <p className="text-sm text-muted-foreground">승인 대기 중인 물품 요청만 표시됩니다.</p>
       </div>
 
       <Table>
-        <TableCaption className="sr-only">관리자 물품 요청 처리 목록</TableCaption>
+        <TableCaption className=" sr-only">관리자 물품 요청 처리 목록</TableCaption>
 
         <TableHeader>
           <TableRow>
-            <TableHead className="text-center">요청자</TableHead>
-            <TableHead className="text-center">부서</TableHead>
-            <TableHead className="text-center">직급</TableHead>
-            <TableHead className="text-center">요청물품</TableHead>
-            <TableHead className="text-center">관리</TableHead>
+            <TableHead className={cn(tableStyle.header)}>요청자</TableHead>
+            <TableHead className={cn(tableStyle.header)}>부서</TableHead>
+            <TableHead className={cn(tableStyle.header)}>직급</TableHead>
+            <TableHead className={cn(tableStyle.header)}>요청물품</TableHead>
+            <TableHead className={cn(tableStyle.header)}>관리</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -51,9 +53,9 @@ export default function AssetRequestAdminTable() {
             </TableRow>
           ) : (
             requests.map(request => (
-              <TableRow key={request.id} className="text-center">
-                <TableCell>{request.requester?.name ?? '-'}</TableCell>
-                <TableCell>{request.requester?.department ?? '-'}</TableCell>
+              <TableRow key={request.id} className={cn(tableStyle.row)}>
+                <TableCell className={cn(tableStyle.employeeName)}>{request.requester?.name ?? '-'}</TableCell>
+                <TableCell className={cn(tableStyle.employeeDepartment)}>{request.requester?.department ?? '-'}</TableCell>
                 <TableCell>{request.requester?.position ?? '-'}</TableCell>
                 <TableCell>{request.asset_type}</TableCell>
 

@@ -7,6 +7,8 @@ import { Badge } from '@/components/ui/badge';
 import { Vacation } from '../type/vacationType';
 import { vacationManageTableHeaders } from './VacationTableHeader';
 import VacationReviewModal from './VacationReviewModal';
+import { tableStyle } from '@/app/style/tableStyle';
+import { cn } from '@/lib/utils';
 
 type Props = {
   vacations: Vacation[];
@@ -30,14 +32,14 @@ const AdminVacationTable = ({ vacations, approverId }: Props) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full p-4">
       <Table>
         <TableCaption className="sr-only">관리자 휴가 신청 목록</TableCaption>
 
-        <TableHeader className="bg-slate-50/70 border-b border-slate-200">
-          <TableRow className="hover:bg-transparent">
+        <TableHeader className={cn(tableStyle.header)}>
+          <TableRow className={cn(tableStyle.row)}>
             {vacationManageTableHeaders.map(item => (
-              <TableHead key={item.key} scope="col" className="text-center font-semibold text-slate-600 h-11">
+              <TableHead key={item.key} scope="col" className={cn(tableStyle.header)}>
                 {item.label}
               </TableHead>
             ))}
@@ -57,13 +59,13 @@ const AdminVacationTable = ({ vacations, approverId }: Props) => {
               const isReviewed = vacation.status === 'APPROVED' || vacation.status === 'REJECTED';
 
               return (
-                <TableRow key={vacation.id} className="hover:bg-slate-50/40 transition-colors text-center">
-                  <TableCell className="font-mono text-xs text-slate-400 py-3.5">{employee?.employee_number ?? '-'}</TableCell>
-                  <TableCell className="font-bold text-slate-800 text-sm">{employee?.name ?? '-'}</TableCell>
-                  <TableCell className="text-slate-600 text-sm font-medium">{employee?.department ?? '-'}</TableCell>
+                <TableRow key={vacation.id} className={cn(tableStyle.row)}>
+                  <TableCell className={cn(tableStyle.employeeNumber)}>{employee?.employee_number ?? '-'}</TableCell>
+                  <TableCell className={cn(tableStyle.employeeName)}>{employee?.name ?? '-'}</TableCell>
+                  <TableCell className={cn(tableStyle.employeeDepartment)}>{employee?.department ?? '-'}</TableCell>
                   <TableCell className="text-slate-500 text-sm">{employee?.position ?? '-'}</TableCell>
                   <TableCell className="font-medium text-slate-700 text-sm">{vacation.vacation_type}</TableCell>
-                  <TableCell className="text-xs text-slate-600 font-medium font-mono">
+                  <TableCell className={cn(tableStyle.date)}>
                     {vacation.start_date} ~ {vacation.end_date}
                   </TableCell>
                   <TableCell>
@@ -74,7 +76,7 @@ const AdminVacationTable = ({ vacations, approverId }: Props) => {
                       {vacation.status}
                     </Badge>
                   </TableCell>
-                  <TableCell className="font-mono text-xs text-slate-400">{vacation.created_at.slice(0, 10)}</TableCell>
+                  <TableCell className={cn(tableStyle.date)}>{vacation.created_at.slice(0, 10)}</TableCell>
                   <TableCell className="py-2">
                     <Button
                       type="button"

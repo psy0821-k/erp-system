@@ -4,6 +4,8 @@ import { Attendance } from '../type/attendance';
 import { attendanceTableHeaders } from '../type/attendanceheaders';
 import AttendanceEditDialog from './AttendanceEditDialog';
 import { Badge } from '@/components/ui/badge';
+import { tableStyle } from '@/app/style/tableStyle';
+import { cn } from '@/lib/utils';
 
 interface Props {
   late_users: Attendance[];
@@ -13,14 +15,14 @@ export default function AttendanceLateTable({ late_users }: Props) {
   const getAttendanceStatusColor = 'bg-amber-50 text-amber-700 border-amber-200';
 
   return (
-    <div className="w-full">
+    <div className="w-full p-4">
       <Table>
         <TableCaption className="sr-only">근태 목록</TableCaption>
 
         <TableHeader className="bg-slate-50/70 border-b border-slate-200">
           <TableRow className="hover:bg-transparent">
             {attendanceTableHeaders.map(item => (
-              <TableHead key={item.key} scope="col" className="text-center font-semibold text-slate-600 h-11">
+              <TableHead key={item.key} scope="col" className={cn(tableStyle.header)}>
                 {item.label}
               </TableHead>
             ))}
@@ -30,11 +32,11 @@ export default function AttendanceLateTable({ late_users }: Props) {
         <TableBody className="divide-y divide-slate-100">
           {late_users.map(late_user => (
             <TableRow key={late_user.id} className="hover:bg-slate-50/40 transition-colors text-center">
-              <TableCell className="font-mono text-xs text-slate-400 py-3.5">{late_user.employee?.employee_number}</TableCell>
-              <TableCell className="font-bold text-slate-800 text-sm">{late_user.employee?.name}</TableCell>
-              <TableCell className="text-slate-600 text-sm font-medium">{late_user.employee?.department}</TableCell>
+              <TableCell className={cn(tableStyle.employeeNumber)}>{late_user.employee?.employee_number}</TableCell>
+              <TableCell className={cn(tableStyle.employeeName)}>{late_user.employee?.name}</TableCell>
+              <TableCell className={cn(tableStyle.employeeDepartment)}>{late_user.employee?.department}</TableCell>
               <TableCell className="text-slate-500 text-sm">{late_user.employee?.position}</TableCell>
-              <TableCell className="font-mono text-xs text-slate-600">{late_user.work_date}</TableCell>
+              <TableCell className={cn(tableStyle.date)}>{late_user.work_date}</TableCell>
 
               <TableCell>
                 <Badge variant="outline" className={`rounded-full shadow-none px-2.5 py-0.5 font-medium text-xs ${getAttendanceStatusColor}`}>

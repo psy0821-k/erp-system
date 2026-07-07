@@ -18,7 +18,7 @@ function EmployeeDetailDialog({ employee }: Props) {
         <Button
           variant="outline"
           size="sm"
-          className="h-8 text-xs font-semibold rounded-xl border-slate-200 text-indigo-600 bg-white hover:bg-slate-50 hover:text-indigo-700 transition-colors shadow-sm"
+          className="h-8 text-xs font-semibold rounded-xl border-slate-200 text-indigo-600 bg-white hover:bg-slate-50 hover:text-indigo-700 transition-colors shadow-sm mr-2"
         >
           상세보기
         </Button>

@@ -2,10 +2,10 @@
 
 import { useSearchParams } from 'next/navigation';
 
-import EmployeeTable from './employeeTable';
 import { useEmployees } from '@/app/feature/employees/hooks/useEmployees';
 import EmployeePagination from './EmployeePagination';
 import TableSkeleton from '@/components/ui/tableSkelleton';
+import { EmployeeTable } from './employeeTable';
 
 export default function EmployeeListClient() {
   const searchParams = useSearchParams();

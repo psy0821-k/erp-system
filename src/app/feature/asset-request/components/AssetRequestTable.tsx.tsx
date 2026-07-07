@@ -8,6 +8,8 @@ import { ASSET_REQUEST_STATUS_LABEL } from '../type/assetRequestType';
 import AssetRequestDetailDialog from './AssetRequestDetailDialog';
 import AssetRequestStatusEditDialog from './AssetRequestStatusEditDialog';
 import AssetRequestDeleteDialog from './AssetRequestDeleteDialog';
+import { cn } from '@/lib/utils';
+import { tableStyle } from '@/app/style/tableStyle';
 
 export default function AssetRequestTable() {
   const { data, isLoading } = useAssetRequests({
@@ -38,17 +40,17 @@ export default function AssetRequestTable() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full p-4">
       <Table>
         <caption className="sr-only">IT 물품 요청 목록</caption>
 
         <TableHeader className="bg-slate-50/70 border-b border-slate-200">
           <TableRow className="hover:bg-transparent">
-            <TableHead className="text-center font-semibold text-slate-600 h-11 pl-6">요청일</TableHead>
-            <TableHead className="text-center font-semibold text-slate-600 h-11">요청 물품</TableHead>
-            <TableHead className="text-left font-semibold text-slate-600 h-11">제목</TableHead>
-            <TableHead className="text-center font-semibold text-slate-600 h-11">상태</TableHead>
-            <TableHead className="text-right font-semibold text-slate-600 h-11 pr-6">관리</TableHead>
+            <TableHead className={cn(tableStyle.header, 'w-[15%] ')}>요청일</TableHead>
+            <TableHead className={cn(tableStyle.header, 'w-[15%] ')}>요청 물품</TableHead>
+            <TableHead className={cn(tableStyle.header, 'w-[40%] ')}>제목</TableHead>
+            <TableHead className={cn(tableStyle.header, 'w-[10%] ')}>상태</TableHead>
+            <TableHead className={cn(tableStyle.header, 'w-[20%] ')}>관리</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -62,17 +64,22 @@ export default function AssetRequestTable() {
           ) : (
             requests.map(request => (
               <TableRow key={request.id} className="hover:bg-slate-50/40 transition-colors">
-                <TableCell className="text-center font-mono text-xs text-slate-400 py-3.5 pl-6">
+                <TableCell className="w-[15%] text-center text-sm text-slate-500">
                   {new Date(request.created_at).toLocaleDateString('ko-KR')}
                 </TableCell>
-                <TableCell className="text-center text-slate-600 text-sm font-medium">{ASSET_TYPE_LABEL[request.asset_type]}</TableCell>
-                <TableCell className="text-left font-bold text-slate-800 text-sm">{request.request_title}</TableCell>
-                <TableCell className="text-center">
-                  <Badge variant="outline" className={`rounded-full shadow-none px-2.5 py-0.5 font-medium text-xs ${getStatusColor(request.status)}`}>
+                <TableCell className="w-[15%] text-center text-sm font-medium text-slate-600">{ASSET_TYPE_LABEL[request.asset_type]}</TableCell>
+                <TableCell className="w-[40%]">
+                  <p className="truncate text-slate-800">{request.request_title}</p>
+                </TableCell>
+                <TableCell className="w-[10%] text-center">
+                  <Badge
+                    variant="outline"
+                    className={cn('rounded-full px-2.5 py-0.5 text-xs font-medium shadow-none', getStatusColor(request.status))}
+                  >
                     {ASSET_REQUEST_STATUS_LABEL[request.status]}
                   </Badge>
                 </TableCell>
-                <TableCell className="text-right py-3.5 pr-6">
+                <TableCell className="w-[20%] pr-19">
                   <div className="flex justify-end gap-1.5">
                     <AssetRequestDetailDialog request={request} />
                     <AssetRequestStatusEditDialog request={request} />

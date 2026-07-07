@@ -8,6 +8,8 @@ import { Vacation } from '../type/vacationType';
 import VacationResultModal from './VacationResultModal';
 import { Badge } from '@/components/ui/badge';
 import VacationDeleteButton from './VacationDeleteButton';
+import { cn } from '@/lib/utils';
+import { tableStyle } from '@/app/style/tableStyle';
 
 type Props = {
   vacations: Vacation[];
@@ -31,19 +33,19 @@ const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full p-4">
       <Table>
         <TableCaption className="sr-only">나의 휴가 신청 목록</TableCaption>
 
-        <TableHeader className="bg-slate-50/70 border-b border-slate-200">
+        <TableHeader className={cn(tableStyle.header)}>
           <TableRow className="hover:bg-transparent">
             {myVacationTableHeaders.map(item => (
-              <TableHead key={item.key} scope="col" className="text-center font-semibold text-slate-600 h-11">
+              <TableHead key={item.key} scope="col" className={cn(tableStyle.header)}>
                 {item.label}
               </TableHead>
             ))}
             {isModalBtn && (
-              <TableHead scope="col" className="text-center font-semibold text-slate-600 h-11">
+              <TableHead scope="col" className={cn(tableStyle.header)}>
                 상세
               </TableHead>
             )}
@@ -52,21 +54,23 @@ const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
 
         <TableBody className="divide-y divide-slate-100">
           {vacations.length === 0 ? (
-            <TableRow>
+            <TableRow className={cn(tableStyle.row)}>
               <TableCell colSpan={isModalBtn ? 4 : 3} className="text-center py-12 text-slate-400 text-sm">
                 휴가 신청 내역이 없습니다.
               </TableCell>
             </TableRow>
           ) : (
             vacations.map(vacation => (
-              <TableRow key={vacation.id} className="hover:bg-slate-50/40 transition-colors text-center">
+              <TableRow key={vacation.id} className={cn(tableStyle.row)}>
                 <TableCell className="font-bold text-slate-700 text-sm py-3.5">{vacation.vacation_type}</TableCell>
 
                 <TableCell className="text-xs text-slate-600 font-medium leading-relaxed">
-                  <span className="font-mono text-slate-700">{vacation.start_date}</span>
-                  <span className="text-slate-300 mx-1">~</span>
+                  <span className={cn(tableStyle.date)}>{vacation.start_date}</span>
+                  <span aria-hidden className="text-slate-300 mx-1">
+                    ~
+                  </span>
                   <br className="sm:hidden" />
-                  <span className="font-mono text-slate-700">{vacation.end_date}</span>
+                  <span className={cn(tableStyle.date)}>{vacation.end_date}</span>
                 </TableCell>
 
                 <TableCell>

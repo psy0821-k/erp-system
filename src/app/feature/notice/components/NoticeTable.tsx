@@ -3,10 +3,11 @@ import { Pin } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Skeleton } from '@/components/ui/skeleton';
 
 import { Notice } from '../type/noticeType';
 import { formatDate } from '../../utils/formatDate';
+import { cn } from '@/lib/utils';
+import { tableStyle } from '@/app/style/tableStyle';
 
 interface Props {
   notices: Notice[];
@@ -14,16 +15,16 @@ interface Props {
 
 export default function NoticeTable({ notices }: Props) {
   return (
-    <div className="rounded-md border bg-card shadow-sm overflow-hidden">
+    <div className="rounded-md border-b border-slate-200 bg-card shadow-sm overflow-hidden p-4">
       <Table>
         <caption className="sr-only">공지사항 목록</caption>
 
         <TableHeader className="bg-muted/50">
-          <TableRow>
-            <TableHead className="w-24 text-center font-semibold text-muted-foreground">구분</TableHead>
-            <TableHead className="font-semibold text-muted-foreground">제목</TableHead>
-            <TableHead className="w-36 font-semibold text-muted-foreground">작성자</TableHead>
-            <TableHead className="w-36 text-right font-semibold text-muted-foreground pr-6">작성일</TableHead>
+          <TableRow className={cn(tableStyle.row)}>
+            <TableHead className={cn(tableStyle.header, 'w-[15%] text-center')}>구분</TableHead>
+            <TableHead className={cn(tableStyle.header, 'w-[50%]')}>제목</TableHead>
+            <TableHead className={cn(tableStyle.header, 'w-[15%] text-center')}>작성자</TableHead>
+            <TableHead className={cn(tableStyle.header, 'w-[20%] text-center')}>작성일</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -40,14 +41,14 @@ export default function NoticeTable({ notices }: Props) {
             const isPinned = notice.is_pinned;
 
             return (
-              <TableRow key={notice.id} className={`transition-colors hover:bg-muted/40 base-row ${isPinned ? 'bg-muted/30 font-medium' : ''}`}>
-                <TableCell className="text-center font-medium">
+              <TableRow key={notice.id} className={cn(tableStyle.row)}>
+                <TableCell className="w-[15%] text-center font-medium">
                   {isPinned ? (
                     <Badge
                       variant="secondary"
-                      className="gap-1 bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50 pointer-events-none"
+                      className="pointer-events-none gap-1 border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-900/50 dark:bg-amber-950/40 dark:text-amber-400"
                     >
-                      <Pin className="h-3 w-3 fill-amber-500 stroke-amber-600 dark:fill-amber-400 dark:stroke-amber-400" />
+                      <Pin className="h-3 w-3 fill-amber-500 stroke-amber-600 dark:fill-amber-400 dark:stroke-amber-400" aria-hidden="true" />
                       고정
                     </Badge>
                   ) : (
@@ -55,17 +56,18 @@ export default function NoticeTable({ notices }: Props) {
                   )}
                 </TableCell>
 
-                <TableCell className="max-w-75 sm:max-w-none">
+                <TableCell className="w-[50%] max-w-0">
                   <Link
                     href={`/notice/${notice.id}`}
-                    className="block truncate font-medium text-foreground hover:text-primary hover:underline underline-offset-4 transition-colors"
+                    className="block truncate font-medium text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
                   >
                     {notice.title}
                   </Link>
                 </TableCell>
 
-                <TableCell className="text-sm text-muted-foreground font-medium">{notice.author?.name ?? '관리자'}</TableCell>
-                <TableCell className="text-right text-sm text-muted-foreground pr-6 tabular-nums">{formatDate(notice.created_at)}</TableCell>
+                <TableCell className={cn(tableStyle.employeeName)}>{notice.author?.name ?? '관리자'}</TableCell>
+
+                <TableCell className={cn(tableStyle.date)}>{formatDate(notice.created_at)}</TableCell>
               </TableRow>
             );
           })}

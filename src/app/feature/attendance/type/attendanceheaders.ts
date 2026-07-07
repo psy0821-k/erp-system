@@ -6,4 +6,5 @@ export const attendanceTableHeaders = [
   { key: 'work_date', label: '날짜' },
   { key: 'status', label: '상태' },
   { key: 'late_reason', label: '지각사유' },
+  { key: 'etc', label: '기타' },
 ];
