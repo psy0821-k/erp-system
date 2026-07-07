@@ -1,43 +1,47 @@
-import { Field, FieldError, FieldLabel } from '@/components/ui/field';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Control, Controller, FieldValues, Path } from 'react-hook-form';
+import { Control, Controller, FieldPath, FieldValues } from 'react-hook-form';
 
-type Option = {
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
+
+interface Option {
   title: string;
   value: string;
-};
+}
 
-type FormSelectFieldProps<T extends FieldValues> = {
-  name: Path<T>;
-  label: string;
+interface FormSelectFieldProps<T extends FieldValues> {
+  name: FieldPath<T>;
   control: Control<T>;
+  label: string;
   options: readonly Option[];
-};
+  placeholder?: string;
+}
 
-export function FormSelectField<T extends FieldValues>({ name, label, control, options }: FormSelectFieldProps<T>) {
+export function FormSelectField<T extends FieldValues>({ name, control, label, options, placeholder }: FormSelectFieldProps<T>) {
+  const selectId = String(name);
+
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid}>
-          <FieldLabel>{label}</FieldLabel>
+          <FieldLabel htmlFor={selectId}>{label}</FieldLabel>
 
-          <Select value={field.value} onValueChange={field.onChange}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder={`${label} 선택`} />
-            </SelectTrigger>
+          <select
+            {...field}
+            id={selectId}
+            aria-invalid={fieldState.invalid}
+            className="h-11 w-full rounded-lg border border-input bg-background px-3 text-sm"
+          >
+            <option value="">{placeholder ?? `${label} 선택`}</option>
 
-            <SelectContent position="popper" className="bg-white">
-              {options.map(option => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.title}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            {options.map(option => (
+              <option key={option.value} value={option.value}>
+                {option.title}
+              </option>
+            ))}
+          </select>
 
-          {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          {fieldState.invalid && <FieldError className="text-red-600" errors={[fieldState.error]} />}
         </Field>
       )}
     />

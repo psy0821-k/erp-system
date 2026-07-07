@@ -87,7 +87,7 @@ export function SignInForm() {
         </CardHeader>
 
         <CardContent>
-          <form id="sign-in-form" onSubmit={form.handleSubmit(onSubmit)}>
+          <form action="" id="sign-in-form" onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup className="gap-5">
               <Controller
                 name="email"

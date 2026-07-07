@@ -80,7 +80,7 @@ export default function LateReasonDialog({ attendance }: LateReasonDialogProps) 
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-2">
+        <form action="" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-2">
           <Controller
             name="lateReason"
             control={form.control}

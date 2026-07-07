@@ -76,7 +76,7 @@ export default function NoticeEditPageView({ id }: Props) {
   }
 
   return (
-    <main className="space-y-6">
+    <div className="space-y-6">
       <Button variant="ghost" asChild>
         <Link href={`/notice/${id}`}>
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -135,6 +135,6 @@ export default function NoticeEditPageView({ id }: Props) {
           </CardContent>
         </Card>
       </form>
-    </main>
+    </div>
   );
 }

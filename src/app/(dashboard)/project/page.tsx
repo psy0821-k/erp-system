@@ -26,7 +26,7 @@ export default function ProjectPage() {
       <section className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-6 mb-8">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900">프로젝트 관리</h1>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900">프로젝트 관리</h2>
             <p className="text-sm text-slate-500 mt-1">사내 프로젝트 진행 현황과 참여 정보를 한눈에 확인합니다.</p>
           </div>
           <ProjectCreateDialog />

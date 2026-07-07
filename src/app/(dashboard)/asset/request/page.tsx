@@ -13,7 +13,7 @@ export default async function AssetRequestPage() {
       <section className="max-w-7xl mx-auto">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-6 mb-8">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900">IT 물품 요청</h1>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900">IT 물품 요청</h2>
             <p className="text-sm text-slate-500 mt-1">업무에 필요한 IT 장비를 요청하고 실시간 처리 상태를 확인합니다.</p>
           </div>
 

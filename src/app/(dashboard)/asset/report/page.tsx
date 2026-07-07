@@ -11,7 +11,7 @@ export default async function AssetReportPage() {
       <section className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-6 mb-8">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900">고장 신고</h1>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900">고장 신고</h2>
             <p className="text-sm text-slate-500 mt-1">사용 중인 IT 자산의 고장 및 이상 증상을 신고하고 처리 상태를 확인합니다.</p>
           </div>
           <AssetReportCreateDialog reporterId={employee?.id} />

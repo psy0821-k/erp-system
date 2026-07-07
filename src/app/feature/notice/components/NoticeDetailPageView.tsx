@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import DOMPurify from 'isomorphic-dompurify';
-import { ArrowLeft, Pencil, Trash2, Pin } from 'lucide-react';
+import { ArrowLeft, Pencil, Pin } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -28,7 +28,7 @@ export default function NoticeDetailPageView({ id }: Props) {
   const sanitizedContent = DOMPurify.sanitize(notice.content);
 
   return (
-    <main className="space-y-6">
+    <div className="space-y-6">
       <div className="flex items-center justify-between">
         <Button variant="ghost" asChild>
           <Link href="/notice">
@@ -64,7 +64,7 @@ export default function NoticeDetailPageView({ id }: Props) {
             <time className="text-sm text-muted-foreground">{new Date(notice.created_at).toLocaleDateString('ko-KR')}</time>
           </div>
 
-          <h1 className="text-2xl font-bold tracking-tight">{notice.title}</h1>
+          <h2 className="text-2xl font-bold tracking-tight">{notice.title}</h2>
         </CardHeader>
 
         <CardContent>
@@ -76,6 +76,6 @@ export default function NoticeDetailPageView({ id }: Props) {
           />
         </CardContent>
       </Card>
-    </main>
+    </div>
   );
 }

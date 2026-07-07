@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { ArrowLeft, ImagePlus } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Button } from '@/components/ui/button';
@@ -59,7 +59,7 @@ export default function NoticeCreatePageView({ employee }: Props) {
     );
   };
   return (
-    <main className="space-y-6">
+    <div className="space-y-6">
       <Button variant="ghost" asChild>
         <Link href="/notice">
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -68,7 +68,7 @@ export default function NoticeCreatePageView({ employee }: Props) {
       </Button>
 
       <section className="space-y-1">
-        <h1 className="text-2xl font-bold tracking-tight">공지사항 작성</h1>
+        <h2 className="text-2xl font-bold tracking-tight">공지사항 작성</h2>
         <p className="text-sm text-muted-foreground">직원들에게 전달할 공지사항을 작성합니다.</p>
       </section>
 
@@ -112,6 +112,6 @@ export default function NoticeCreatePageView({ employee }: Props) {
           </CardContent>
         </Card>
       </form>
-    </main>
+    </div>
   );
 }

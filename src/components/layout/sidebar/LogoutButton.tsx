@@ -1,15 +1,27 @@
+'use client';
+
 import { LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import { logoutAction } from '@/app/actions/auth';
+import { createClient } from '@/lib/client';
 
 export default function LogoutButton() {
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    const supabase = createClient();
+
+    await supabase.auth.signOut();
+
+    router.refresh();
+    router.push('/login');
+  };
+
   return (
-    <form action={logoutAction}>
-      <Button type="submit" className="w-full bg-red-700 hover:bg-red-800 text-white">
-        <LogOut className="h-4 w-4 " />
-        로그아웃
-      </Button>
-    </form>
+    <Button type="button" onClick={handleLogout} className="w-full bg-red-700 text-white hover:bg-red-800">
+      <LogOut className="h-4 w-4" aria-hidden="true" />
+      로그아웃
+    </Button>
   );
 }

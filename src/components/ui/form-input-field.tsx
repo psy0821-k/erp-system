@@ -3,6 +3,7 @@ import { LucideIcon } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
 import { Field, FieldError, FieldLabel } from '@/components/ui/field';
+import { Label } from './label';
 
 interface FormInputFieldProps<T extends FieldValues> {
   name: FieldPath<T>;

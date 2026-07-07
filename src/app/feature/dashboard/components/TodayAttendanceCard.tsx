@@ -32,12 +32,24 @@ export default function TodayAttendanceCard({ employeeId }: Props) {
           <div className="grid grid-cols-2 divide-x divide-border rounded-lg border border-border bg-card/50">
             <div className="flex flex-col items-center justify-center p-6 text-center">
               <p className="text-xs font-medium text-muted-foreground mb-1">출근 시간</p>
-              <p className="text-xl font-bold tracking-tight text-foreground tabular-nums">{attendance?.check_in ?? '--:--'}</p>
+              <time
+                dateTime={attendance?.check_in ?? undefined}
+                aria-label={`출근 시간 ${attendance?.check_in ?? '정보 없음'}`}
+                className="text-xl font-bold tracking-tight text-foreground tabular-nums"
+              >
+                {attendance?.check_in ?? '--:--'}
+              </time>{' '}
             </div>
 
             <div className="flex flex-col items-center justify-center p-6 text-center">
               <p className="text-xs font-medium text-muted-foreground mb-1">퇴근 시간</p>
-              <p className="text-xl font-bold tracking-tight text-foreground tabular-nums">{attendance?.check_out ?? '--:--'}</p>
+              <time
+                dateTime={attendance?.check_out ?? undefined}
+                aria-label={`퇴근 시간 ${attendance?.check_out ?? '정보 없음'}`}
+                className="text-xl font-bold tracking-tight text-foreground tabular-nums"
+              >
+                {attendance?.check_out ?? '--:--'}
+              </time>
             </div>
           </div>
         )}

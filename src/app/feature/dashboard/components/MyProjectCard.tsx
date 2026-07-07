@@ -50,7 +50,7 @@ export default function MyProjectCard({ employeeId }: Props) {
             <div className="rounded-md border p-3">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-semibold">{project.project_name}</p>
+                  <h3 className="font-semibold">{project.project_name}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">
                     {formatDate(project.start_date)} ~ {formatDate(project.end_date)}
                   </p>
@@ -61,20 +61,18 @@ export default function MyProjectCard({ employeeId }: Props) {
 
               <p className="mt-3 text-sm text-muted-foreground">참여 인원 {project.project_members?.length ?? 0}명</p>
             </div>
-
-            <Button variant="outline" size="sm" className="w-full" asChild>
-              <Link href="/project">프로젝트 보기</Link>
-            </Button>
           </>
         ) : (
           <div className="flex min-h-32 flex-col items-center justify-center gap-3 text-center">
             <p className="text-sm text-muted-foreground">참여 중인 프로젝트가 없습니다.</p>
-
-            <Button size="sm" asChild>
-              <Link href="/project">프로젝트 보기</Link>
-            </Button>
           </div>
         )}
+
+        <Button variant="outline" size="sm" className="w-full" asChild>
+          <Link href="/project" aria-label="프로젝트 페이지로 이동">
+            프로젝트 보기
+          </Link>
+        </Button>
       </CardContent>
     </Card>
   );

@@ -27,7 +27,7 @@ export function SignUpForm() {
   });
 
   return (
-    <section className="flex min-h-screen items-center justify-center bg-slate-50/50 px-4 py-12">
+    <main className="flex min-h-screen items-center justify-center bg-slate-50/50 px-4 py-12">
       <Card className="w-full max-w-2xl bg-white border border-slate-200/80 shadow-xl shadow-slate-100/50 rounded-2xl overflow-hidden">
         <CardHeader className="space-y-2 border-b border-slate-100 p-6 sm:p-8 bg-slate-50/50">
           <div className="flex items-center gap-3">
@@ -65,17 +65,30 @@ export function SignUpForm() {
                 autoComplete="off"
                 icon={Briefcase}
               />
-              <FormInputField name="hire_date" control={form.control} label="입사일" type="date" autoComplete="bday-year" icon={Calendar} />
+              <FormInputField name="hire_date" control={form.control} label="입사일" type="date" autoComplete="off" icon={Calendar} />
 
-              <FormSelectField name="position" label="직급" control={form.control} options={positions.items} />
-              <FormSelectField name={departments.value} label={departments.title} control={form.control} options={departments.items} />
+              <FormSelectField name="position" label="직급" control={form.control} options={positions.items} placeholder="직급을 선택해 주세요" />
+
+              <FormSelectField
+                name={departments.value}
+                label={departments.title}
+                control={form.control}
+                options={departments.items}
+                placeholder="부서를 선택해 주세요"
+              />
 
               <div className="md:col-span-2 text-xs font-semibold text-indigo-600 uppercase tracking-wider mt-2 -mb-1">계정 보안 설정</div>
-              <FormSelectField name="role" label="시스템 권한 역할" control={form.control} options={roles.items} />
+              <FormSelectField
+                name="role"
+                label="시스템 권한 역할"
+                control={form.control}
+                options={roles.items}
+                placeholder="권한 역할을 선택해 주세요"
+              />
             </FieldGroup>
 
             <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-8">
-              <p className="text-xs text-slate-400 text-center sm:text-left">※ 등록 즉시 해당 사번과 이메일로 대시보드 로그인이 가능해집니다.</p>
+              <p className="text-xs text-center sm:text-left">※ 등록 즉시 해당 사번과 이메일로 대시보드 로그인이 가능해집니다.</p>
               <Button
                 type="submit"
                 form="sign-up-form"
@@ -88,6 +101,6 @@ export function SignUpForm() {
           </form>
         </CardContent>
       </Card>
-    </section>
+    </main>
   );
 }

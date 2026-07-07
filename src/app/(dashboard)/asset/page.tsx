@@ -14,7 +14,7 @@ const assetStats = [
 
 export default function AssetPage() {
   return (
-    <div className="min-h-screen bg-slate-50/50 p-6 sm:p-8">
+    <main className="min-h-screen bg-slate-50/50 p-6 sm:p-8">
       <section className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-6 mb-6">
           <div>
@@ -54,6 +54,6 @@ export default function AssetPage() {
           <AssetClientList />
         </div>
       </section>
-    </div>
+    </main>
   );
 }

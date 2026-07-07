@@ -23,7 +23,7 @@ export default function NoticeClientPage() {
   const { data, isLoading } = useNotices(params);
 
   return (
-    <main className="space-y-6">
+    <div className="space-y-6">
       <section className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
@@ -51,6 +51,6 @@ export default function NoticeClientPage() {
           {isLoading ? <TableSkeleton columns={6} rows={5} /> : <NoticeTable notices={data?.notices ?? []} />}
         </CardContent>
       </Card>
-    </main>
+    </div>
   );
 }

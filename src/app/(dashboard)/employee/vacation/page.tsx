@@ -25,7 +25,7 @@ const VacationPage = async () => {
       <section className="max-w-7xl mx-auto space-y-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-6 mb-6">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight text-slate-900">휴가관리</h1>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900">휴가관리</h2>
             <p className="text-sm text-slate-500 mt-1">직원 휴가 신청 현황과 승인 상태를 통합 관리합니다.</p>
           </div>
           <Link

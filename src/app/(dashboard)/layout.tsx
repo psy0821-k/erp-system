@@ -27,7 +27,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <DarkModeToggle />
         </header>
 
-        <div className="flex-1 bg-background p-6">{children}</div>
+        <main className="flex-1 bg-background p-6">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );
