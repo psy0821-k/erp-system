@@ -17,12 +17,12 @@ export const EmployeeTable = ({ employees }: Props) => {
 
         <TableHeader>
           <TableRow className="border-b border-slate-200 hover:bg-transparent">
-            <TableHead>사번</TableHead>
-            <TableHead>이름</TableHead>
-            <TableHead>부서 / 직위</TableHead>
-            <TableHead>권한</TableHead>
-            <TableHead>상태</TableHead>
-            <TableHead>관리</TableHead>
+            <TableHead className={cn(tableStyle.header)}>사번</TableHead>
+            <TableHead className={cn(tableStyle.header)}>이름</TableHead>
+            <TableHead className={cn(tableStyle.header)}>부서 / 직위</TableHead>
+            <TableHead className={cn(tableStyle.header)}>권한</TableHead>
+            <TableHead className={cn(tableStyle.header)}>상태</TableHead>
+            <TableHead className={cn(tableStyle.header)}>관리</TableHead>
           </TableRow>
         </TableHeader>
 

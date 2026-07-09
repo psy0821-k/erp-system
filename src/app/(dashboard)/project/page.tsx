@@ -10,6 +10,8 @@ import { PROJECT_STATUS_LABEL } from '@/app/feature/project/types/projectType';
 import ProjectDetailDialog from '@/app/feature/project/components/ProjectDetailDialog';
 import ProjectUpdateDialog from '@/app/feature/project/components/ProjectUpdateDialog';
 import ProjectDeleteDialog from '@/app/feature/project/components/ProjectDeleteDialog';
+import StatusBadge from '@/components/ui/statusBadge';
+import { PROJECT_STATUS_BADGE_MAP } from '@/components/badge';
 
 const statusClassName = {
   WAITING: 'bg-slate-100 text-slate-700 border-slate-200',
@@ -51,12 +53,7 @@ export default function ProjectPage() {
                   <CardHeader className="space-y-3 pb-4 p-6 bg-slate-50/30">
                     <div className="flex items-start justify-between gap-3">
                       <CardTitle className="line-clamp-1 text-lg font-bold text-slate-800">{project.project_name}</CardTitle>
-                      <Badge
-                        variant="outline"
-                        className={`shrink-0 px-2.5 py-0.5 font-medium rounded-full shadow-none ${statusClassName[project.status]}`}
-                      >
-                        {PROJECT_STATUS_LABEL[project.status]}
-                      </Badge>
+                      <StatusBadge label={PROJECT_STATUS_LABEL[project.status]} variant={PROJECT_STATUS_BADGE_MAP[project.status]} />
                     </div>
                     <p className="text-slate-500 line-clamp-2 min-h-10 text-sm leading-relaxed">{project.description}</p>
                   </CardHeader>

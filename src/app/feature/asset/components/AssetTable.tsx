@@ -1,31 +1,18 @@
 'use client';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
 import { Asset, ASSET_STATUS_LABEL, ASSET_TYPE_LABEL } from '@/config/types/asset';
 import AssetDeleteButton from './AssetDeleteButton';
 import AssetEditButton from './AssetEditButton';
 import { cn } from '@/lib/utils';
 import { tableStyle } from '@/app/style/tableStyle';
+import { ASSET_STATUS_BADGE_MAP } from '@/components/badge';
+import StatusBadge from '@/components/ui/statusBadge';
 
 type AssetsTableProps = {
   assets: Asset[];
 };
 
 function AssetsTable({ assets }: AssetsTableProps) {
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'AVAILABLE':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-      case 'ASSIGNED':
-        return 'bg-blue-50 text-blue-700 border-blue-200';
-      case 'REPAIRING':
-      case 'LOST':
-        return 'bg-rose-50 text-rose-700 border-rose-200';
-      default:
-        return 'bg-slate-50 text-slate-700 border-slate-200';
-    }
-  };
-
   return (
     <div className="w-full p-4">
       <Table>
@@ -50,9 +37,7 @@ function AssetsTable({ assets }: AssetsTableProps) {
               <TableCell className="text-center text-slate-600 text-sm">{ASSET_TYPE_LABEL[asset.asset_type]}</TableCell>
               <TableCell className={cn(tableStyle.employeeNumber)}>{asset.serial_number ?? '-'}</TableCell>
               <TableCell className="text-center">
-                <Badge variant="outline" className={`rounded-full px-2.5 py-0.5 shadow-none font-medium ${getStatusColor(asset.status)}`}>
-                  {ASSET_STATUS_LABEL[asset.status]}
-                </Badge>
+                <StatusBadge label={ASSET_STATUS_LABEL[asset.status]} variant={ASSET_STATUS_BADGE_MAP[asset.status]} />
               </TableCell>
               <TableCell className="text-center text-slate-500 text-sm max-w-45 truncate">{asset.memo ?? '-'}</TableCell>
               <TableCell className={cn(tableStyle.date)}>{asset.created_at.slice(0, 10)}</TableCell>

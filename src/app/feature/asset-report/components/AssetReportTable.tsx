@@ -9,6 +9,8 @@ import AssetReportDeleteDialog from './AssetReportDeleteDialog';
 import AssetReportStatusEditDialog from './AssetReportEditDialog';
 import { cn } from '@/lib/utils';
 import { tableStyle } from '@/app/style/tableStyle';
+import StatusBadge from '@/components/ui/statusBadge';
+import { ASSET_REPORT_STATUS_BADGE_MAP } from '@/components/badge';
 
 export default function AssetReportTable() {
   const { data, isLoading } = useAssetReports({
@@ -24,19 +26,6 @@ export default function AssetReportTable() {
   }
 
   const reports = data?.reports ?? [];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'PENDING':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
-      case 'PROCESSING':
-        return 'bg-blue-50 text-blue-700 border-blue-200';
-      case 'COMPLETED':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-      default:
-        return 'bg-slate-50 text-slate-700 border-slate-200';
-    }
-  };
 
   return (
     <div className="w-full p-4">
@@ -67,12 +56,7 @@ export default function AssetReportTable() {
                 <TableCell className={cn(tableStyle.employeeName, 'w-[15%]')}>{report.asset?.asset_name ?? '-'}</TableCell>
                 <TableCell className="text-left text-slate-800 text-sm w-[40%]">{report.title}</TableCell>
                 <TableCell className="text-center">
-                  <Badge
-                    variant="outline"
-                    className={`rounded-full shadow-none px-2.5 py-0.5 font-medium text-xs w-[10%] ${getStatusColor(report.status)}`}
-                  >
-                    {ASSET_REPORT_STATUS_LABEL[report.status]}
-                  </Badge>
+                  <StatusBadge label={ASSET_REPORT_STATUS_LABEL[report.status]} variant={ASSET_REPORT_STATUS_BADGE_MAP[report.status]} />
                 </TableCell>
                 <TableCell className="text-right py-3.5 pr-6 w-[20%]">
                   <div className="flex justify-end gap-1.5">

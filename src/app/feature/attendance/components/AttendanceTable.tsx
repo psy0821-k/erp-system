@@ -3,29 +3,17 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Attendance } from '../type/attendance';
 import { attendanceTableHeaders } from '../type/attendanceheaders';
 import AttendanceEditDialog from './AttendanceEditDialog';
-import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { tableStyle } from '@/app/style/tableStyle';
+import StatusBadge from '@/components/ui/statusBadge';
+import { ATTENDANCE_STATUS_LABEL } from '@/config/types/attendanceStatus';
+import { ATTENDANCE_STATUS_BADGE_MAP } from '@/components/badge';
 
 interface Props {
   attendances: Attendance[];
 }
 
 export default function AttendanceTable({ attendances }: Props) {
-  const getAttendanceStatusColor = (status: string) => {
-    switch (status) {
-      case '출근':
-      case '정상':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-      case '지각':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
-      case '결근':
-        return 'bg-rose-50 text-rose-700 border-rose-200';
-      default:
-        return 'bg-slate-50 text-slate-700 border-slate-200';
-    }
-  };
-
   return (
     <div className="w-full p-4">
       <Table>
@@ -51,24 +39,12 @@ export default function AttendanceTable({ attendances }: Props) {
               <TableCell className={cn(tableStyle.date)}>{attendance.work_date}</TableCell>
 
               <TableCell>
-                <Badge
-                  variant="outline"
-                  className={`rounded-full shadow-none px-2.5 py-0.5 font-medium text-xs ${getAttendanceStatusColor(attendance.status)}`}
-                >
-                  {attendance.status}
-                </Badge>
+                <StatusBadge label={ATTENDANCE_STATUS_LABEL[attendance.status]} variant={ATTENDANCE_STATUS_BADGE_MAP[attendance.status]} />
               </TableCell>
 
               <TableCell>
-                {attendance.late_reason ? (
-                  <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-bold">
-                    O
-                  </span>
-                ) : (
-                  <span className="text-slate-300 font-mono text-sm">X</span>
-                )}
+                {attendance.late_reason ? <StatusBadge label="O" variant={'success'} /> : <StatusBadge label="X" variant={'danger'} />}
               </TableCell>
-
               <TableCell className="py-2">
                 <div className="inline-flex justify-center w-full">
                   <AttendanceEditDialog attendance={attendance} />

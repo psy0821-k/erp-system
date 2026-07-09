@@ -1,7 +1,7 @@
 export const tableStyle = {
   wrapper: 'rounded-2xl border border-slate-200/80 bg-white shadow-sm overflow-hidden',
 
-  header: 'bg-slate-50/70 border-b border-slate-200',
+  header: 'bg-slate-100 border-b border-slate-200',
 
   row: 'text-center hover:bg-slate-50/50 transition-colors border-b border-slate-200',
   employeeRow: 'flex flex-col gap-2 border-slate-100 px-6 py-4 text-center md:table-row md:px-0 md:py-0',

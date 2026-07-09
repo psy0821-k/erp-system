@@ -6,10 +6,12 @@ import { Button } from '@/components/ui/button';
 import { myVacationTableHeaders } from './VacationTableHeader';
 import { Vacation } from '../type/vacationType';
 import VacationResultModal from './VacationResultModal';
-import { Badge } from '@/components/ui/badge';
 import VacationDeleteButton from './VacationDeleteButton';
 import { cn } from '@/lib/utils';
 import { tableStyle } from '@/app/style/tableStyle';
+import StatusBadge from '@/components/ui/statusBadge';
+import { APPROVAL_STATUS_LABEL } from '@/config/types/approvalStatus';
+import { APPROVAL_BADGE_MAP } from '@/components/badge';
 
 type Props = {
   vacations: Vacation[];
@@ -18,19 +20,6 @@ type Props = {
 
 const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
   const [selectedVacation, setSelectedVacation] = useState<Vacation | null>(null);
-
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'PENDING':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
-      case 'APPROVED':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-      case 'REJECTED':
-        return 'bg-rose-50 text-rose-700 border-rose-200';
-      default:
-        return 'bg-slate-50 text-slate-700 border-slate-200';
-    }
-  };
 
   return (
     <div className="w-full p-4">
@@ -74,9 +63,7 @@ const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
                 </TableCell>
 
                 <TableCell>
-                  <Badge variant="outline" className={`rounded-full shadow-none px-2 py-0.5 font-medium text-xs ${getStatusBadge(vacation.status)}`}>
-                    {vacation.status}
-                  </Badge>
+                  <StatusBadge label={APPROVAL_STATUS_LABEL[vacation.status]} variant={APPROVAL_BADGE_MAP[vacation.status]} />
                 </TableCell>
 
                 {isModalBtn && (
