@@ -15,6 +15,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { ASSET_TYPE_OPTIONS } from '@/config/types/asset';
 import { useCreateAssetRequest } from '../hooks/useCreateAssetRequest';
 import { createAssetRequestSchema, CreateAssetRequestFormInput } from '../schema/assetRequestSchema';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 interface Props {
   requesterId: string;
@@ -57,7 +59,7 @@ export default function AssetRequestCreateDialog({ requesterId }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>
+        <Button className={cn(buttonStyle.createNew, buttonStyle.base)}>
           <Plus className="mr-2 h-4 w-4" />
           IT 물품 요청
         </Button>

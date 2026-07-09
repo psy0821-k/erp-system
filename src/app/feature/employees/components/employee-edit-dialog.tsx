@@ -18,6 +18,7 @@ import { FormSelectField } from '@/app/(auth)/sign-up/components/SelectField';
 import { roles } from '@/app/feature/sign-up/types/role';
 import { DEPARTMENT_TYPE_OPTIONS } from '@/config/types/department';
 import { POSITION_OPTIONS } from '@/config/types/position';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 type EmployeeEditDialogProps = {
   employee: {
@@ -61,7 +62,7 @@ export default function EmployeeEditDialog({ employee }: EmployeeEditDialogProps
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button type="button" variant="outline" size="sm">
+        <Button type="button" variant="outline" size="sm" className={buttonStyle.edit}>
           수정
         </Button>
       </DialogTrigger>

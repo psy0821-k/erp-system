@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 import { ASSET_REPORT_STATUS_LABEL, AssetReport } from '../type/assetReportType';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Props {
   report: AssetReport;
@@ -14,7 +16,7 @@ export default function AssetReportDetailDialog({ report }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button className={cn(buttonStyle.base, buttonStyle.detail)} variant="outline" size="sm">
           상세보기
         </Button>
       </DialogTrigger>

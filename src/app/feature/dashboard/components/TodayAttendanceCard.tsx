@@ -56,7 +56,7 @@ export default function TodayAttendanceCard({ employeeId }: Props) {
 
         <div className="space-y-3 mt-auto">
           <AttendanceButtons employeeId={employeeId} />
-          {attendance && <LateReasonDialog attendance={attendance} />}
+          <div className="flex justify-center w-full">{attendance && <LateReasonDialog attendance={attendance} />}</div>{' '}
         </div>
       </CardContent>
     </Card>

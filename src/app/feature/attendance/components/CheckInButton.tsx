@@ -19,7 +19,7 @@ export default function CheckInButton({ employeeId }: Props) {
       onClick={() => checkInMutate()}
       disabled={isPending}
       className="relative h-12 w-full sm:w-auto min-w-35 px-6 font-semibold text-base transition-all duration-200 ease-in-out shadow-sm 
-        bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white
+        bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white cursor-pointer
         hover:scale-[1.02] active:scale-[0.98] hover:shadow-blue-100 dark:hover:shadow-none"
     >
       {isPending ? (

@@ -4,6 +4,7 @@ import { PROJECT_STATUS, ProjectStatus } from '@/app/feature/project/types/proje
 import { ATTENDANCE_STATUS, AttendanceStatus } from '@/config/types/attendanceStatus';
 import { APPROVAL_STATUS, ApprovalStatus } from '@/config/types/approvalStatus';
 import { ASSET_REPORT_STATUS, AssetReportStatus } from '@/app/feature/asset-report/type/assetReportType';
+import { ASSET_REQUEST_STATUS, AssetRequestStatus } from '@/app/feature/asset-request/type/assetRequestType';
 
 export const statusBadgeStyle = {
   approved: 'border-emerald-300 bg-emerald-200 text-emerald-900 dark:border-emerald-700 dark:bg-emerald-900 dark:text-emerald-200',
@@ -57,4 +58,12 @@ export const PROJECT_STATUS_BADGE_MAP: Record<ProjectStatus, StatusBadgeVariant>
   [PROJECT_STATUS.WAITING]: 'pending',
   [PROJECT_STATUS.IN_PROGRESS]: 'progress',
   [PROJECT_STATUS.COMPLETED]: 'success',
+};
+
+export const ASSET_REQUEST_STATUS_BADGE_MAP: Record<AssetRequestStatus, StatusBadgeVariant> = {
+  [ASSET_REQUEST_STATUS.PENDING]: 'pending',
+  [ASSET_REQUEST_STATUS.APPROVED]: 'approved',
+  [ASSET_REQUEST_STATUS.REJECTED]: 'rejected',
+  [ASSET_REQUEST_STATUS.COMPLETED]: 'success',
+  [ASSET_REQUEST_STATUS.CANCELLED]: 'muted',
 };

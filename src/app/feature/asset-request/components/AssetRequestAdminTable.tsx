@@ -4,14 +4,20 @@ import { useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
 import EmployeePagination from '../../employees/components/EmployeePagination';
 import ApproveAssetRequestDialog from './ApproveAssetRequestDialog';
+
 import { usePendingAssetRequests, useRejectAssetRequest } from '../hooks/useAdminAssetRequest';
-import { tableStyle } from '@/app/style/tableStyle';
+
 import { cn } from '@/lib/utils';
+import { tableStyle } from '@/app/style/tableStyle';
+import { textStyle } from '@/app/style/textStyle';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 export default function AssetRequestAdminTable() {
   const searchParams = useSearchParams();
+
   const page = Number(searchParams.get('requestPage') ?? 1);
   const MAX_PAGE = 10;
 
@@ -21,51 +27,55 @@ export default function AssetRequestAdminTable() {
   const requests = data?.data ?? [];
 
   if (isLoading) {
-    return <p className="text-sm text-muted-foreground">물품 요청 목록을 불러오는 중입니다.</p>;
+    return <p className={cn('text-sm', textStyle.subtle)}>물품 요청 목록을 불러오는 중입니다.</p>;
   }
 
   return (
     <div className="space-y-4 p-4">
       <div>
-        <h2 className="text-lg font-semibold">관리자 요청 처리</h2>
-        <p className="text-sm text-muted-foreground">승인 대기 중인 물품 요청만 표시됩니다.</p>
+        <h2 className={cn('text-lg font-semibold', textStyle.primary)}>관리자 요청 처리</h2>
+
+        <p className={cn('text-sm', textStyle.muted)}>승인 대기 중인 물품 요청만 표시됩니다.</p>
       </div>
 
       <Table>
-        <TableCaption className=" sr-only">관리자 물품 요청 처리 목록</TableCaption>
+        <TableCaption className="sr-only">관리자 물품 요청 처리 목록</TableCaption>
 
-        <TableHeader>
-          <TableRow>
-            <TableHead className={cn(tableStyle.header)}>요청자</TableHead>
-            <TableHead className={cn(tableStyle.header)}>부서</TableHead>
-            <TableHead className={cn(tableStyle.header)}>직급</TableHead>
-            <TableHead className={cn(tableStyle.header)}>요청물품</TableHead>
-            <TableHead className={cn(tableStyle.header)}>관리</TableHead>
+        <TableHeader className={tableStyle.header}>
+          <TableRow className="hover:bg-transparent">
+            <TableHead className={cn(tableStyle.cell, 'text-center font-semibold', textStyle.secondary)}>요청자</TableHead>
+
+            <TableHead className={cn(tableStyle.cell, 'text-center font-semibold', textStyle.secondary)}>부서</TableHead>
+
+            <TableHead className={cn(tableStyle.cell, 'text-center font-semibold', textStyle.secondary)}>직급</TableHead>
+
+            <TableHead className={cn(tableStyle.cell, 'text-center font-semibold', textStyle.secondary)}>요청 물품</TableHead>
+
+            <TableHead className={cn(tableStyle.cell, 'text-center font-semibold', textStyle.secondary)}>관리</TableHead>
           </TableRow>
         </TableHeader>
 
-        <TableBody>
+        <TableBody className="divide-y divide-slate-100 dark:divide-slate-800">
           {requests.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={5} className="h-24 text-center text-sm text-muted-foreground">
+            <TableRow className={tableStyle.row}>
+              <TableCell colSpan={5} className={cn('h-24 text-center text-sm', textStyle.subtle)}>
                 승인 대기 중인 물품 요청이 없습니다.
               </TableCell>
             </TableRow>
           ) : (
             requests.map(request => (
-              <TableRow key={request.id} className={cn(tableStyle.row)}>
-                <TableCell className={cn(tableStyle.employeeName)}>{request.requester?.name ?? '-'}</TableCell>
-                <TableCell className={cn(tableStyle.employeeDepartment)}>{request.requester?.department ?? '-'}</TableCell>
-                <TableCell>{request.requester?.position ?? '-'}</TableCell>
-                <TableCell>{request.asset_type}</TableCell>
-
-                <TableCell>
+              <TableRow key={request.id} className={tableStyle.row}>
+                <TableCell className={cn(tableStyle.employeeName, textStyle.primary)}>{request.requester?.name ?? '-'}</TableCell>
+                <TableCell className={cn(tableStyle.employeeDepartment, textStyle.body)}>{request.requester?.department ?? '-'}</TableCell>
+                <TableCell className={cn(tableStyle.cell, 'text-center', textStyle.body)}>{request.requester?.position ?? '-'}</TableCell>
+                <TableCell className={cn(tableStyle.cell, 'text-center', textStyle.secondary)}>{request.asset_type}</TableCell>
+                <TableCell className={tableStyle.cell}>
                   <div className="flex justify-center gap-2">
                     <ApproveAssetRequestDialog request={request} />
-
                     <Button
                       type="button"
                       variant="outline"
+                      className={cn(buttonStyle.delete, buttonStyle.base)}
                       size="sm"
                       disabled={isRejecting}
                       onClick={() =>

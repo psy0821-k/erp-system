@@ -1,7 +1,7 @@
 'use client';
 
 import { Table, TableBody, TableCell, TableHead, TableRow, TableHeader } from '@/components/ui/table';
-import { Vacation } from '../type/vacationType';
+import { Vacation, VACATION_TYPE_LABEL } from '../type/vacationType';
 import { cn } from '@/lib/utils';
 import { tableStyle } from '@/app/style/tableStyle';
 
@@ -34,7 +34,9 @@ function GetTodayVacationTable({ vacations }: Props) {
               <TableRow key={vacation.id} className={cn(tableStyle.row)}>
                 <TableCell className={cn(tableStyle.employeeName)}>{vacation.employee?.name}</TableCell>
                 <TableCell className={cn(tableStyle.employeeDepartment)}>{vacation.employee?.department}</TableCell>
-                <TableCell className="text-slate-700 text-sm font-medium">{vacation.vacation_type}</TableCell>
+                <TableCell className="text-slate-700 text-sm font-medium dark:text-slate-200">
+                  {VACATION_TYPE_LABEL[vacation.vacation_type]}
+                </TableCell>
                 <TableCell className={cn(tableStyle.date)}>
                   {vacation.start_date} - {vacation.end_date}
                 </TableCell>

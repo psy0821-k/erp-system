@@ -3,30 +3,33 @@ import Link from 'next/link';
 import EmployeeSearch from '@/app/feature/employees/components/EmployeeSearch';
 import EmployeeFiltering from '@/components/filtering/employeeFiltering';
 import { Plus } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { filterStyle } from '@/app/style/tableStyle';
 
 export default async function Page() {
   return (
-    <div className="min-h-screen bg-slate-50/50 p-6 sm:p-8">
-      <section className="max-w-7xl mx-auto">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-6 mb-8">
+    <div className="min-h-screen bg-slate-50/50 p-6 sm:p-8 dark:bg-slate-950">
+      <section className="mx-auto max-w-7xl">
+        <div className="mb-8 flex flex-col gap-4 border-b border-slate-200 pb-6 dark:border-slate-800 md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900">직원 관리</h2>
-            <p className="text-sm text-slate-500 mt-1">사내 구성원의 정보와 권한을 통합 관리합니다.</p>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">직원 관리</h2>
+
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">사내 구성원의 정보와 권한을 통합 관리합니다.</p>
           </div>
-          <Link
-            href="/sign-up"
-            className="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 transition-colors px-4 py-2.5 text-white font-medium rounded-xl shadow-sm shadow-indigo-100"
-          >
-            <Plus className="w-4 h-4" />
+
+          <Link href="/sign-up" className={cn(buttonStyle.createNew, buttonStyle.base)}>
+            <Plus className="h-4 w-4" />
             <span>직원 신규 등록</span>
           </Link>
         </div>
 
-        <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between mb-6">
-          <div className="w-full sm:max-w-md">
-            <EmployeeSearch placeholder="직원 이름 또는 사번을 입력해주세요" />
-          </div>
-          <div className="w-full sm:w-auto flex justify-end">
+        <div className={filterStyle.wrapper}>
+          <div className={filterStyle.area}>
+            <div className="w-full lg:max-w-md">
+              <EmployeeSearch placeholder="직원 이름 또는 사번을 입력해주세요" />
+            </div>
+
             <EmployeeFiltering />
           </div>
         </div>

@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 import AssetEditForm from './AssetEditForm';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 interface Props {
   asset: Asset;
@@ -18,7 +20,7 @@ export default function AssetEditButton({ asset }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button type="button" className="bg-green-600 text-white focus-visible:ring-4 ring-offset-2 ring-black">
+        <Button type="button" className={cn(buttonStyle.base, buttonStyle.create)}>
           수정
         </Button>
       </DialogTrigger>

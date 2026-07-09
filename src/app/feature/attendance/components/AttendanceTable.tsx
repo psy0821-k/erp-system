@@ -1,4 +1,5 @@
 'use client';
+
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Attendance } from '../type/attendance';
 import { attendanceTableHeaders } from '../type/attendanceheaders';
@@ -19,34 +20,32 @@ export default function AttendanceTable({ attendances }: Props) {
       <Table>
         <TableCaption className="sr-only">근태 목록</TableCaption>
 
-        <TableHeader className="bg-slate-50/70 border-b border-slate-200">
+        <TableHeader className={tableStyle.header}>
           <TableRow className="hover:bg-transparent">
             {attendanceTableHeaders.map(item => (
-              <TableHead key={item.key} scope="col" className={cn(tableStyle.header)}>
+              <TableHead key={item.key} scope="col" className={cn(tableStyle.cell, 'text-center font-semibold')}>
                 {item.label}
               </TableHead>
             ))}
           </TableRow>
         </TableHeader>
 
-        <TableBody className="divide-y divide-slate-100">
+        <TableBody className="divide-y divide-slate-100 dark:divide-slate-800">
           {attendances.map(attendance => (
-            <TableRow key={attendance.id} className="hover:bg-slate-50/40 transition-colors text-center">
+            <TableRow key={attendance.id} className={tableStyle.row}>
               <TableCell className={cn(tableStyle.employeeNumber)}>{attendance.employee?.employee_number}</TableCell>
               <TableCell className={cn(tableStyle.employeeName)}>{attendance.employee?.name}</TableCell>
               <TableCell className={cn(tableStyle.employeeDepartment)}>{attendance.employee?.department}</TableCell>
-              <TableCell className="text-slate-500 text-sm">{attendance.employee?.position}</TableCell>
-              <TableCell className={cn(tableStyle.date)}>{attendance.work_date}</TableCell>
-
-              <TableCell>
+              <TableCell className={cn(tableStyle.cell, 'text-sm text-slate-500 dark:text-slate-400')}>{attendance.employee?.position}</TableCell>
+              <TableCell className={cn(tableStyle.cell, tableStyle.date)}>{attendance.work_date}</TableCell>
+              <TableCell className={tableStyle.cell}>
                 <StatusBadge label={ATTENDANCE_STATUS_LABEL[attendance.status]} variant={ATTENDANCE_STATUS_BADGE_MAP[attendance.status]} />
               </TableCell>
-
-              <TableCell>
-                {attendance.late_reason ? <StatusBadge label="O" variant={'success'} /> : <StatusBadge label="X" variant={'danger'} />}
+              <TableCell className={tableStyle.cell}>
+                {attendance.late_reason ? <StatusBadge label="O" variant="success" /> : <StatusBadge label="X" variant="danger" />}
               </TableCell>
-              <TableCell className="py-2">
-                <div className="inline-flex justify-center w-full">
+              <TableCell className="px-6 py-2">
+                <div className="inline-flex w-full justify-center">
                   <AttendanceEditDialog attendance={attendance} />
                 </div>
               </TableCell>

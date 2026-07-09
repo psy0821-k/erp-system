@@ -11,6 +11,8 @@ import NoticeTable from './NoticeTable';
 import { useNotices } from '../hooks/useNotices';
 import EmployeeSearch from '../../employees/components/EmployeeSearch';
 import TableSkeleton from '@/components/ui/tableSkelleton';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 export default function NoticeClientPage() {
   const searchParams = useSearchParams();
@@ -33,7 +35,7 @@ export default function NoticeClientPage() {
           <p className="text-sm text-muted-foreground">사내 주요 공지와 업무 안내를 확인합니다.</p>
         </div>
 
-        <Button asChild>
+        <Button className={cn(buttonStyle.base, buttonStyle.createNew)} asChild>
           <Link href="/notice/create">
             <Plus className="mr-2 h-4 w-4" />
             공지 작성

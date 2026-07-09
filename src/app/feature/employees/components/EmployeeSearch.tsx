@@ -37,12 +37,12 @@ export default function EmployeeSearch({ placeholder }: Props) {
   }, [debouncedKeyword, pathname, router, searchParams]);
 
   return (
-    <div className="relative w-72">
+    <div className="relative w-full">
       <label htmlFor="employee-search" className="sr-only">
         검색
       </label>
 
-      <Input id="employee-search" value={keyword} onChange={e => setKeyword(e.target.value)} placeholder={placeholder} />
+      <Input id="employee-search" value={keyword} onChange={e => setKeyword(e.target.value)} placeholder={placeholder} className="w-full" />
     </div>
   );
 }

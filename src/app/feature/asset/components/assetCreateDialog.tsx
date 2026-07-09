@@ -6,6 +6,8 @@ import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import AssetCreateForm from './AssetCreateForm';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 export default function AssetCreateDialog() {
   const [open, setOpen] = useState(false);
@@ -13,7 +15,7 @@ export default function AssetCreateDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button type="button" className="bg-blue-600 text-white focus-visible:ring-4 ring-offset-2 ring-black">
+        <Button type="button" className={cn(buttonStyle.createNew, buttonStyle.base)}>
           <Plus className="h-4 w-4" />
           자산 등록
         </Button>

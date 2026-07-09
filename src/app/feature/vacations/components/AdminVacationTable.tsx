@@ -64,14 +64,14 @@ const AdminVacationTable = ({ vacations, approverId }: Props) => {
                   <TableCell className={cn(tableStyle.employeeName)}>{employee?.name ?? '-'}</TableCell>
                   <TableCell className={cn(tableStyle.employeeDepartment)}>{employee?.department ?? '-'}</TableCell>
                   <TableCell className="text-slate-500 text-sm">{employee?.position ?? '-'}</TableCell>
-                  <TableCell className="font-medium text-slate-700 text-sm">{vacation.vacation_type}</TableCell>
+                  <TableCell className="font-medium text-slate-700 text-sm dark:text-slate-100">{vacation.vacation_type}</TableCell>
                   <TableCell className={cn(tableStyle.date)}>
                     {vacation.start_date} ~ {vacation.end_date}
                   </TableCell>
                   <TableCell>
                     <Badge
                       variant="outline"
-                      className={`rounded-full shadow-none px-2.5 py-0.5 font-medium text-xs ${getStatusBadge(vacation.status)}`}
+                      className={`rounded-full shadow-none px-2.5 py-0.5 font-medium text-xs ${getStatusBadge(vacation.status)} dark:text-slate-100`}
                     >
                       {vacation.status}
                     </Badge>

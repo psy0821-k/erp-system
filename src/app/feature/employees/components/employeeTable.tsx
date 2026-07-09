@@ -11,7 +11,7 @@ type Props = {
 
 export const EmployeeTable = ({ employees }: Props) => {
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-sm p-4">
+    <div className="overflow-hidden rounded-2xl bg-white shadow-sm p-4 dark:border-slate-800 dark:bg-slate-900">
       <Table>
         <caption className="sr-only">직원 목록</caption>
 
@@ -31,26 +31,19 @@ export const EmployeeTable = ({ employees }: Props) => {
             <TableRow key={employee.id} className={cn(tableStyle.employeeRow, tableStyle.row)}>
               <TableCell className={cn(tableStyle.employeeNumber)}>{employee.employee_number}</TableCell>
               <TableCell className={cn(tableStyle.employeeName)}>{employee.name}</TableCell>
-              <TableCell className={cn(tableStyle.employeeDepartment)}>
-                <span className="font-medium text-slate-700">{employee.department}</span>
-                <span aria-hidden className="mx-1.5 text-slate-400">
+              <TableCell className={tableStyle.employeeDepartment}>
+                <span className="font-medium text-slate-700 dark:text-slate-200">{employee.department}</span>
+                <span aria-hidden className="mx-1.5 text-slate-400 dark:text-slate-600">
                   |
                 </span>
-                <span className="text-xs text-slate-500">{employee.position}</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400">{employee.position}</span>
               </TableCell>
-
-              <TableCell className="">
+              <TableCell>
                 <span className="rounded bg-slate-100 px-2 py-0.5 text-xs text-slate-700">{employee.role}</span>
               </TableCell>
 
               <TableCell className="w-full md:w-[15%] md:text-center">
-                <span
-                  className={`mr-2 inline-block h-2 w-2 rounded-full ${
-                    employee.status === '재직' ? 'bg-emerald-500' : employee.status === '휴직' ? 'bg-amber-400' : 'bg-slate-300'
-                  }`}
-                  aria-hidden="true"
-                />
-                <span className="text-sm font-medium text-slate-700">{employee.status}</span>
+                <span className="text-sm font-medium text-slate-700 dark:text-slate-200">{employee.status}</span>
               </TableCell>
 
               <TableCell className="w-full text-right md:w-[20%] pr-11">

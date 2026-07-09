@@ -6,6 +6,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Building2, ShieldCheck, User } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Props {
   employee: employeesType;
@@ -15,11 +17,7 @@ function EmployeeDetailDialog({ employee }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          size="sm"
-          className="h-8 text-xs font-semibold rounded-xl border-slate-200 text-indigo-600 bg-white hover:bg-slate-50 hover:text-indigo-700 transition-colors shadow-sm mr-2"
-        >
+        <Button variant="outline" size="sm" className={cn(buttonStyle.base, buttonStyle.detail)}>
           상세보기
         </Button>
       </DialogTrigger>

@@ -16,6 +16,8 @@ import { useUpdateAssetReportStatus } from '../hooks/useUpdateAssetReportStatus'
 import { updateAssetReportStatusSchema, UpdateAssetReportStatusFormInput } from '../schema/assetReportSchema';
 import { AssetReport } from '../type/assetReportType';
 import { ASSET_REPORT_STATUS_OPTIONS } from '../type/assetReportOption';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 interface Props {
   report: AssetReport;
@@ -51,9 +53,8 @@ export default function AssetReportStatusEditDialog({ report }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Pencil className="h-4 w-4" />
-          <span className="sr-only">처리 상태 수정</span>
+        <Button variant="outline" size="icon" className={cn(buttonStyle.create, buttonStyle.base, 'px-5')}>
+          수정
         </Button>
       </DialogTrigger>
 
@@ -110,16 +111,11 @@ export default function AssetReportStatusEditDialog({ report }: Props) {
           </FieldGroup>
 
           <div className="flex justify-end gap-2">
-            <Button className="bg-blue-600 text-white focus-visible:ring-4 ring-black ring-offset-2" type="submit" disabled={isPending}>
+            <Button className={cn(buttonStyle.submit, buttonStyle.base)} type="submit" disabled={isPending}>
               {isPending ? '수정 중...' : '수정'}
             </Button>
 
-            <Button
-              className="bg-red-600 text-white focus-visible:ring-4 ring-black ring-offset-2"
-              type="button"
-              variant="outline"
-              onClick={() => setOpen(false)}
-            >
+            <Button className={cn(buttonStyle.delete, buttonStyle.base)} type="button" variant="outline" onClick={() => setOpen(false)}>
               취소
             </Button>
           </div>

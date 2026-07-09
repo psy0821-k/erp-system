@@ -17,6 +17,8 @@ import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
 
 import { useDeleteAssetReport } from '../hooks/useDeleteAssetReport';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Props {
   id: string;
@@ -28,7 +30,7 @@ export default function AssetReportDeleteDialog({ id }: Props) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="icon">
+        <Button variant="destructive" size="icon" className={cn(buttonStyle.base, buttonStyle.delete)}>
           <Trash2 className="h-4 w-4" />
           <span className="sr-only">고장 신고 삭제</span>
         </Button>

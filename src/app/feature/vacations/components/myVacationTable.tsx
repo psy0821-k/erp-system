@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 import { tableStyle } from '@/app/style/tableStyle';
 import StatusBadge from '@/components/ui/statusBadge';
 import { APPROVAL_STATUS_LABEL } from '@/config/types/approvalStatus';
-import { APPROVAL_BADGE_MAP } from '@/components/badge';
+import { APPROVAL_BADGE_MAP, statusBadgeStyle } from '@/components/badge';
 
 type Props = {
   vacations: Vacation[];
@@ -51,7 +51,7 @@ const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
           ) : (
             vacations.map(vacation => (
               <TableRow key={vacation.id} className={cn(tableStyle.row)}>
-                <TableCell className="font-bold text-slate-700 text-sm py-3.5">{vacation.vacation_type}</TableCell>
+                <TableCell className="font-bold text-slate-700 text-sm py-3.5 dark:text-slate-100">{vacation.vacation_type}</TableCell>
 
                 <TableCell className="text-xs text-slate-600 font-medium leading-relaxed">
                   <span className={cn(tableStyle.date)}>{vacation.start_date}</span>
@@ -72,16 +72,14 @@ const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
                       type="button"
                       variant="outline"
                       size="sm"
-                      className="h-8 rounded-xl border-slate-200 text-xs font-semibold text-slate-600 bg-white hover:bg-slate-50"
+                      className={statusBadgeStyle.progress}
                       onClick={() => setSelectedVacation(vacation)}
                     >
                       자세히
                     </Button>
+                    {vacation.status === 'PENDING' && <VacationDeleteButton vacationId={vacation.id} />}
                   </TableCell>
                 )}
-                <TableCell>
-                  <VacationDeleteButton vacationId={vacation.id} status={vacation.status} />
-                </TableCell>
               </TableRow>
             ))
           )}

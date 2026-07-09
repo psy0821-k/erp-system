@@ -16,6 +16,8 @@ import { Plus } from 'lucide-react';
 import { useCreateAssetReport } from '../hooks/useCreateAssetReport';
 import { createAssetReportSchema, CreateAssetReportFormInput } from '../schema/assetReportSchema';
 import { useMyAssets } from '../hooks/useMyAsset';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Props {
   reporterId: string;
@@ -62,7 +64,7 @@ export default function AssetReportCreateDialog({ reporterId }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-red-600 text-white">
+        <Button className={cn(buttonStyle.delete, buttonStyle.base)}>
           <Plus className="mr-2 h-4 w-4" />
           고장 신고
         </Button>
@@ -124,15 +126,10 @@ export default function AssetReportCreateDialog({ reporterId }: Props) {
           </FieldGroup>
 
           <div className="flex justify-end gap-2">
-            <Button className="bg-blue-600 text-white focus-visible:ring-4 ring-black ring-offset-2" type="submit" disabled={isPending}>
+            <Button className={cn(buttonStyle.create, buttonStyle.base)} type="submit" disabled={isPending}>
               {isPending ? '등록 중...' : '등록'}
             </Button>
-            <Button
-              className="bg-red-600 text-white focus-visible:ring-4 ring-black ring-offset-2"
-              type="button"
-              variant="outline"
-              onClick={() => setOpen(false)}
-            >
+            <Button className={cn(buttonStyle.delete, buttonStyle.base)} type="button" variant="outline" onClick={() => setOpen(false)}>
               취소
             </Button>
           </div>

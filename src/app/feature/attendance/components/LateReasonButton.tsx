@@ -13,6 +13,8 @@ import { useSubmitLateReason } from '../hooks/useAttendance';
 import { SubmitLateReasonInput } from '../api/attendanceApi';
 import { updateUserAttendanceSchema } from '../Schema/updateAttendanceSchema';
 import { AttendanceStatus } from '@/config/types/attendanceStatus';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 type LateReasonDialogProps = {
   attendance: {
@@ -39,9 +41,7 @@ export default function LateReasonDialog({ attendance }: LateReasonDialogProps) 
   const isLate = attendance.status === 'LATE';
   const hasLateReason = Boolean(attendance.late_reason?.trim());
 
-  const lateReasonButtonClassName = isLate
-    ? 'w-full cursor-pointer border-amber-200 bg-amber-50 text-amber-900 hover:bg-amber-100 focus-visible:ring-2 focus-visible:ring-amber-500 dark:border-amber-900/50 dark:bg-amber-950/40 dark:text-amber-200 dark:hover:bg-amber-950/60 font-medium'
-    : 'w-full cursor-not-allowed border-border bg-muted/50 text-muted-foreground opacity-60';
+  const lateReasonButtonClassName = isLate ? cn(buttonStyle.base, buttonStyle.create) : buttonStyle.base;
 
   const onSubmit = (values: LateReasonFormInput) => {
     const payload: SubmitLateReasonInput = {

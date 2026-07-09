@@ -32,7 +32,7 @@ export default function AdminVacationListClient({ employee }: Props) {
   }
 
   if (vacations.length === 0) {
-    return <div className="my-8">대기 중인 휴가 신청이 없습니다.</div>;
+    return <div className="my-8 ">대기 중인 휴가 신청이 없습니다.</div>;
   }
 
   return (

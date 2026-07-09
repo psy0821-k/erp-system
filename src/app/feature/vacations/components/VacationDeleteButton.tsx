@@ -8,15 +8,10 @@ import { ApprovalStatus } from '../type/vacationType';
 
 interface Props {
   vacationId: string;
-  status: ApprovalStatus;
 }
 
-export default function VacationDeleteButton({ vacationId, status }: Props) {
+export default function VacationDeleteButton({ vacationId }: Props) {
   const { mutate, isPending } = useDeleteVacation();
-
-  if (status !== 'PENDING') {
-    return null;
-  }
 
   return (
     <Button type="button" variant="ghost" size="icon" disabled={isPending} onClick={() => mutate(vacationId)}>

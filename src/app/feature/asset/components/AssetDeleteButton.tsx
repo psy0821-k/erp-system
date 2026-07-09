@@ -16,6 +16,8 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { useDeleteAsset } from '../hooks/useDeleteAsset';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Props {
   id: string;
@@ -41,11 +43,7 @@ export default function AssetDeleteButton({ id, assetName }: Props) {
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogAction
-            className="cursor-pointer bg-red-600 text-white focus-visible:ring-2 ring-black"
-            disabled={isPending}
-            onClick={() => mutate(id)}
-          >
+          <AlertDialogAction className={cn(buttonStyle.base, buttonStyle.delete)} disabled={isPending} onClick={() => mutate(id)}>
             {isPending ? '삭제 중...' : '삭제'}
           </AlertDialogAction>
           <AlertDialogCancel>취소</AlertDialogCancel>

@@ -13,6 +13,8 @@ import { Textarea } from '@/components/ui/textarea';
 
 import { useCreateProject } from '../hooks/useCreateProject';
 import { CreateProjectInput, PROJECT_STATUS, PROJECT_STATUS_OPTIONS } from '../types/projectType';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 export default function ProjectCreateDialog() {
   const [open, setOpen] = useState(false);
@@ -48,7 +50,7 @@ export default function ProjectCreateDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>
+        <Button className={cn(buttonStyle.base, buttonStyle.createNew)}>
           <Plus className="mr-2 h-4 w-4" />
           프로젝트 등록
         </Button>

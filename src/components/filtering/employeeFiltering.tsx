@@ -27,8 +27,8 @@ const EmployeeFiltering = () => {
   };
 
   return (
-    <header className="flex justify-between mb-8">
-      <div className="flex gap-4">
+    <header className="w-full lg:w-auto">
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
         <PositionFilter value={position} onChange={handleFilterChange} />
         <DepartmentFilter value={department} onChange={handleFilterChange} />
       </div>

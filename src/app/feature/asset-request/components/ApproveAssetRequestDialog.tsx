@@ -9,6 +9,8 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 import { AssetRequestAdmin } from '../type/assetRequestAdmin';
 import { useApproveAssetRequest, useAvailableAssetsByType } from '../hooks/useAdminAssetRequest';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 interface Props {
   request: AssetRequestAdmin;
@@ -42,7 +44,7 @@ export default function ApproveAssetRequestDialog({ request }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button type="button" size="sm">
+        <Button type="button" size="sm" className={cn(buttonStyle.base, buttonStyle.create)}>
           승인
         </Button>
       </DialogTrigger>
@@ -89,11 +91,11 @@ export default function ApproveAssetRequestDialog({ request }: Props) {
         </div>
 
         <DialogFooter>
-          <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+          <Button type="button" className={cn(buttonStyle.delete, buttonStyle.base)} variant="outline" onClick={() => setOpen(false)}>
             취소
           </Button>
 
-          <Button type="button" disabled={!selectedAssetId || isPending} onClick={handleApprove}>
+          <Button type="button" className={cn(buttonStyle.delete, buttonStyle.base)} disabled={!selectedAssetId || isPending} onClick={handleApprove}>
             {isPending ? '승인 중...' : '배정 승인'}
           </Button>
         </DialogFooter>
