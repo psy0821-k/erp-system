@@ -120,12 +120,11 @@ export default function AssetRequestCreateDialog({ requesterId }: Props) {
             </Field>
           </FieldGroup>
           <div className="flex justify-end gap-2">
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
-              취소
-            </Button>
-
-            <Button type="submit" disabled={isPending}>
+            <Button className={cn(buttonStyle.submit, buttonStyle.base)} type="submit" disabled={isPending}>
               {isPending ? '등록 중...' : '등록'}
+            </Button>
+            <Button className={cn(buttonStyle.delete, buttonStyle.base)} type="button" variant="outline" onClick={() => setOpen(false)}>
+              취소
             </Button>
           </div>
         </form>

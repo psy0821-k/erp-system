@@ -15,6 +15,10 @@ import { FormSelectField } from '@/components/ui/form-select-field';
 import { vacationTypeOptions } from '../type/vacationOptionType';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { cardStyle } from '@/app/style/tableStyle';
+import { textStyle } from '@/app/style/textStyle';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Employee {
   id: string;
@@ -41,12 +45,11 @@ const VacationClientForm = ({ employee }: Props) => {
   }
 
   return (
-    <div className="max-w-xl mx-auto my-10 p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-      <Card>
-        <CardHeader className="space-y-3 text-center">
-          <div>
-            <CardTitle className="text-2xl font-bold tracking-tight">휴가 신청 폼</CardTitle>
-          </div>
+    <div className="mx-auto my-10 max-w-xl">
+      <Card className={cardStyle.wrapper}>
+        <CardHeader className="border-b border-slate-200 pb-6 text-center dark:border-slate-800">
+          <CardTitle className={textStyle.title}>휴가 신청 폼</CardTitle>
+          <p className={textStyle.muted}>휴가 신청 정보를 입력해주세요.</p>
         </CardHeader>
 
         <CardContent>
@@ -73,7 +76,7 @@ const VacationClientForm = ({ employee }: Props) => {
 
               <div className="flex flex-col gap-1.5">
                 <div className="flex">
-                  <Label htmlFor="reason" className="text-sm font-medium text-gray-700">
+                  <Label htmlFor="reason" className="text-sm font-medium text-slate-900 dark:text-slate-100">
                     사유
                   </Label>
                 </div>
@@ -82,7 +85,7 @@ const VacationClientForm = ({ employee }: Props) => {
                   rows={4}
                   {...form.register('reason')}
                   placeholder="휴가 신청 사유를 입력해주세요."
-                  className="w-full h-30 px-3.5 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:ring-2 outline-none transition-all resize-none"
+                  className=" h-30 resize-none border-slate-300 bg-background text-foreground placeholder:text-slate-400 focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2 dark:border-slate-700 dark:focus-visible:ring-slate-100 dark:focus-visible:ring-offset-slate-950"
                 />
               </div>
             </FieldGroup>
@@ -92,20 +95,13 @@ const VacationClientForm = ({ employee }: Props) => {
             </p>
 
             <div className="flex justify-center items-center gap-2 mt-10">
-              <Button
-                form="vacation-create-form"
-                type="submit"
-                className="w-22 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg text-sm shadow-sm hover:shadow transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
+              <Button form="vacation-create-form" type="submit" className={cn(buttonStyle.base, buttonStyle.submit)}>
                 <Send />
                 {isPending ? '요청 중...' : '요청'}
               </Button>
-              <Link
-                href={'/employee/vacation'}
-                className="w-22  text-center bg-red-600 hover:bg-red-700 text-white font-medium py-1.5 rounded-lg text-sm shadow-sm hover:shadow transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-              >
-                취소
-              </Link>
+              <Button asChild variant="outline" className={cn(buttonStyle.base, buttonStyle.delete)}>
+                <Link href="/employee/vacation">취소</Link>
+              </Button>
             </div>
           </form>
         </CardContent>

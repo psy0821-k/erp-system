@@ -2,10 +2,21 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 import { ASSET_TYPE_LABEL } from '@/config/types/asset';
 import { ASSET_REQUEST_STATUS_LABEL, AssetRequest } from '../type/assetRequestType';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Props {
   request: AssetRequest;
@@ -15,7 +26,7 @@ export default function AssetRequestDetailDialog({ request }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button className={cn(buttonStyle.detail, buttonStyle.base)} variant="outline" size="sm">
           상세보기
         </Button>
       </DialogTrigger>
@@ -56,6 +67,13 @@ export default function AssetRequestDetailDialog({ request }: Props) {
             <p className="text-muted-foreground">요청 사유</p>
             <div className="bg-muted min-h-24 rounded-md p-3 leading-6 whitespace-pre-wrap">{request.reason}</div>
           </div>
+        </div>
+        <div className="mt-6 flex justify-end">
+          <DialogClose asChild>
+            <Button type="button" variant="outline" className={cn(buttonStyle.base, buttonStyle.delete)}>
+              닫기
+            </Button>
+          </DialogClose>
         </div>
       </DialogContent>
     </Dialog>

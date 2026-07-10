@@ -15,6 +15,8 @@ import {
 
 import { useDeleteProject } from '../hooks/useDeleteProject';
 import { Project } from '../types/projectType';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 interface Props {
   project: Project;
@@ -30,7 +32,7 @@ export default function ProjectDeleteDialog({ project }: Props) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="sm">
+        <Button className={cn(buttonStyle.base, buttonStyle.delete)} variant="destructive" size="sm">
           삭제
         </Button>
       </AlertDialogTrigger>
@@ -42,10 +44,10 @@ export default function ProjectDeleteDialog({ project }: Props) {
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel>취소</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete} disabled={isPending}>
+          <AlertDialogAction className={cn(buttonStyle.base, buttonStyle.delete)} onClick={handleDelete} disabled={isPending}>
             {isPending ? '삭제 중...' : '삭제'}
           </AlertDialogAction>
+          <AlertDialogCancel>취소</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

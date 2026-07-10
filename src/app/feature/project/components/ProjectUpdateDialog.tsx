@@ -12,6 +12,8 @@ import { Textarea } from '@/components/ui/textarea';
 
 import { useUpdateProject } from '../hooks/useUpdateProject';
 import { Project, PROJECT_STATUS_OPTIONS, UpdateProjectInput } from '../types/projectType';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 interface Props {
   project: Project;
@@ -50,7 +52,7 @@ export default function ProjectUpdateDialog({ project }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button className={cn(buttonStyle.base, buttonStyle.create)} variant="outline" size="sm">
           수정
         </Button>
       </DialogTrigger>
@@ -128,10 +130,10 @@ export default function ProjectUpdateDialog({ project }: Props) {
           </FieldGroup>
 
           <div className="flex justify-end gap-2">
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+            <Button className={cn(buttonStyle.base, buttonStyle.delete)} type="button" variant="outline" onClick={() => setOpen(false)}>
               취소
             </Button>
-            <Button type="submit" disabled={isPending}>
+            <Button className={cn(buttonStyle.base, buttonStyle.submit)} type="submit" disabled={isPending}>
               {isPending ? '수정 중...' : '수정'}
             </Button>
           </div>

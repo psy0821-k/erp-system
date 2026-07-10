@@ -14,6 +14,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { updateAssetRequestStatusSchema, UpdateAssetRequestStatusFormInput } from '../schema/assetRequestSchema';
 import { ASSET_REQUEST_STATUS_OPTIONS, AssetRequest } from '../type/assetRequestType';
 import { useUpdateAssetRequestStatus } from '../hooks/useUpdateAssetApi';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Props {
   request: AssetRequest;
@@ -48,8 +50,8 @@ export default function AssetRequestStatusEditDialog({ request }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Pencil className="h-4 w-4" />
+        <Button className={cn(buttonStyle.base, buttonStyle.create, 'px-5')} variant="outline" size="icon">
+          수정
           <span className="sr-only">IT 물품 요청 상태 수정</span>
         </Button>
       </DialogTrigger>
@@ -107,12 +109,11 @@ export default function AssetRequestStatusEditDialog({ request }: Props) {
           </FieldGroup>
 
           <div className="flex justify-end gap-2">
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
-              취소
-            </Button>
-
-            <Button type="submit" disabled={isPending}>
+            <Button className={cn(buttonStyle.base, buttonStyle.submit)} type="submit" disabled={isPending}>
               {isPending ? '수정 중...' : '수정'}
+            </Button>
+            <Button className={cn(buttonStyle.base, buttonStyle.delete)} type="button" variant="outline" onClick={() => setOpen(false)}>
+              취소
             </Button>
           </div>
         </form>

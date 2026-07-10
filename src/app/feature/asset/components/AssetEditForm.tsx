@@ -12,6 +12,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Asset, ASSET_STATUS_OPTIONS, ASSET_TYPE_OPTIONS } from '@/config/types/asset';
 import { UpdateAssetInput, updateAssetSchema } from '../queryKey/assetSchema';
 import { useUpdateAsset } from '../hooks/useUpdateAsset';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Props {
   asset: Asset;
@@ -104,7 +106,7 @@ export default function AssetEditForm({ asset, onSuccess }: Props) {
             tabIndex={-1}
             id="edit_serial_number"
             placeholder="예: SN-MBP-2026-001"
-            className="text-gray-500 bg-gray-100"
+            className="text-gray-500 bg-gray-100 cursor-not-allowed dark:text-200 dark:bg-slate-800"
             {...register('serial_number')}
             readOnly
           />
@@ -151,12 +153,16 @@ export default function AssetEditForm({ asset, onSuccess }: Props) {
       </FieldGroup>
 
       <div className="flex justify-end gap-2">
-        <Button type="button" variant="outline" onClick={() => reset(getAssetEditDefaultValues(asset))}>
-          초기화
-        </Button>
-
-        <Button type="submit" disabled={isPending}>
+        <Button className={cn(buttonStyle.base, buttonStyle.submit)} type="submit" disabled={isPending}>
           {isPending ? '수정 중...' : '수정'}
+        </Button>
+        <Button
+          className={cn(buttonStyle.base, 'bg-slate-200 text-black')}
+          type="button"
+          variant="outline"
+          onClick={() => reset(getAssetEditDefaultValues(asset))}
+        >
+          초기화
         </Button>
       </div>
     </form>

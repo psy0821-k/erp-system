@@ -36,7 +36,7 @@ export default function AttendanceTable({ attendances }: Props) {
               <TableCell className={cn(tableStyle.employeeNumber)}>{attendance.employee?.employee_number}</TableCell>
               <TableCell className={cn(tableStyle.employeeName)}>{attendance.employee?.name}</TableCell>
               <TableCell className={cn(tableStyle.employeeDepartment)}>{attendance.employee?.department}</TableCell>
-              <TableCell className={cn(tableStyle.cell, 'text-sm text-slate-500 dark:text-slate-400')}>{attendance.employee?.position}</TableCell>
+              <TableCell className={cn(tableStyle.cell, 'text-sm text-slate-500 dark:text-slate-200')}>{attendance.employee?.position}</TableCell>
               <TableCell className={cn(tableStyle.cell, tableStyle.date)}>{attendance.work_date}</TableCell>
               <TableCell className={tableStyle.cell}>
                 <StatusBadge label={ATTENDANCE_STATUS_LABEL[attendance.status]} variant={ATTENDANCE_STATUS_BADGE_MAP[attendance.status]} />

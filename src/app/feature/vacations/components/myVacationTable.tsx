@@ -33,11 +33,10 @@ const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
                 {item.label}
               </TableHead>
             ))}
-            {isModalBtn && (
-              <TableHead scope="col" className={cn(tableStyle.header)}>
-                상세
-              </TableHead>
-            )}
+
+            <TableHead scope="col" className={cn(tableStyle.header)}>
+              기타
+            </TableHead>
           </TableRow>
         </TableHeader>
 
@@ -66,8 +65,8 @@ const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
                   <StatusBadge label={APPROVAL_STATUS_LABEL[vacation.status]} variant={APPROVAL_BADGE_MAP[vacation.status]} />
                 </TableCell>
 
-                {isModalBtn && (
-                  <TableCell className="py-2">
+                <TableCell className="py-2">
+                  {isModalBtn && (
                     <Button
                       type="button"
                       variant="outline"
@@ -77,9 +76,9 @@ const MyVacationTable = ({ vacations, isModalBtn = false }: Props) => {
                     >
                       자세히
                     </Button>
-                    {vacation.status === 'PENDING' && <VacationDeleteButton vacationId={vacation.id} />}
-                  </TableCell>
-                )}
+                  )}
+                  {vacation.status === 'PENDING' && <VacationDeleteButton vacationId={vacation.id} />}
+                </TableCell>
               </TableRow>
             ))
           )}

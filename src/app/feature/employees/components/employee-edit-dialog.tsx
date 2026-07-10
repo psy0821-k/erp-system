@@ -19,6 +19,7 @@ import { roles } from '@/app/feature/sign-up/types/role';
 import { DEPARTMENT_TYPE_OPTIONS } from '@/config/types/department';
 import { POSITION_OPTIONS } from '@/config/types/position';
 import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 type EmployeeEditDialogProps = {
   employee: {
@@ -121,7 +122,7 @@ export default function EmployeeEditDialog({ employee }: EmployeeEditDialogProps
               { title: '퇴사', value: 'RESIGNED' },
             ]}
           />
-          <Button type="submit" disabled={isPending}>
+          <Button className={cn(buttonStyle.base, buttonStyle.submit)} type="submit" disabled={isPending}>
             {isPending ? '수정 중...' : '수정 완료'}
           </Button>
         </form>

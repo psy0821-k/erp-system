@@ -5,6 +5,8 @@ import { Badge } from '@/components/ui/badge';
 import { Project, PROJECT_STATUS_LABEL } from '../types/projectType';
 import ProjectMemberCreateDialog from './ProjectMemberCreateDialog';
 import ProjectDeleteMemberButton from './ProjectDeleteMemberButton';
+import { buttonStyle } from '@/app/style/buttonStyle';
+import { cn } from '@/lib/utils';
 
 interface Props {
   project: Project;
@@ -14,7 +16,7 @@ export default function ProjectDetailDialog({ project }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button className={cn(buttonStyle.base, buttonStyle.detail)} variant="outline" size="sm">
           상세보기
         </Button>
       </DialogTrigger>
