@@ -8,6 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { useForgotPassword } from './hooks/useForgotPassword';
 import { ForgotPasswordFormInput, forgotPasswordSchema } from './schema/forgotPasswordSchema';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 export default function ForgotPasswordForm() {
   const { mutate, isPending } = useForgotPassword();
@@ -42,7 +44,7 @@ export default function ForgotPasswordForm() {
         </Field>
       </FieldGroup>
 
-      <Button type="submit" className="w-full" disabled={isPending}>
+      <Button type="submit" className={cn(buttonStyle.base, buttonStyle.submit, 'w-full')} disabled={isPending}>
         {isPending ? '메일 발송 중...' : '비밀번호 재설정 메일 받기'}
       </Button>
     </form>

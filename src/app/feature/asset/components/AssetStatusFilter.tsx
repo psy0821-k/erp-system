@@ -21,7 +21,7 @@ function AssetStatusFilter({ value, onChange }: AssetStatusFilterProps) {
           <SelectValue placeholder="상태 선택" />
         </SelectTrigger>
 
-        <SelectContent position="popper" className="bg-white">
+        <SelectContent position="popper">
           <SelectGroup>
             <SelectItem value="all">상태 선택</SelectItem>
 

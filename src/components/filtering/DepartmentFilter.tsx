@@ -21,7 +21,7 @@ function DepartmentFilter({ value, onChange }: DepartmentFilterProps) {
           <SelectValue placeholder="부서 선택" />
         </SelectTrigger>
 
-        <SelectContent position="popper" className="bg-white">
+        <SelectContent position="popper">
           <SelectGroup>
             <SelectItem value="all">부서 선택</SelectItem>
 

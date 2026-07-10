@@ -21,7 +21,7 @@ function AssetTypeFilter({ value, onChange }: AssetTypeFilterProps) {
           <SelectValue placeholder="자산 종류" />
         </SelectTrigger>
 
-        <SelectContent position="popper" className="bg-white">
+        <SelectContent position="popper">
           <SelectGroup>
             <SelectItem value="all">물품 선택</SelectItem>
 

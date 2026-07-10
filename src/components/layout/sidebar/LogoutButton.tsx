@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { createClient } from '@/lib/client';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 export default function LogoutButton() {
   const router = useRouter();
@@ -15,11 +17,11 @@ export default function LogoutButton() {
     await supabase.auth.signOut();
 
     router.refresh();
-    router.push('/login');
+    router.push('/sign-in');
   };
 
   return (
-    <Button type="button" onClick={handleLogout} className="w-full bg-red-700 text-white hover:bg-red-800">
+    <Button type="button" onClick={handleLogout} className={cn(buttonStyle.base, buttonStyle.delete, 'w-full')}>
       <LogOut className="h-4 w-4" aria-hidden="true" />
       로그아웃
     </Button>
