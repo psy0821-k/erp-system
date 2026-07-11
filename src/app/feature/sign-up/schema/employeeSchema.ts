@@ -16,4 +16,7 @@ export const employeeCreateSchema = z.object({
   authority_level: z.number(),
 });
 
+export const EmployeeRoleSchema = z.enum(['ADMIN', 'HR_MANAGER', 'APPROVAL_MANAGER', 'ASSET_MANAGER', 'EMPLOYEE', 'TEAM_LEADER']);
+
 export type EmployeeCreateInput = z.infer<typeof employeeCreateSchema>;
+export type EmployeeRole = z.infer<typeof EmployeeRoleSchema>;
