@@ -101,7 +101,7 @@ export const getCurrentEmployee = async () => {
     throw new Error('로그인이 필요합니다.');
   }
 
-  const { data, error } = await supabase.from('employees').select('id, name, email, department, position').eq('user_id', user.id).single();
+  const { data, error } = await supabase.from('employees').select('id, name, email, department, position,role').eq('user_id', user.id).single();
 
   if (error) {
     throw error;

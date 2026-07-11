@@ -6,8 +6,11 @@ import { Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { buttonStyle } from '@/app/style/buttonStyle';
 import { filterStyle } from '@/app/style/tableStyle';
+import RoleGuard from '@/components/auth/RoleGuard';
+import { getCurrentEmployee } from '@/app/api/getEmployee';
 
 export default async function Page() {
+  const employee = await getCurrentEmployee();
   return (
     <div className="min-h-screen bg-slate-50/50 p-6 sm:p-8 dark:bg-slate-950">
       <section className="mx-auto max-w-7xl">
@@ -18,10 +21,12 @@ export default async function Page() {
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">사내 구성원의 정보와 권한을 통합 관리합니다.</p>
           </div>
 
-          <Link href="/sign-up" className={cn(buttonStyle.createNew, buttonStyle.base)}>
-            <Plus className="h-4 w-4" />
-            <span>직원 신규 등록</span>
-          </Link>
+          <RoleGuard role={employee?.role} permission="EMPLOYEE_MANAGE">
+            <Link href="/sign-up" className={cn(buttonStyle.createNew, buttonStyle.base)}>
+              <Plus className="h-4 w-4" />
+              <span>직원 신규 등록</span>
+            </Link>
+          </RoleGuard>
         </div>
 
         <div className={filterStyle.wrapper}>

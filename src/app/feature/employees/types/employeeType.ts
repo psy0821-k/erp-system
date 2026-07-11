@@ -1,3 +1,5 @@
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
+
 export interface employeesType {
   id: string;
   name: string;
@@ -5,7 +7,7 @@ export interface employeesType {
   department: string;
   position: string;
   status: string;
-  role: string;
+  role: EmployeeRole;
   hire_date: string;
   created_at: string;
   employee_number: string;
