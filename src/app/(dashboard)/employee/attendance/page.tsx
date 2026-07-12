@@ -5,6 +5,7 @@ import LateUserClientList from '@/app/feature/attendance/components/LateUserClie
 import TodayAttendanceStatsGrid from '@/app/feature/attendance/components/TodayAttendanceStatsGrid';
 import { cardStyle } from '@/app/style/tableStyle';
 import { getCurrentEmployee } from '@/app/api/getEmployee';
+import { textStyle } from '@/app/style/textStyle';
 
 export default async function AttendancePage() {
   const employee = await getCurrentEmployee();
@@ -13,8 +14,8 @@ export default async function AttendancePage() {
       <section className="mx-auto max-w-7xl space-y-6">
         <div className={cardStyle.pageHeader}>
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">근태관리</h2>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">직원들의 출근, 지각, 결근, 휴가 현황을 일자별로 투명하게 관리합니다.</p>
+            <h2 className={textStyle.title}>근태관리</h2>
+            <p className={textStyle.subtle}>직원들의 출근, 지각, 결근, 휴가 현황을 일자별로 투명하게 관리합니다.</p>
           </div>
         </div>
 
@@ -38,8 +39,8 @@ export default async function AttendancePage() {
       <section className="mx-auto mt-10 max-w-7xl space-y-6">
         <div className={cardStyle.pageHeader}>
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">지각 사유가 추가된 직원</h2>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">지각 사유가 등록되어 수정 요청한 직원 목록입니다.</p>
+            <h2 className={textStyle.title}>지각 사유가 추가된 직원</h2>
+            <p className={textStyle.subtle}>지각 사유가 등록되어 수정 요청한 직원 목록입니다.</p>
           </div>
         </div>
 

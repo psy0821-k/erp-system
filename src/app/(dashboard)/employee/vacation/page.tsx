@@ -11,7 +11,8 @@ import { cardStyle } from '@/app/style/tableStyle';
 
 const VacationPage = async () => {
   const employee = await getCurrentEmployee();
-  const isAdmin = true;
+  if (!employee) return;
+  const isAdmin = employee.role === 'ADMIN' && employee.role === 'HR_MANAGER';
 
   if (employee === null) {
     return (
@@ -49,7 +50,7 @@ const VacationPage = async () => {
               <CalendarDays className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               <div>
                 <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">금일 휴가자</h2>
-                <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">사내 구성원의 오늘 자 휴가 유형 및 승인 상태입니다.</p>
+                <p className="mt-0.5 text-xs text-slate-500  dark:text-slate-500">사내 구성원의 오늘 자 휴가 유형 및 승인 상태입니다.</p>
               </div>
             </div>
 
@@ -64,7 +65,7 @@ const VacationPage = async () => {
                 <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 <div>
                   <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">휴가 승인 대기</h2>
-                  <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">내가 결재 요청한 승인 대기 상태의 휴가입니다.</p>
+                  <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-500">내가 결재 요청한 승인 대기 상태의 휴가입니다.</p>
                 </div>
               </div>
 
@@ -78,7 +79,7 @@ const VacationPage = async () => {
                 <UserCheck className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                 <div>
                   <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">휴가 승인 결과</h2>
-                  <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-500">내가 신청한 휴가의 최종 승인/반려 내역입니다.</p>
+                  <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-500">내가 신청한 휴가의 최종 승인/반려 내역입니다.</p>
                 </div>
               </div>
 
@@ -95,9 +96,7 @@ const VacationPage = async () => {
               <ShieldAlert className="h-5 w-5 text-rose-600 dark:text-rose-400" />
               <div>
                 <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">휴가 관리 전용 테이블 (Admin)</h3>
-                <p className="mt-0.5 text-xs text-slate-400 dark:text-slate-300">
-                  전체 임직원의 결재 대상 문서를 조회하고 승인/반려 처리를 수행합니다.
-                </p>
+                <p className="mt-0.5 text-black dark:text-slate-300">전체 임직원의 결재 대상 문서를 조회하고 승인/반려 처리를 수행합니다.</p>
               </div>
             </div>
 

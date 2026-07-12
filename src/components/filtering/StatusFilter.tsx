@@ -12,7 +12,7 @@ type StatusFilterProps = {
 function StatusFilter({ value, onChange }: StatusFilterProps) {
   return (
     <div>
-      <Label htmlFor="filtering-position" className="sr-only">
+      <Label htmlFor="filtering-status" className="sr-only">
         출근 상태 필터링
       </Label>
 
