@@ -7,8 +7,13 @@ import AttendanceTable from './AttendanceTable';
 import { useAttendanceList } from '../hooks/useAttendance';
 import { AttendanceStatus } from '@/config/types/attendanceStatus';
 import TableSkeleton from '@/components/ui/tableSkelleton';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
 
-export default function AttendanceClientList() {
+interface Props {
+  employeeRole: EmployeeRole;
+}
+
+export default function AttendanceClientList({ employeeRole }: Props) {
   const searchParams = useSearchParams();
   const rawStatus = searchParams.get('status');
 
@@ -40,7 +45,7 @@ export default function AttendanceClientList() {
 
   return (
     <div>
-      <AttendanceTable attendances={attendances} />
+      <AttendanceTable employeeRole={employeeRole} attendances={attendances} />
       <EmployeePagination currentPage={params.page} totalCount={totalCount} pageSize={pageSize} />
     </div>
   );

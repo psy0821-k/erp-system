@@ -5,11 +5,14 @@ import EmployeeDeleteButton from './employee-delete-button';
 import { employeesType } from '../types/employeeType';
 import { cn } from '@/lib/utils';
 import { tableStyle } from '@/app/style/tableStyle';
+import RoleGuard from '@/components/auth/RoleGuard';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
 type Props = {
   employees: employeesType[];
+  currentEmployee: EmployeeRole;
 };
 
-export const EmployeeTable = ({ employees }: Props) => {
+export const EmployeeTable = ({ employees, currentEmployee }: Props) => {
   return (
     <div className="overflow-hidden rounded-2xl bg-white shadow-sm p-4 dark:border-slate-800 dark:bg-slate-900">
       <Table>
@@ -48,8 +51,10 @@ export const EmployeeTable = ({ employees }: Props) => {
 
               <TableCell className="w-full text-right md:w-[20%] pr-11">
                 <EmployeeDetailDialog employee={employee} />
-                <EmployeeEditDialog employee={employee} />
-                <EmployeeDeleteButton id={employee.id} />
+                <RoleGuard role={currentEmployee} permission="EMPLOYEE_MANAGE">
+                  <EmployeeEditDialog employee={employee} />
+                  <EmployeeDeleteButton id={employee.id} />
+                </RoleGuard>
               </TableCell>
             </TableRow>
           ))}

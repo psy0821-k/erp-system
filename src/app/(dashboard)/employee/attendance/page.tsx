@@ -4,8 +4,10 @@ import EmployeeSearch from '@/app/feature/employees/components/EmployeeSearch';
 import LateUserClientList from '@/app/feature/attendance/components/LateUserClientList';
 import TodayAttendanceStatsGrid from '@/app/feature/attendance/components/TodayAttendanceStatsGrid';
 import { cardStyle } from '@/app/style/tableStyle';
+import { getCurrentEmployee } from '@/app/api/getEmployee';
 
-export default function AttendancePage() {
+export default async function AttendancePage() {
+  const employee = await getCurrentEmployee();
   return (
     <div className="min-h-screen bg-slate-50/50 p-6 dark:bg-slate-950 sm:p-8">
       <section className="mx-auto max-w-7xl space-y-6">
@@ -29,7 +31,7 @@ export default function AttendancePage() {
         </div>
 
         <div className={cardStyle.wrapper}>
-          <AttendanceClientList />
+          <AttendanceClientList employeeRole={employee?.role} />
         </div>
       </section>
 
@@ -42,7 +44,7 @@ export default function AttendancePage() {
         </div>
 
         <div className={cardStyle.wrapper}>
-          <LateUserClientList />
+          <LateUserClientList employeeRole={employee?.role} />
         </div>
       </section>
     </div>

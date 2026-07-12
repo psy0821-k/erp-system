@@ -9,12 +9,15 @@ import { tableStyle } from '@/app/style/tableStyle';
 import StatusBadge from '@/components/ui/statusBadge';
 import { ATTENDANCE_STATUS_LABEL } from '@/config/types/attendanceStatus';
 import { ATTENDANCE_STATUS_BADGE_MAP } from '@/components/badge';
+import RoleGuard from '@/components/auth/RoleGuard';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
 
 interface Props {
   attendances: Attendance[];
+  employeeRole: EmployeeRole;
 }
 
-export default function AttendanceTable({ attendances }: Props) {
+export default function AttendanceTable({ attendances, employeeRole }: Props) {
   return (
     <div className="w-full p-4">
       <Table>
@@ -45,9 +48,11 @@ export default function AttendanceTable({ attendances }: Props) {
                 {attendance.late_reason ? <StatusBadge label="O" variant="success" /> : <StatusBadge label="X" variant="danger" />}
               </TableCell>
               <TableCell className="px-6 py-2">
-                <div className="inline-flex w-full justify-center">
-                  <AttendanceEditDialog attendance={attendance} />
-                </div>
+                <RoleGuard role={employeeRole} permission="ATTENDANCE_MANAGE">
+                  <div className="inline-flex w-full justify-center">
+                    <AttendanceEditDialog attendance={attendance} />
+                  </div>
+                </RoleGuard>
               </TableCell>
             </TableRow>
           ))}

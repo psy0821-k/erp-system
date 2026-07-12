@@ -6,8 +6,13 @@ import { useEmployees } from '@/app/feature/employees/hooks/useEmployees';
 import EmployeePagination from './EmployeePagination';
 import TableSkeleton from '@/components/ui/tableSkelleton';
 import { EmployeeTable } from './employeeTable';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
 
-export default function EmployeeListClient() {
+interface Props {
+  currentRole: EmployeeRole;
+}
+
+export default function EmployeeListClient({ currentRole }: Props) {
   const searchParams = useSearchParams();
 
   const params = {
@@ -36,7 +41,7 @@ export default function EmployeeListClient() {
 
   return (
     <div>
-      <EmployeeTable employees={employees} />
+      <EmployeeTable currentEmployee={currentRole} employees={employees} />
       <EmployeePagination currentPage={params.page} totalCount={totalCount} pageSize={pageSize} />
     </div>
   );

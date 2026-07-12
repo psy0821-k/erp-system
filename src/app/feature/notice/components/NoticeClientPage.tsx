@@ -13,8 +13,14 @@ import EmployeeSearch from '../../employees/components/EmployeeSearch';
 import TableSkeleton from '@/components/ui/tableSkelleton';
 import { buttonStyle } from '@/app/style/buttonStyle';
 import { cn } from '@/lib/utils';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
+import RoleGuard from '@/components/auth/RoleGuard';
 
-export default function NoticeClientPage() {
+interface Props {
+  employeeRole: EmployeeRole;
+}
+
+export default function NoticeClientPage({ employeeRole }: Props) {
   const searchParams = useSearchParams();
 
   const params = {
@@ -35,12 +41,14 @@ export default function NoticeClientPage() {
           <p className="text-sm text-muted-foreground">사내 주요 공지와 업무 안내를 확인합니다.</p>
         </div>
 
-        <Button className={cn(buttonStyle.base, buttonStyle.createNew)} asChild>
-          <Link href="/notice/create">
-            <Plus className="mr-2 h-4 w-4" />
-            공지 작성
-          </Link>
-        </Button>
+        <RoleGuard role={employeeRole} permission="NOTICE_MANAGE">
+          <Button className={cn(buttonStyle.base, buttonStyle.createNew)} asChild>
+            <Link href="/notice/create">
+              <Plus className="mr-2 h-4 w-4" />
+              공지 작성
+            </Link>
+          </Button>
+        </RoleGuard>
       </section>
 
       <Card>

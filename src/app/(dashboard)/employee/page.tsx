@@ -28,7 +28,6 @@ export default async function Page() {
             </Link>
           </RoleGuard>
         </div>
-
         <div className={filterStyle.wrapper}>
           <div className={filterStyle.area}>
             <div className="w-full lg:max-w-md">
@@ -38,8 +37,7 @@ export default async function Page() {
             <EmployeeFiltering />
           </div>
         </div>
-
-        <EmployeeListClient />
+        <EmployeeListClient currentRole={employee?.role} />
       </section>
     </div>
   );
