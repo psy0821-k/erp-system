@@ -17,7 +17,7 @@ export const ROUTE_PERMISSIONS: readonly RoutePermission[] = [
     allowedRoles: ['HR_MANAGER', 'ADMIN'],
   },
   {
-    path: '/attendance',
+    path: '/employee/attendance',
     allowedRoles: ['HR_MANAGER', 'ADMIN'],
   },
   {
