@@ -1,6 +1,6 @@
 export const tableStyle = {
   wrapper: 'overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950',
-  header: 'border-b border-slate-200 bg-slate-100 dark:border-slate-800 dark:bg-slate-700 dark:text-white',
+  header: 'border-b border-slate-200 bg-slate-100 text-black dark:border-slate-800 dark:bg-slate-700 dark:text-white',
   row: 'border-b border-slate-200 text-center transition-colors hover:bg-slate-50/50 dark:border-slate-800 dark:hover:bg-slate-900/70',
   employeeRow: 'flex flex-col gap-2 border-slate-100 px-6 py-4 text-center md:table-row md:px-0 md:py-0 dark:border-slate-800',
   cell: 'px-6 py-4 text-slate-700 dark:text-slate-200',

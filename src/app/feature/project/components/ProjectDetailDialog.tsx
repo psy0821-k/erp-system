@@ -7,16 +7,19 @@ import ProjectMemberCreateDialog from './ProjectMemberCreateDialog';
 import ProjectDeleteMemberButton from './ProjectDeleteMemberButton';
 import { buttonStyle } from '@/app/style/buttonStyle';
 import { cn } from '@/lib/utils';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
 
 interface Props {
   project: Project;
+  role: EmployeeRole;
 }
 
-export default function ProjectDetailDialog({ project }: Props) {
+export default function ProjectDetailDialog({ project, role }: Props) {
+  const isAdmin = role;
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className={cn(buttonStyle.base, buttonStyle.detail)} variant="outline" size="sm">
+        <Button className={cn(buttonStyle.base, buttonStyle.detail, isAdmin ? '' : 'col-span-3')} variant="outline" size="sm">
           상세보기
         </Button>
       </DialogTrigger>
