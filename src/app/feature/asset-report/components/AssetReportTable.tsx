@@ -15,8 +15,14 @@ import { ASSET_REPORT_STATUS_BADGE_MAP } from '@/components/badge';
 import { cn } from '@/lib/utils';
 import { tableStyle } from '@/app/style/tableStyle';
 import { textStyle } from '@/app/style/textStyle';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
+import RoleGuard from '@/components/auth/RoleGuard';
 
-export default function AssetReportTable() {
+interface Props {
+  employeeRole: EmployeeRole;
+}
+
+export default function AssetReportTable({ employeeRole }: Props) {
   const { data, isLoading } = useAssetReports({
     page: '1',
   });
@@ -70,8 +76,10 @@ export default function AssetReportTable() {
                 <TableCell className={cn(tableStyle.cell, 'w-[20%]')}>
                   <div className="flex justify-end gap-1.5">
                     <AssetReportDetailDialog report={report} />
-                    <AssetReportStatusEditDialog report={report} />
-                    {report.status === 'PENDING' && <AssetReportDeleteDialog id={report.id} />}
+                    <RoleGuard role={employeeRole} permission="ASSET_MANAGE">
+                      <AssetReportStatusEditDialog report={report} />
+                      <AssetReportDeleteDialog id={report.id} />
+                    </RoleGuard>
                   </div>
                 </TableCell>
               </TableRow>

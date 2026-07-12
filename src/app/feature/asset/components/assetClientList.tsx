@@ -5,8 +5,12 @@ import { useAssets } from '../hooks/useAssetList';
 import EmployeePagination from '../../employees/components/EmployeePagination';
 import AssetsTable from './AssetTable';
 import TableSkeleton from '@/components/ui/tableSkelleton';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
+interface Props {
+  employeeRole: EmployeeRole;
+}
 
-function AssetClientList() {
+function AssetClientList({ employeeRole }: Props) {
   const searchParams = useSearchParams();
 
   const params = {
@@ -35,7 +39,7 @@ function AssetClientList() {
   }
   return (
     <>
-      <AssetsTable assets={assets} />
+      <AssetsTable employeeRole={employeeRole} assets={assets} />
       <EmployeePagination currentPage={params.page} totalCount={totalCount} pageSize={pageSize} />
     </>
   );

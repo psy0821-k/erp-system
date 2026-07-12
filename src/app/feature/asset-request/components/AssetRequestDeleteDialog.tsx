@@ -12,8 +12,9 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { Trash2 } from 'lucide-react';
 import { useDeleteAssetRequest } from '../hooks/useDeleteRequest';
+import { cn } from '@/lib/utils';
+import { buttonStyle } from '@/app/style/buttonStyle';
 
 interface Props {
   id: string;
@@ -25,9 +26,8 @@ export default function AssetRequestDeleteDialog({ id }: Props) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" size="icon">
-          <Trash2 className="h-4 w-4" />
-          <span className="sr-only">IT 물품 요청 삭제</span>
+        <Button className={cn(buttonStyle.base, buttonStyle.delete, 'px-5')} variant="destructive" size="icon">
+          삭제
         </Button>
       </AlertDialogTrigger>
 

@@ -9,12 +9,15 @@ import { tableStyle } from '@/app/style/tableStyle';
 import { textStyle } from '@/app/style/textStyle';
 import { ASSET_STATUS_BADGE_MAP } from '@/components/badge';
 import StatusBadge from '@/components/ui/statusBadge';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
+import RoleGuard from '@/components/auth/RoleGuard';
 
 type AssetsTableProps = {
   assets: Asset[];
+  employeeRole: EmployeeRole;
 };
 
-function AssetsTable({ assets }: AssetsTableProps) {
+function AssetsTable({ assets, employeeRole }: AssetsTableProps) {
   return (
     <div className={cn(tableStyle.wrapper, 'p-4')}>
       <Table>
@@ -49,8 +52,10 @@ function AssetsTable({ assets }: AssetsTableProps) {
 
               <TableCell className="py-3.5 pr-6 text-right">
                 <div className="inline-flex items-center gap-1">
-                  <AssetEditButton asset={asset} />
-                  <AssetDeleteButton assetName={asset.asset_name} id={asset.id} />
+                  <RoleGuard role={employeeRole} permission="ASSET_MANAGE">
+                    <AssetEditButton asset={asset} />
+                    <AssetDeleteButton assetName={asset.asset_name} id={asset.id} />
+                  </RoleGuard>
                 </div>
               </TableCell>
             </TableRow>

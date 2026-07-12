@@ -70,7 +70,7 @@ export default function MyProjectCard({ employeeId }: Props) {
 
         <Button variant="outline" size="sm" className="w-full" asChild>
           <Link href="/project" aria-label="프로젝트 페이지로 이동">
-            프로젝트 보기
+            프로젝트 전체 보기
           </Link>
         </Button>
       </CardContent>

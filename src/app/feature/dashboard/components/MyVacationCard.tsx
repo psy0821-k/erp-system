@@ -11,6 +11,8 @@ import { Skeleton } from '@/components/ui/skeleton'; // shadcn/ui 스켈레톤 �
 import { VACATION_TYPE_LABEL } from '../../vacations/type/vacationType';
 import { APPROVAL_STATUS_LABEL } from '@/config/types/approvalStatus';
 import { useMyVacation } from '../hooks/useMyVacation';
+import StatusBadge from '@/components/ui/statusBadge';
+import { APPROVAL_BADGE_MAP } from '@/components/badge';
 
 interface Props {
   employeeId: string;
@@ -26,21 +28,6 @@ const formatDate = (date?: string | null) => {
     month: '2-digit',
     day: '2-digit',
   }).format(parsedDate);
-};
-
-const getStatusBadgeClass = (status: string) => {
-  switch (status) {
-    case 'APPROVED':
-    case '승인':
-      return 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/50';
-    case 'REJECTED':
-    case '반려':
-      return 'bg-rose-50 text-rose-700 border-rose-200 dark:bg-rose-950/40 dark:text-rose-400 dark:border-rose-900/50';
-    case 'PENDING':
-    case '대기':
-    default:
-      return 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50';
-  }
 };
 
 export default function MyVacationStatusCard({ employeeId }: Props) {
@@ -80,12 +67,7 @@ export default function MyVacationStatusCard({ employeeId }: Props) {
                 </p>
               </div>
 
-              <Badge
-                variant="outline"
-                className={`px-2.5 py-0.5 text-xs font-semibold rounded-full shadow-sm pointer-events-none ${getStatusBadgeClass(recentVacation.status)}`}
-              >
-                {APPROVAL_STATUS_LABEL[recentVacation.status]}
-              </Badge>
+              <StatusBadge label={APPROVAL_STATUS_LABEL[recentVacation.status]} variant={APPROVAL_BADGE_MAP[recentVacation.status]} />
             </div>
 
             <div className="rounded-r-md border border-l-2 border-l-indigo-500 bg-muted/40 p-3.5 transition-colors hover:bg-muted/60">

@@ -8,9 +8,11 @@ import AssetFiltering from '@/app/feature/asset/components/assetFiltering';
 
 import { textStyle } from '@/app/style/textStyle';
 import { cardStyle } from '@/app/style/tableStyle';
+import RoleGuard from '@/components/auth/RoleGuard';
 
 export default async function AssetRequestPage() {
   const employee = await getCurrentEmployee();
+  if (!employee) return;
 
   return (
     <div className="min-h-screen bg-slate-50/50 p-6 dark:bg-slate-950 sm:p-8">
@@ -22,21 +24,24 @@ export default async function AssetRequestPage() {
           </div>
           <AssetRequestCreateDialog requesterId={employee?.id} />
         </div>
-        <div className={cardStyle.wrapper}>
-          <div className={cardStyle.sectionHeader}>
-            <Laptop className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-            <div>
-              <h2 className={textStyle.primary}>기기 요청 내역</h2>
-              <p className={textStyle.subtle}>직원이 신청한 IT 자산의 승인 대상 목록입니다.</p>
-            </div>
-          </div>
-          <AssetRequestAdminTable />
-        </div>
         <div className={cardStyle.toolbar}>
           <div className="flex w-full justify-end">
             <AssetFiltering />
           </div>
         </div>
+        <RoleGuard role={employee.role} permission="ASSET_MANAGE">
+          <div className={cardStyle.wrapper}>
+            <div className={cardStyle.sectionHeader}>
+              <Laptop className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <div>
+                <h2 className={textStyle.primary}>기기 요청 관리</h2>
+                <p className={textStyle.subtle}>직원이 신청한 IT 자산의 승인 대상 목록입니다.</p>
+              </div>
+            </div>
+            <AssetRequestAdminTable />
+          </div>
+        </RoleGuard>
+
         <div className={cardStyle.wrapper}>
           <div className={cardStyle.sectionHeader}>
             <Laptop className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
@@ -46,7 +51,7 @@ export default async function AssetRequestPage() {
             </div>
           </div>
 
-          <AssetRequestTable />
+          <AssetRequestTable employeeRole={employee.role} />
         </div>
       </section>
     </div>

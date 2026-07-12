@@ -16,8 +16,14 @@ import { ASSET_REQUEST_STATUS_BADGE_MAP } from '@/components/badge';
 import { cn } from '@/lib/utils';
 import { tableStyle } from '@/app/style/tableStyle';
 import { textStyle } from '@/app/style/textStyle';
+import RoleGuard from '@/components/auth/RoleGuard';
+import { EmployeeRole } from '../../sign-up/schema/employeeSchema';
 
-export default function AssetRequestTable() {
+interface Props {
+  employeeRole: EmployeeRole;
+}
+
+export default function AssetRequestTable({ employeeRole }: Props) {
   const { data, isLoading } = useAssetRequests({
     page: '1',
   });
@@ -72,8 +78,10 @@ export default function AssetRequestTable() {
                 <TableCell className={cn(tableStyle.cell, 'w-[20%]')}>
                   <div className="flex justify-end gap-1.5">
                     <AssetRequestDetailDialog request={request} />
-                    <AssetRequestStatusEditDialog request={request} />
-                    {request.status === 'PENDING' && <AssetRequestDeleteDialog id={request.id} />}
+                    <RoleGuard role={employeeRole} permission="ASSET_MANAGE">
+                      <AssetRequestStatusEditDialog request={request} />
+                      {request.status === 'PENDING' && <AssetRequestDeleteDialog id={request.id} />}
+                    </RoleGuard>
                   </div>
                 </TableCell>
               </TableRow>

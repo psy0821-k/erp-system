@@ -9,7 +9,7 @@ import { cardStyle } from '@/app/style/tableStyle';
 
 export default async function AssetReportPage() {
   const employee = await getCurrentEmployee();
-
+  if (!employee) return;
   return (
     <div className="min-h-screen bg-slate-50/50 p-6 dark:bg-slate-950 sm:p-8">
       <section className="mx-auto max-w-7xl space-y-6">
@@ -33,7 +33,7 @@ export default async function AssetReportPage() {
             </div>
           </div>
 
-          <AssetReportTable />
+          <AssetReportTable employeeRole={employee.role} />
         </div>
       </section>
     </div>
