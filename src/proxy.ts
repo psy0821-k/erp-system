@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { EmployeeRoleSchema } from '@/app/feature/sign-up/schema/employeeSchema';
 import { hasAllowedRole, isPermissionPathMatch, ROUTE_PERMISSIONS } from '@/config/permissions';
 
-const PUBLIC_PATHS = ['/sign-in', '/auth/callback'];
+const PUBLIC_PATHS = ['/sign-in', '/forgot-password', '/reset-password', '/auth/callback'] as const;
 
 function isPublicPath(pathname: string): boolean {
   return PUBLIC_PATHS.some(path => pathname === path || pathname.startsWith(`${path}/`));
