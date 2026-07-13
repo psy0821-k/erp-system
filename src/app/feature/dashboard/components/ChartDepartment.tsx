@@ -9,13 +9,8 @@ import { Shapes } from 'lucide-react';
 
 const COLORS = ['#3b82f6', '#10b981', '#6366f1', '#ec4899', '#f59e0b', '#8b5cf6', '#f97316', '#06b6d4'];
 
-type DepartmentItem = {
-  department: DepartmentType;
-  count: number;
-};
-
 export default function DepartmentChartCard() {
-  const { data = [], isLoading } = useDepartment() as { data: DepartmentItem[]; isLoading: boolean };
+  const { data = [], isLoading } = useDepartment();
 
   const total = data.reduce((sum, item) => sum + item.count, 0);
 
