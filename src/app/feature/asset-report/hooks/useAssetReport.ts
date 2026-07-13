@@ -8,5 +8,8 @@ export const useAssetReports = (params: AssetReportListParams) => {
   return useQuery({
     queryKey: assetReportKeys.list(params),
     queryFn: () => getAssetReports(params),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
+    refetchOnWindowFocus: false,
   });
 };

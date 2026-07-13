@@ -9,6 +9,8 @@ export const usePendingAssetRequests = (page: number) => {
   return useQuery({
     queryKey: assetRequestKeys.pending(page),
     queryFn: () => getPendingAssetRequests({ page }),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };
 
@@ -17,6 +19,8 @@ export const useAvailableAssetsByType = (assetType: AssetType) => {
     queryKey: assetRequestKeys.availableAssets(assetType),
     queryFn: () => getAvailableAssetsByType(assetType),
     enabled: !!assetType,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };
 

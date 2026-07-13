@@ -6,5 +6,7 @@ export const useTodoSummary = () => {
   return useQuery({
     queryKey: dashboardKeys.todoSummary(),
     queryFn: getTodoSummary,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };

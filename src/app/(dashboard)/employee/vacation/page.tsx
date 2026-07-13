@@ -8,6 +8,7 @@ import { Plus, CalendarDays, UserCheck, Clock, ShieldAlert } from 'lucide-react'
 import { cn } from '@/lib/utils';
 import { buttonStyle } from '@/app/style/buttonStyle';
 import { cardStyle } from '@/app/style/tableStyle';
+import { textStyle } from '@/app/style/textStyle';
 
 const VacationPage = async () => {
   const employee = await getCurrentEmployee();
@@ -29,8 +30,8 @@ const VacationPage = async () => {
       <section className="mx-auto max-w-7xl space-y-6">
         <div className={cardStyle.pageHeader}>
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">휴가관리</h2>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">직원 휴가 신청 현황과 승인 상태를 통합 관리합니다.</p>
+            <h2 className={textStyle.title}>휴가관리</h2>
+            <p className={textStyle.subtle}>직원 휴가 신청 현황과 승인 상태를 통합 관리합니다.</p>
           </div>
 
           <Link href="/employee/vacation/create" className={cn(buttonStyle.createNew, buttonStyle.base)}>
@@ -49,8 +50,8 @@ const VacationPage = async () => {
             <div className={cardStyle.sectionHeader}>
               <CalendarDays className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
               <div>
-                <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">금일 휴가자</h2>
-                <p className="mt-0.5 text-xs text-slate-500  dark:text-slate-500">사내 구성원의 오늘 자 휴가 유형 및 승인 상태입니다.</p>
+                <h2 className={textStyle.secondTitle}>금일 휴가자</h2>
+                <p className={textStyle.subtle}>사내 구성원의 오늘 자 휴가 유형 및 승인 상태입니다.</p>
               </div>
             </div>
 
@@ -64,8 +65,8 @@ const VacationPage = async () => {
               <div className={cardStyle.sectionHeader}>
                 <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 <div>
-                  <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">휴가 승인 대기</h2>
-                  <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-500">내가 결재 요청한 승인 대기 상태의 휴가입니다.</p>
+                  <h2 className={textStyle.secondTitle}>휴가 승인 대기</h2>
+                  <p className={textStyle.subtle}>내가 결재 요청한 승인 대기 상태의 휴가입니다.</p>
                 </div>
               </div>
 
@@ -78,8 +79,8 @@ const VacationPage = async () => {
               <div className={cardStyle.sectionHeader}>
                 <UserCheck className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
                 <div>
-                  <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">휴가 승인 결과</h2>
-                  <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-500">내가 신청한 휴가의 최종 승인/반려 내역입니다.</p>
+                  <h2 className={textStyle.secondTitle}>휴가 승인 결과</h2>
+                  <p className={textStyle.subtle}>내가 신청한 휴가의 최종 승인/반려 내역입니다.</p>
                 </div>
               </div>
 
@@ -95,8 +96,8 @@ const VacationPage = async () => {
             <div className={cardStyle.sectionHeader}>
               <ShieldAlert className="h-5 w-5 text-rose-600 dark:text-rose-400" />
               <div>
-                <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">휴가 관리 전용 테이블 (Admin)</h3>
-                <p className="mt-0.5 text-black dark:text-slate-300">전체 임직원의 결재 대상 문서를 조회하고 승인/반려 처리를 수행합니다.</p>
+                <h3 className={textStyle.title}>휴가 관리 전용 테이블 (Admin)</h3>
+                <p className={textStyle.subtle}>전체 임직원의 결재 대상 문서를 조회하고 승인/반려 처리를 수행합니다.</p>
               </div>
             </div>
 

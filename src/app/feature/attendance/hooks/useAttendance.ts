@@ -14,6 +14,8 @@ export const useTodayAttendance = (employeeId: string) => {
     queryKey: attendanceKeys.today(employeeId),
     queryFn: () => getTodayAttendance(employeeId),
     enabled: !!employeeId,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };
 
@@ -21,6 +23,8 @@ export const useAttendanceList = (params: AttendanceListParams) => {
   return useQuery({
     queryKey: attendanceKeys.list(params),
     queryFn: () => getAttendanceList(params),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };
 
@@ -29,6 +33,8 @@ export const useAttendanceDetail = (id: string) => {
     queryKey: attendanceKeys.detail(id),
     queryFn: () => getAttendanceDetail(id),
     enabled: !!id,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };
 
@@ -36,6 +42,8 @@ export const useTodayAttendanceAll = () => {
   return useQuery({
     queryKey: attendanceKeys.todayAll(),
     queryFn: () => getTodayAttendanceAll(),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };
 
@@ -43,6 +51,8 @@ export const useLateUserList = () => {
   return useQuery({
     queryKey: attendanceKeys.late_user(),
     queryFn: () => getLateUserList(),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };
 

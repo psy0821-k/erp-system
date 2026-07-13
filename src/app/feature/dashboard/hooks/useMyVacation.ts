@@ -9,5 +9,7 @@ export const useMyVacation = (employeeId: string) => {
     queryKey: vacationKeys.myRecent(employeeId),
     queryFn: () => getMyRecentVacation(employeeId),
     enabled: !!employeeId,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };

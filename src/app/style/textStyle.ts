@@ -1,5 +1,6 @@
 export const textStyle = {
   title: 'text-3xl mb-4 font-bold tracking-tight text-slate-900 dark:text-slate-100',
+  secondTitle: 'text-2xl mb-4 font-bold tracking-tight text-slate-900 dark:text-slate-100',
   primary: 'text-slate-800 dark:text-slate-100',
   secondary: 'text-slate-700 dark:text-slate-200',
   body: 'text-slate-600 dark:text-slate-200',

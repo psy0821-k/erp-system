@@ -9,5 +9,6 @@ export function useEmployees(params: EmployeeListParams) {
     queryFn: () => getEmployees(params),
     staleTime: 5 * 60 * 1000,
     gcTime: 30 * 60 * 1000,
+    refetchOnWindowFocus: false,
   });
 }

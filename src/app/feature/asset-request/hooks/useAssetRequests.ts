@@ -8,5 +8,8 @@ export const useAssetRequests = (params: AssetRequestListParams) => {
   return useQuery({
     queryKey: assetRequestKeys.list(params),
     queryFn: () => getAssetRequests(params),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
+    refetchOnWindowFocus: false,
   });
 };

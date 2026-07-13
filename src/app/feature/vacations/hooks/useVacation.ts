@@ -18,6 +18,8 @@ export const useTodayVacations = () => {
   return useQuery({
     queryKey: ['today-vacations'],
     queryFn: getTodayVacations,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };
 
@@ -25,5 +27,7 @@ export const useTodayDashboardVacations = () => {
   return useQuery<Vacation[]>({
     queryKey: vacationKeys.today(),
     queryFn: getTodayVacations,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
   });
 };
