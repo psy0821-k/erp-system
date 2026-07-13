@@ -1,9 +1,6 @@
 import { createClient } from '@/lib/client';
 import { Attendance } from '../type/attendance';
-
-const getToday = () => {
-  return new Date().toLocaleDateString('sv-SE');
-};
+import { getToday } from '@/lib/utils';
 
 const isLate = () => {
   const now = new Date();

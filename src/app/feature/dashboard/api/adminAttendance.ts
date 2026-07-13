@@ -1,10 +1,8 @@
 import { createClient } from '@/lib/client';
+import { getToday } from '@/lib/utils';
 
 export const getTodayAttendanceSummary = async () => {
   const supabase = createClient();
-  const getToday = () => {
-    return new Date().toLocaleDateString('sv-SE');
-  };
 
   const today = getToday();
 

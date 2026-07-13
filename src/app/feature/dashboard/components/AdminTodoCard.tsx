@@ -1,5 +1,3 @@
-// src/app/feature/dashboard/components/AdminTodoCard.tsx
-
 'use client';
 
 import Link from 'next/link';
