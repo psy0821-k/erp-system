@@ -139,7 +139,7 @@ export function SignInForm() {
                         aria-label={viewPassword ? '비밀번호 감추기' : '비밀번호 보기'}
                         aria-pressed={viewPassword}
                       >
-                        {viewPassword ? <EyeOff className="h-4 w-4" aria-hidden="true" /> : <Eye className="h-4 w-4" aria-hidden="true" />}
+                        {viewPassword ? <Eye className="h-4 w-4" aria-hidden="true" /> : <EyeOff className="h-4 w-4" aria-hidden="true" />}
                       </Button>
                     </div>
 

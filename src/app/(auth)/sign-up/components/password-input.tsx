@@ -55,7 +55,7 @@ export default function PasswordInput({ control }: PasswordInputProps) {
               onClick={() => setViewPassword(prev => !prev)}
               aria-label={viewPassword ? '패스워드 감추기' : '패스워드 보기'}
             >
-              {viewPassword ? <Eye className="h-4 w-4" /> : <EyeClosed className="h-4 w-4" />}
+              {viewPassword ? <EyeClosed className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </Button>
           </div>
 
