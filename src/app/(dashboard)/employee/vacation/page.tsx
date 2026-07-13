@@ -12,7 +12,7 @@ import { cardStyle } from '@/app/style/tableStyle';
 const VacationPage = async () => {
   const employee = await getCurrentEmployee();
   if (!employee) return;
-  const isAdmin = employee.role === 'ADMIN' && employee.role === 'HR_MANAGER';
+  const isAdmin = employee.role === 'ADMIN' || employee.role === 'HR_MANAGER';
 
   if (employee === null) {
     return (
