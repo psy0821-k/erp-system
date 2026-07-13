@@ -55,7 +55,6 @@ export const createAsset = async (input: CreateAssetInput) => {
   const { data, error } = await supabase.from('assets').insert(payload).select().single();
 
   if (error) {
-    console.error('자산 등록 실패:', error);
     throw error;
   }
 

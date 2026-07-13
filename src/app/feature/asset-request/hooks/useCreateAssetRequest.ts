@@ -18,8 +18,7 @@ export const useCreateAssetRequest = () => {
       });
     },
 
-    onError: error => {
-      console.error(error);
+    onError: () => {
       toast.error('IT 물품 요청 등록에 실패했습니다.');
     },
   });

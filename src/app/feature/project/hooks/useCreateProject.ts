@@ -18,8 +18,7 @@ export const useCreateProject = () => {
       });
     },
 
-    onError: error => {
-      console.error(error);
+    onError: () => {
       toast.error('프로젝트 등록에 실패했습니다.');
     },
   });

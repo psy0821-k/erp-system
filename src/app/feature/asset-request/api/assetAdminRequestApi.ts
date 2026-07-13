@@ -113,7 +113,6 @@ export const rejectAssetRequest = async ({ requestId, resultMessage }: RejectAss
     .single();
 
   if (error) {
-    console.error('물품 요청 반려 실패:', error);
     throw error;
   }
 

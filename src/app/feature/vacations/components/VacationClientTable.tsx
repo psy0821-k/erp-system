@@ -5,7 +5,7 @@ import { useTodayVacations } from '../hooks/useVacation';
 import CardSkeleton from '@/components/ui/cardSkeleton';
 
 export default function VacationListClient() {
-  const { data, error, isLoading, isError } = useTodayVacations();
+  const { data, isLoading, isError } = useTodayVacations();
 
   const vacations = data ?? [];
 
@@ -14,7 +14,6 @@ export default function VacationListClient() {
   }
 
   if (isError) {
-    console.error('오늘 휴가자 조회 에러:', error);
     return <div>오늘 휴가자 정보를 불러오지 못했습니다.</div>;
   }
 

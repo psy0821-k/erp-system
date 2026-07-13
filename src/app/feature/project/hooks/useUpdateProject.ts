@@ -22,8 +22,7 @@ export const useUpdateProject = () => {
       });
     },
 
-    onError: error => {
-      console.error(error);
+    onError: () => {
       toast.error('프로젝트 수정에 실패했습니다.');
     },
   });

@@ -18,8 +18,7 @@ export const useDeleteProject = () => {
       });
     },
 
-    onError: error => {
-      console.error(error);
+    onError: () => {
       toast.error('프로젝트 삭제에 실패했습니다.');
     },
   });

@@ -18,8 +18,7 @@ export const useDeleteProjectMember = () => {
       });
     },
 
-    onError: error => {
-      console.error(error);
+    onError: () => {
       toast.error('참여자 제거에 실패했습니다.');
     },
   });

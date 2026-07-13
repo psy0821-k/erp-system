@@ -17,8 +17,7 @@ export const useDeleteVacation = () => {
       });
     },
 
-    onError: error => {
-      console.error(error);
+    onError: () => {
       toast.error('휴가 삭제에 실패했습니다.');
     },
   });
