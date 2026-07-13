@@ -12,10 +12,8 @@ import { textStyle } from '@/app/style/textStyle';
 
 const VacationPage = async () => {
   const employee = await getCurrentEmployee();
-  if (!employee) return;
-  const isAdmin = employee.role === 'ADMIN' || employee.role === 'HR_MANAGER';
 
-  if (employee === null) {
+  if (!employee) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50/50 p-6 dark:bg-slate-950">
         <div className="max-w-sm rounded-2xl border border-slate-200/80 bg-white p-8 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -24,7 +22,7 @@ const VacationPage = async () => {
       </div>
     );
   }
-
+  const isAdmin = employee.role === 'ADMIN' || employee.role === 'HR_MANAGER';
   return (
     <div className="min-h-screen bg-slate-50/50 p-6 dark:bg-slate-950 sm:p-8">
       <section className="mx-auto max-w-7xl space-y-6">
